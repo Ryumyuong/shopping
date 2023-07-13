@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default_layout}">
+<head>
+<title>가게 목록</title>
+<script type="text/javascript">
+	function addToCart() {
+		if (confirm("메뉴를 장바구니에 추가하시겠습니까?")) {
+			document.addForm.submit();
+		} else {
+			document.addForm.reset();
+		}
+	}
+</script>
+</head>
+
+<body>
+	<th:block layout:fragment="content">
+		<div class="container">
+			<div th:each="row : ${rs}"
+				style="display: inline-block; margin: 30px;">
+				<div th:text="${row['s_condition']}" style="color: red;font-weight:bold; text-align: center; margin-bottom:5px;"></div>
+				<p>
+					<img th:src="'/image/' + ${row['s_fileName']}" style="width: 100%">
+				</p>
+				<h5 th:text="${row['s_name']}" style="text-align:center;"></h5>
+				<p th:text="${row['s_description']}"></p>
+				<form name="addForm" th:action="@{/}" method="post">
+					<input type="hidden" name="userId" value="user" />
+					<input type="hidden" name="name" th:value="${row['s_name']}" />
+					<input type="hidden" name="fileName" th:value="${row['s_fileName']}" />
+					<button class="btn btn-info" onclick="addToCart()"
+						style="border-radius: 20px;">상품 주문 &raquo;</button>
+				</form>
+				<br>
+			</div>
+		</div>
+		<div class="container" style="text-align: right;">
+			<a href="/cart?userId=user" class="btn btn-warning"> 장바구니
+				&raquo;</a> <a th:href="@{/products}" class="btn btn-secondary"> 가게
+				목록 &raquo;</a>
+			<div th:if="${sessionId == 'admin' or code == a_id}">
+				<a th:href="@{/addProductMenu(id=${p_id})}"
+					class="btn btn-secondary"> 메뉴 등록 &raquo;</a>
+			</div>
+		</div>
+		<hr>
+	</th:block>
+</body>
+</html>
+

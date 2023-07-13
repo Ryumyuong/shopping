@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.ProductMapper">
+    
+    <select id="productAll" resultType="com.example.domain.Product">
+    	select * from products
+    </select>
+    
+    <insert id="inCart">
+    	insert into cart(userId ,s_name, fileName) values(#{userId}, #{name}, #{fileName})
+    </insert>
+    
+    <select id="product" resultType="com.example.domain.Cart">
+    	select userId, s_name, fileName, count(s_name) as count from cart where userId = #{userId} group by userId, s_name, fileName
+    </select>
+    
+    
+</mapper>

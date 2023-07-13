@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default_layout}">
+<head>
+<title>장바구니</title>
+</head>
+<body>
+<th:block layout:fragment="content">
+	<div class="jumbotron">
+		<div class="container">
+			<h1 class="display-3">장바구니</h1>
+		</div>
+	</div>
+	<br><br>
+	<div class="container" style="background-color:#ffe600;">
+		<div>
+			<a href="./deleteCart.jsp?id=${p_id}"
+				class="btn btn-danger" style="float:left;">삭제하기</a>
+		</div>
+		<div style="text-align: right;">
+			<a href="./shippingInfo.jsp?id=${p_id}"
+				class="btn btn-success" >주문하기</a>
+		</div>
+		<div style="padding-top: 50px">
+			<table class="table table-hover" style="text-align:center">
+				<tr>
+					<th style="width:200px">제품</th>
+					<th>수량</th>
+					<th>비고</th>
+				</tr>
+				<tr th:each="cartItem : ${cartItems}">
+					<td>
+						<img th:src="'/image/' + ${cartItem['fileName']}" style="width: 40%; height:40%">
+						<br><br>
+						<p th:text="${cartItem['s_name']}"></p>
+					</td>
+					<td th:text="${cartItem['count']}"></td>
+					<td><a href="./removeCart.jsp"
+						class="badge badge-danger" style="text-decoration:none; color:red">삭제</a></td>
+				</tr>
+			</table>
+			<a href="./product.jsp" class="btn btn-secondary">
+				&laquo; 쇼핑 계속하기</a>
+		</div>
+	</div>
+</th:block>
+</body>
+
+</html>
