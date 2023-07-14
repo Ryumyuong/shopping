@@ -21,13 +21,34 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public void inCart(String userId, String name, String fileName) {
-		productMapper.inCart(userId, name, fileName);
+	public void inCart(String userId, String name, int price, String fileName) {
+		productMapper.inCart(userId, name, price, fileName);
 	}
 
 	@Override
 	public List<Cart> product(String userId) {
 		return productMapper.product(userId);
+	}
+	
+	@Override
+	public Cart total(String userId) {
+		return productMapper.total(userId);
+	}
+	
+	@Override
+	public void order(String userId) {
+		productMapper.order(userId);
+	}
+	
+	@Override
+	public void deleteCartAll(String userId) {
+		productMapper.deleteCartAll(userId);
+	}
+
+	@Override
+	public void deleteCart(String userId, String name) {
+		productMapper.deleteCart(userId, name);
+		
 	}
 	
 }

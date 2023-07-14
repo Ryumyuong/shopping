@@ -14,7 +14,15 @@ import com.example.domain.Product;
 public interface ProductMapper {
 	public List<Product> productAll();
 	
-	public void inCart(@Param("userId")String userId, @Param("name")String name, @Param("fileName")String fileName);
+	public void inCart(@Param("userId")String userId, @Param("name")String name, @Param("price")int price, @Param("fileName")String fileName);
 	
 	public List<Cart> product(String userId);
+	
+	public Cart total(String userId);
+	
+	public void order(@Param("userId")String userId);
+	
+	public void deleteCartAll(@Param("userId")String userId);
+	
+	public void deleteCart(@Param("userId")String userId, @Param("name")String name);
 }
