@@ -33,7 +33,7 @@
 				<div class="form-group row">
 					<label class="col-sm-2">물품 설명</label>
 					<div class="col-sm-3">
-						<textarea name="description" class="form-control"></textarea>
+						<textarea name="description" class="form-control" th:value="${p?.s_description}"></textarea>
 					</div>
 				</div>
 				<br><br>
@@ -46,8 +46,7 @@
 				<br><br>
 				<div class="form-group row">
 					<div class="col-sm-offset-2 col-sm-10">
-						<button class="btn btn-info"
-							style="border-radius: 20px;">물품 수정 &raquo;</button>
+						<button style="padding: 10px; padding-left: 30px; padding-right: 30px">물품 수정 &raquo;</button>
 					</div>
 				</div>
 			</form>

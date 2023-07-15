@@ -16,26 +16,26 @@
 	<div class="container" style="width:720px;">
 		<div>
 			<a th:href="@{/cart/deleteAll?userId=user}"
-				class="btn btn-danger" style="float:left;">삭제하기</a>
+				class="btn btn-danger" style="float:left;">모두 삭제하기</a>
 		</div>
 		<div style="padding-top: 50px">
 			<table style="text-align:center">
 				<tr>
-					<th style="width:300px;">상품</th>
-					<th style="width:200px;">가격</th>
-					<th style="width:100px;">수량</th>
-					<th style="width:100px;">금액</th>
-					<th>비고</th>
+					<th style="width:350px;text-align:center">상품</th>
+					<th style="width:150px;">가격</th>
+					<th style="width:80px;">수량</th>
+					<th style="width:150px;">금액</th>
+					<th style="width:100px;">비고</th>
 				</tr>
 				<tr th:each="cartItem : ${cartItems}">
 					<td>
 						<div style="float:left;">
-							<img th:src="'data:image/png;base64,' + ${cartItem.fileName}" alt="Product Image" style="margin:10px;width:100px;height:150px;"/>
+							<img th:src="'data:image/png;base64,' + ${cartItem.fileName}" alt="Product Image" style="margin:10px;width:100px;height:100px;"/>
 						</div>
 						<div >
 						<p th:text="${cartItem['s_name']}" style="padding-top:20px;"></p>
 
-						<p th:text="${cartItem['s_description']}" style="text-align:left;"></p>
+						<p th:text="${cartItem['s_description']}" style="text-align:left;font-size:15px" class="description"></p>
 
 						</div>
 					</td>
@@ -44,8 +44,8 @@
 						<span>루나</span>
 					</td>
 					<td style="vertical-align: middle;">
-						<span th:text="${cartItem['count']}" ></span>
-						<span>개</span>
+						<span th:text="${cartItem['count']}" style="color:black"></span>
+						<span style="color:black">개</span>
 					</td>
 					<td style="vertical-align: middle;">
 						<span th:text="${cartItem['cost']}"></span>
@@ -53,13 +53,13 @@
 					</td>
 					<td style="vertical-align: middle;">
 					<a th:href="@{/cart/delete(userId=user, name=${cartItem['s_name']})}"
-						class="badge badge-danger" style="text-decoration:none; color:red">삭제</a>
+						class="badge badge-danger" style="text-decoration:none; color:red; font-size:15px;">삭제</a>
 					</td>
 				</tr>
 				<tr>
 					<td></td>
 					<td></td>
-					<td style="padding-top: 50px;">총액</td>
+					<td style="padding-top: 50px;font-weight:bold">총액</td>
 					<td style="padding-top: 45px;">
 						<span th:text="${total?.total}"></span>
 						<span>루나</span>

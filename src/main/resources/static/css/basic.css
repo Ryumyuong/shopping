@@ -1,51 +1,72 @@
 h1 {
-	  font-size: 3em;
-            font-weight: bold;
-            color: #333;
-            margin-top: 50px;
-	}
-table{
-  border-top:2px solid black;
+	font-size: 3em;
+	font-weight: bold;
+	color: #333;
+	margin-top: 50px;
+}
+
+table {
+	border-top: 2px solid black;
 }
 
 td, th {
-	border-bottom:1px gray;
-	border-top:1px solid gray;
-	padding:10px;
+	border-bottom: 1px gray;
+	border-top: 1px solid gray;
+	padding: 10px;
 }
 
 label {
-	margin-right:50px;
+	margin-right: 50px;
 }
 
 a {
 	text-decoration: none;
+	color:black;
 }
 
 #preview {
 	width: 100px;
-	height:150px;
+	height: 150px;
 }
 
- img {
+img {
 	width: 200px;
-	height: 300px;
+	height: 200px;
 }
 
- video {
+video {
 	width: 200px;
-	height:150px;
+	height: 150px;
 }
 
 #scroll-to-top {
-  position: fixed;
-  bottom: 200px;
-  right: 10px;
-  display: none;
+	position: fixed;
+	bottom: 200px;
+	right: 10px;
+	display: none;
 }
- 
-   .card-text{
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            overflow: hidden;
-        }
+
+.description {
+	font-size:15px;
+}
+
+.card-text {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+.nav-link {
+	color:black;
+}
+.nav-item {
+	margin-right:10px;
+}
+
+@font-face {
+	font-family: 'Basic';
+	src: url('/font/Pby6FmXiEBPT4ITbgNA5CgmOsn7tqoAetwxcvEcQNuukkRBBEIyMcFQ.0.ttf') format('truetype');
+}
+
+body {
+	font-family: 'Basic', sans-serif;
+}

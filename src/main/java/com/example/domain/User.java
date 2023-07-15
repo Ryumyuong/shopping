@@ -11,10 +11,7 @@ public class User{
 	private int id;
     private String userId;
     private String password;
-    private String password_confirm;
     private String username;
-    private String regident_front;
-    private String regident_back;
     private String phone;
     private String address;
 }

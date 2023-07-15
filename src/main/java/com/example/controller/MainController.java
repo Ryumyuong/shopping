@@ -2,7 +2,6 @@ package com.example.controller;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.Base64;
 import java.util.List;
 
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.example.domain.Cart;
 import com.example.domain.Product;
 import com.example.service.ProductService;
 
@@ -53,10 +51,12 @@ public class MainController {
 	
 	@PostMapping("/updateProduct")
 	public String updateComplete(Model model, @RequestParam String name, String sname, String description, String price, MultipartFile fileData) throws IOException{
-		String filePath = uploadPath + "/" + fileData.getOriginalFilename();
-        FileCopyUtils.copy(fileData.getBytes(), new FileOutputStream(filePath));
-        byte[] imageData = fileData.getBytes();
-        String fileName = Base64.getEncoder().encodeToString(imageData);
+		if(fileData != null) {
+			String filePath = uploadPath + "/" + fileData.getOriginalFilename();
+	        FileCopyUtils.copy(fileData.getBytes(), new FileOutputStream(filePath));
+		}
+		byte[] imageData = fileData.getBytes();
+		String fileName = Base64.getEncoder().encodeToString(imageData);
 		productService.updateProduct(sname, name, description, price, fileName);
 		List<Product> productList = productService.productAll();
 		model.addAttribute("rs", productList);

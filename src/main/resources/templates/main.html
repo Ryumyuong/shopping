@@ -13,40 +13,49 @@
 		}
 	}
 </script>
+
 </head>
 
 <body>
 	<th:block layout:fragment="content">
-		<div class="container" style="text-align:center">
-			<div style="margin-left:30px;margin-top:30px;margin-bottom:20px;font-weight:bold;font-size:50px;text-align:center">전체 상품</div>
+		<div class="container" style="text-align: center">
+			<div
+				style="margin-left: 30px; margin-top: 30px; margin-bottom: 20px; font-size: 50px; text-align: center">전체
+				상품</div>
 			<br>
 			<div>
 				<div th:each="row : ${rs}"
-					style="display: inline-block; margin: 30px; text-align:center;">
+					style="display: inline-block; margin: 30px; text-align: center;">
 					<p>
-					<img th:src="'data:image/png;base64,' + ${row.s_fileName}" alt="Product Image"/>
+						<img th:src="'data:image/png;base64,' + ${row.s_fileName}"
+							alt="Product Image" />
 					</p>
-					<h5 th:text="${row['s_name']}" style="text-align:center;"></h5>
+					<p th:text="${row['s_name']}" style="text-align: center;"></p>
 					<br>
-					<p th:text="${row['s_description']}"></p>
-					<br>
-					<span th:text="${row['s_price']}"></span>루나
+					<a href="https://www.naver.com"th:text="${row['s_description']}" class="description"></a>
+					
 					<br><br>
-					<form name="addForm" th:action="@{/}" method="post"  style="margin-top:5px;">
-						<input type="hidden" name="userId" value="user" />
-						<input type="hidden" name="name" th:value="${row['s_name']}" />
-						<input type="hidden" name="description" th:value="${row['s_description']}" />
-						<input type="hidden" name="price" th:value="${row['s_price']}" />
-						<textarea name="fileName" th:text="${row['s_fileName']}" style="display: none;"></textarea>
-						<button onclick="addToCart()" style="padding:10px; padding-left:30px;padding-right:30px">물품 주문 &raquo;</button>
+					 <span th:text="${row['s_price']}" style="font-weight:bold"></span><span>  루나</span>
+					<br>
+					<br>
+					<form name="addForm" th:action="@{/}" method="post"
+						style="margin-top: 5px;">
+						<input type="hidden" name="userId" value="user" /> <input
+							type="hidden" name="name" th:value="${row['s_name']}" /> <input
+							type="hidden" name="description"
+							th:value="${row['s_description']}" /> <input type="hidden"
+							name="price" th:value="${row['s_price']}" />
+						<textarea name="fileName" th:text="${row['s_fileName']}"
+							style="display: none;"></textarea>
+						<button onclick="addToCart()"
+							style="padding: 10px; padding-left: 30px; padding-right: 30px">장바구니 &raquo;</button>
 					</form>
 					<br>
 				</div>
 			</div>
 		</div>
 		<div class="container" style="text-align: right;">
-			<a href="/cart?userId=user" class="btn btn-warning"> 장바구니
-				&raquo;</a>
+			
 		</div>
 	</th:block>
 </body>
