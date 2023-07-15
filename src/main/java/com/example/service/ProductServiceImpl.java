@@ -19,46 +19,15 @@ public class ProductServiceImpl implements ProductService{
 	public List<Product> productAll() {
 		return productMapper.productAll();
 	}
-
-	@Override
-	public void inCart(String userId, String name, int price) {
-		productMapper.inCart(userId, name, price);
-	}
-
-	@Override
-	public List<Cart> product(String userId) {
-		return productMapper.product(userId);
-	}
 	
 	@Override
-	public Cart total(String userId) {
-		return productMapper.total(userId);
-	}
-	
-	@Override
-	public void order(String userId) {
-		productMapper.order(userId);
-	}
-	
-	@Override
-	public void deleteCartAll(String userId) {
-		productMapper.deleteCartAll(userId);
+	public void insertProduct(String name, String description, String price, String fileName) {
+		productMapper.insertProduct(name, description, price, fileName);	
 	}
 
 	@Override
-	public void deleteCart(String userId, String name) {
-		productMapper.deleteCart(userId, name);
-		
-	}
-	
-	@Override
-	public void insertProduct(String name, String price, String fileName) {
-		productMapper.insertProduct(name, price, fileName);	
-	}
-
-	@Override
-	public void updateProduct(String name, String s_name, String price, String fileName) {
-		productMapper.updateProduct(name, s_name, price, fileName);	
+	public void updateProduct(String name, String s_name, String description, String price, String fileName) {
+		productMapper.updateProduct(name, s_name, description, price, fileName);	
 	}
 	
 	@Override

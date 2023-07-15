@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.CartMapper">
+	<insert id="inCart">
+    	insert into cart(userId ,s_name, s_description, s_price, fileName) values(#{userId}, #{name}, #{description}, #{price}, #{fileName})
+    </insert>
+    
+    <select id="product" resultType="com.example.domain.Cart">
+    	select userId, s_name, s_description, s_price, fileName, c_condition, count(s_name) as count, count(s_name) * s_price as cost from cart where userId = #{userId} and c_condition = "X" group by userId, s_name, s_description, s_price, fileName, c_condition
+    </select>
+    <select id="total" resultType="com.example.domain.Cart">
+	    SELECT sum(cost) as total
+		FROM (
+		  SELECT userId, s_name, s_description, s_price, fileName, c_condition, COUNT(s_name) AS count, (COUNT(s_name) * s_price) AS cost
+		  FROM cart
+		  WHERE userId = #{userId} and c_condition = "X"
+		  GROUP BY userId, s_name, s_description, s_price, fileName, c_condition
+		) AS subquery
+    </select>
+    
+    <update id="order">
+    	update cart set c_condition = "O" where userId = #{userId} ;
+    </update>
+    
+    <delete id="deleteCartAll">
+    	delete from cart where userId = #{userId} and c_condition = "X"
+    </delete>
+    
+    <delete id="deleteCart">
+    	delete from cart where userId = #{userId} and s_name = #{name} and c_condition = "X"
+    </delete>
+</mapper>

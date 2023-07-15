@@ -13,11 +13,11 @@
     </select>
     
     <insert id="insertProduct">
-    	insert into products(s_name, s_price, s_fileName) values(#{name}, #{price}, #{fileName})
+    	insert into products(s_name, s_price, s_description, s_fileName) values(#{name}, #{price},#{description}, #{fileName})
     </insert>
     
     <update id="updateProduct">
-    	update products set s_name = #{name}, s_price = #{price}, s_fileName = #{fileName} where s_name = #{s_name} ;
+    	update products set s_name = #{name}, s_description = #{description}, s_price = #{price}, s_fileName = #{fileName} where s_name = #{s_name} ;
     </update>
     
     <delete id="deleteProduct">
@@ -27,35 +27,6 @@
     <select id="checkDuplicateProductName" resultType="java.lang.Integer">
     	select COUNT(*) from products where s_name = #{name}
     </select>
-    
-    <insert id="inCart">
-    	insert into cart(userId ,s_name, s_price) values(#{userId}, #{name}, #{price})
-    </insert>
-    
-    <select id="product" resultType="com.example.domain.Cart">
-    	select userId, s_name, s_price, fileName, c_condition, count(s_name) as count, count(s_name) * s_price as cost from cart where userId = #{userId} and c_condition = "X" group by userId, s_name, s_price, fileName, c_condition
-    </select>
-    <select id="total" resultType="com.example.domain.Cart">
-	    SELECT sum(cost) as total
-		FROM (
-		  SELECT userId, s_name, s_price, fileName, c_condition, COUNT(s_name) AS count, (COUNT(s_name) * s_price) AS cost
-		  FROM cart
-		  WHERE userId = #{userId} and c_condition = "X"
-		  GROUP BY userId, s_name, s_price, fileName, c_condition
-		) AS subquery
-    </select>
-    
-    <update id="order">
-    	update cart set c_condition = "O" where userId = #{userId} ;
-    </update>
-    
-    <delete id="deleteCartAll">
-    	delete from cart where userId = #{userId} and c_condition = "X"
-    </delete>
-    
-    <delete id="deleteCart">
-    	delete from cart where userId = #{userId} and s_name = #{name} and c_condition = "X"
-    </delete>
     
     
 </mapper>

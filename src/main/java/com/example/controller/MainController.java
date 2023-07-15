@@ -36,14 +36,6 @@ public class MainController {
 		return "main";
 	}
 	
-	@PostMapping("/")
-	public String addCart(Model model, String userId, String name, int price) {
-		productService.inCart(userId, name, price);
-		List<Product> productList = productService.productAll();
-		model.addAttribute("rs", productList);
-		return "main";
-	}
-	
 	@GetMapping("/update")
 	public String update(Model model) {
 		List<Product> productList = productService.productAll();
@@ -60,12 +52,12 @@ public class MainController {
 	}
 	
 	@PostMapping("/updateProduct")
-	public String updateComplete(Model model, @RequestParam String name, String sname, String price, MultipartFile fileData) throws IOException{
+	public String updateComplete(Model model, @RequestParam String name, String sname, String description, String price, MultipartFile fileData) throws IOException{
 		String filePath = uploadPath + "/" + fileData.getOriginalFilename();
         FileCopyUtils.copy(fileData.getBytes(), new FileOutputStream(filePath));
         byte[] imageData = fileData.getBytes();
         String fileName = Base64.getEncoder().encodeToString(imageData);
-		productService.updateProduct(sname, name, price, fileName);
+		productService.updateProduct(sname, name, description, price, fileName);
 		List<Product> productList = productService.productAll();
 		model.addAttribute("rs", productList);
 		return "main";
@@ -77,7 +69,7 @@ public class MainController {
 	}
 	
 	@PostMapping("/insertProduct")
-	public String insertComplete(Model model, String name, String price, MultipartFile fileData) throws IOException{
+	public String insertComplete(Model model, String name, String description, String price, MultipartFile fileData) throws IOException{
 		boolean isDuplicate = productService.checkDuplicateProductName(name);
 		if(isDuplicate) {
 			model.addAttribute("duplicateWarning", true);
@@ -87,7 +79,7 @@ public class MainController {
         FileCopyUtils.copy(fileData.getBytes(), new FileOutputStream(filePath));
         byte[] imageData = fileData.getBytes();
         String fileName = Base64.getEncoder().encodeToString(imageData);
-        productService.insertProduct(name, price, fileName);
+        productService.insertProduct(name, description, price, fileName);
 		List<Product> productList = productService.productAll();
 		model.addAttribute("rs", productList);
 		return "main";
@@ -107,38 +99,5 @@ public class MainController {
 		List<Product> productList = productService.productAll();
 		model.addAttribute("rs", productList);
 		return "main";
-	}
-	
-	@GetMapping("/cart")
-	public String cart(Model model, @RequestParam("userId") String userId) {
-		List<Cart> cartList = productService.product(userId);
-		Cart total = productService.total(userId);
-		model.addAttribute("cartItems", cartList);
-		model.addAttribute("total",total);
-		return "cart";
-	}
-	
-	@GetMapping("/cart/delete")
-	public String cartDelete(Model model, @RequestParam("userId") String userId, @RequestParam("name") String name) {
-		productService.deleteCart(userId, name);
-		List<Cart> cartList = productService.product(userId);
-		Cart total = productService.total(userId);
-		model.addAttribute("cartItems", cartList);
-		model.addAttribute("total",total);
-		return "cart";
-	}
-	
-	@GetMapping("/cart/deleteAll")
-	public String cartDeleteAll(Model model, @RequestParam("userId") String userId) {
-		productService.deleteCartAll(userId);
-		List<Product> productList = productService.productAll();
-		model.addAttribute("rs", productList);
-		return "main";
-	}
-	
-	@GetMapping("/order")
-	  public String main(@RequestParam("userId") String userId){
-		productService.order(userId);
-		return "orderComplete";
 	}
 }

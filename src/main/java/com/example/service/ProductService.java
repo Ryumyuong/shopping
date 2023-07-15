@@ -11,21 +11,9 @@ public interface ProductService {
 	
 	public Product productName(String name);
 	
-	public void inCart(String userId, String name, int price);
+	public void insertProduct(String name, String price, String description, String fileName); 
 	
-	public List<Cart> product(String userId);
-	
-	public Cart total(String userId);
-	
-	public void order(String userId);
-	
-	public void deleteCartAll(String userId);
-	
-	public void deleteCart(String userId, String name);
-	
-	public void insertProduct(String name, String price, String fileName); 
-	
-	public void updateProduct(String name, String s_name, String price, String fileName);
+	public void updateProduct(String name, String s_name, String description, String price, String fileName);
 	
 	public void deleteProduct(String name);
 	

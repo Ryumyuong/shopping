@@ -12,6 +12,7 @@ public class Cart {
 	private String userId;
 	private String s_name;
 	private int s_price;
+	private String s_description;
 	private String fileName;
 	private String c_condition;
 	private int count;

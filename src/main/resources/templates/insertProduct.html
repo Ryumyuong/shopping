@@ -17,34 +17,45 @@
 <body>
 	<th:block layout:fragment="content">
 		<div class="jumbotron">
-			<div class="container">
-				<h1 class="display-3">물품 수정</h1>
+			<div class="container" style="text-align:center">
+				<h1 class="display-3">물품 등록</h1>
 			</div>
 		</div>
-		<div class="container">
+		<br><br>
+		<div class="container" style="width:720px">
 			<div th:if="${duplicateWarning}" class="alert alert-danger">
-				중복된 데이터가 있습니다.
+				중복된 물품명이 있습니다.
 			</div>
 			<form name="addProduct" th:action="@{/insertProduct}"
 				class="form-horizontal" method="post" enctype="multipart/form-data">
 				<div class="form-group row">
-					<label class="col-sm-2">제품명</label>
+					<label class="col-sm-2">물품명</label>
 					<div class="col-sm-3">
 						<input type="text" id="name" name="name" class="form-control">
 					</div>
 				</div>
+				<br><br>
 				<div class="form-group row">
 					<label class="col-sm-2">가격</label>
 					<div class="col-sm-3">
 						<input type="text" name="price" class="form-control">
 					</div>
 				</div>
+				<br><br>
+				<div class="form-group row">
+					<label class="col-sm-2">물품 설명</label>
+					<div class="col-sm-3">
+						<textarea name="description" class="form-control"></textarea>
+					</div>
+				</div>
+				<br><br>
 				<div class="form-gruop row">
 					<label class="col-sm-2">이미지</label>
 					<div class="col-sm-5">
 						<input type="file" name="fileData" class="form-control">
 					</div>
 				</div>
+				<br><br>
 				<div class="form-group row">
 					<div class="col-sm-offset-2 col-sm-10">
 						<button class="btn btn-info" onclick="addProduct()"
