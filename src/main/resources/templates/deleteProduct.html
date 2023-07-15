@@ -4,15 +4,6 @@
 	layout:decorate="~{layout/default_layout}">
 <head>
 <title>물품 삭제</title>
-<script type="text/javascript">
-	function deleteToCart() {
-		if (confirm("물품을 삭제하시겠습니까?")) {
-			document.deleteForm.submit();
-		} else {
-			document.deleteForm.reset();
-		}
-	}
-</script>
 </head>
 
 <body>
@@ -23,13 +14,12 @@
 				<div th:each="row : ${rs}"
 					style="display: inline-block; margin: 30px; text-align:center;">
 					<p>
-						<img th:src="'/image/' + ${row['s_fileName']}" style="width: 100%">
+						<img th:src="'data:image/png;base64,' + ${row.s_fileName}" alt="Product Image" />
 					</p>
 					<h5 th:text="${row['s_name']}" style="text-align:center;"></h5>
 					<span th:text="${row['s_price']}"></span>루나
-					<form name="deleteForm" th:action="@{/delete}" method="post"  style="margin-top:5px;">
-						<input type="hidden" name="name" th:value="${row['s_name']}" />
-						<button class="btn btn-danger" onclick="deleteToCart()"
+					<form name="deleteForm" th:action="@{/delete(name=${row['s_name']})}" method="post"  style="margin-top:5px;">
+						<button class="btn btn-danger"
 							style="border-radius: 20px;">물품 삭제 &raquo;</button>
 					</form>
 					<br>

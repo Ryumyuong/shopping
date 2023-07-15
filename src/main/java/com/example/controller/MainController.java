@@ -60,8 +60,7 @@ public class MainController {
 	}
 	
 	@PostMapping("/updateProduct")
-	public String updateComplete(Model model, @RequestParam String name, String sname, String price, MultipartFile fileData) throws IOException, SQLException{
-		
+	public String updateComplete(Model model, @RequestParam String name, String sname, String price, MultipartFile fileData) throws IOException{
 		String filePath = uploadPath + "/" + fileData.getOriginalFilename();
         FileCopyUtils.copy(fileData.getBytes(), new FileOutputStream(filePath));
         byte[] imageData = fileData.getBytes();
@@ -72,18 +71,23 @@ public class MainController {
 		return "main";
 	}
 	
+	@GetMapping("/insertProduct")
+	public String insert() {
+		return "insertProduct";
+	}
+	
 	@PostMapping("/insertProduct")
-	public String insertComplete(Model model, @RequestParam String name, String sname, String price, MultipartFile fileData) throws IOException, SQLException{
-		boolean isDuplicate = productService.checkDuplicateProductName(sname);
+	public String insertComplete(Model model, String name, String price, MultipartFile fileData) throws IOException{
+		boolean isDuplicate = productService.checkDuplicateProductName(name);
 		if(isDuplicate) {
 			model.addAttribute("duplicateWarning", true);
-			return "updateProduct";
+			return "insertProduct";
 		} else {
 		String filePath = uploadPath + "/" + fileData.getOriginalFilename();
         FileCopyUtils.copy(fileData.getBytes(), new FileOutputStream(filePath));
         byte[] imageData = fileData.getBytes();
         String fileName = Base64.getEncoder().encodeToString(imageData);
-		productService.updateProduct(sname, name, price, fileName);
+        productService.insertProduct(name, price, fileName);
 		List<Product> productList = productService.productAll();
 		model.addAttribute("rs", productList);
 		return "main";
@@ -95,6 +99,14 @@ public class MainController {
 		List<Product> productList = productService.productAll();
 		model.addAttribute("rs", productList);
 		return "deleteProduct";
+	}
+	
+	@PostMapping("/delete")
+	public String deleteProduct(Model model, @RequestParam String name) {
+		productService.deleteProduct(name);
+		List<Product> productList = productService.productAll();
+		model.addAttribute("rs", productList);
+		return "main";
 	}
 	
 	@GetMapping("/cart")

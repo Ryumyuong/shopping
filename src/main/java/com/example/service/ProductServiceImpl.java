@@ -51,11 +51,20 @@ public class ProductServiceImpl implements ProductService{
 		productMapper.deleteCart(userId, name);
 		
 	}
+	
+	@Override
+	public void insertProduct(String name, String price, String fileName) {
+		productMapper.insertProduct(name, price, fileName);	
+	}
 
 	@Override
 	public void updateProduct(String name, String s_name, String price, String fileName) {
-		productMapper.updateProduct(name, s_name, price, fileName);
-		
+		productMapper.updateProduct(name, s_name, price, fileName);	
+	}
+	
+	@Override
+	public void deleteProduct(String name) {
+		productMapper.deleteProduct(name);	
 	}
 
 	@Override

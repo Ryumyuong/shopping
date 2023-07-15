@@ -23,7 +23,11 @@ public interface ProductService {
 	
 	public void deleteCart(String userId, String name);
 	
+	public void insertProduct(String name, String price, String fileName); 
+	
 	public void updateProduct(String name, String s_name, String price, String fileName);
+	
+	public void deleteProduct(String name);
 	
 	public boolean checkDuplicateProductName(String name);
 }

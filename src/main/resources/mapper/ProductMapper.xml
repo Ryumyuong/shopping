@@ -12,9 +12,17 @@
     	select * from products where s_name = #{name}
     </select>
     
+    <insert id="insertProduct">
+    	insert into products(s_name, s_price, s_fileName) values(#{name}, #{price}, #{fileName})
+    </insert>
+    
     <update id="updateProduct">
     	update products set s_name = #{name}, s_price = #{price}, s_fileName = #{fileName} where s_name = #{s_name} ;
     </update>
+    
+    <delete id="deleteProduct">
+    	delete from products where s_name = #{name}
+    </delete>
     
     <select id="checkDuplicateProductName" resultType="java.lang.Integer">
     	select COUNT(*) from products where s_name = #{name}
