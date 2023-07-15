@@ -29,5 +29,7 @@ public interface ProductMapper {
 	
 	public void deleteCart(@Param("userId")String userId, @Param("name")String name);
 	
-	public void updateProduct(@Param("name")String name, @Param("s_name")String s_name, @Param("price")String price, @Param("fileName")String fileName, @Param("fileData")byte[] imageData);
+	public void updateProduct(@Param("name")String name, @Param("s_name")String s_name, @Param("price")String price, @Param("fileName")String fileName);
+	
+	public int checkDuplicateProductName(@Param("name")String name);
 }

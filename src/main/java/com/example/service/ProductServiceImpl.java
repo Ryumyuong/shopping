@@ -53,9 +53,8 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public void updateProduct(String name, String s_name, String price, String fileName, byte[] imageData) {
-		System.out.print("ServiceImpl update " + imageData);
-		productMapper.updateProduct(name, s_name, price, fileName, imageData);
+	public void updateProduct(String name, String s_name, String price, String fileName) {
+		productMapper.updateProduct(name, s_name, price, fileName);
 		
 	}
 
@@ -63,6 +62,13 @@ public class ProductServiceImpl implements ProductService{
 	public Product productName(String name) {
 		
 		return productMapper.productName(name);
+	}
+
+	@Override
+	public boolean checkDuplicateProductName(String name) {
+		int count = productMapper.checkDuplicateProductName(name);
+		return count > 0;
+		
 	}
 	
 }

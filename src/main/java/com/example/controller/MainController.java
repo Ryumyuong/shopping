@@ -60,15 +60,34 @@ public class MainController {
 	}
 	
 	@PostMapping("/updateProduct")
-	public String updateComplete(Model model, @RequestParam String s_name, String name, String price, MultipartFile fileData) throws IOException, SQLException{
+	public String updateComplete(Model model, @RequestParam String name, String sname, String price, MultipartFile fileData) throws IOException, SQLException{
+		
 		String filePath = uploadPath + "/" + fileData.getOriginalFilename();
         FileCopyUtils.copy(fileData.getBytes(), new FileOutputStream(filePath));
         byte[] imageData = fileData.getBytes();
         String fileName = Base64.getEncoder().encodeToString(imageData);
-		productService.updateProduct(name, s_name, price, fileName, imageData);
+		productService.updateProduct(sname, name, price, fileName);
 		List<Product> productList = productService.productAll();
 		model.addAttribute("rs", productList);
 		return "main";
+	}
+	
+	@PostMapping("/insertProduct")
+	public String insertComplete(Model model, @RequestParam String name, String sname, String price, MultipartFile fileData) throws IOException, SQLException{
+		boolean isDuplicate = productService.checkDuplicateProductName(sname);
+		if(isDuplicate) {
+			model.addAttribute("duplicateWarning", true);
+			return "updateProduct";
+		} else {
+		String filePath = uploadPath + "/" + fileData.getOriginalFilename();
+        FileCopyUtils.copy(fileData.getBytes(), new FileOutputStream(filePath));
+        byte[] imageData = fileData.getBytes();
+        String fileName = Base64.getEncoder().encodeToString(imageData);
+		productService.updateProduct(sname, name, price, fileName);
+		List<Product> productList = productService.productAll();
+		model.addAttribute("rs", productList);
+		return "main";
+		}
 	}
 	
 	@GetMapping("/delete")

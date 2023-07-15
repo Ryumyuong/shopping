@@ -12,5 +12,4 @@ public class Product {
 	private String s_name;
 	private int s_price;
 	private String s_fileName;
-	private byte[] s_fileData;
 }

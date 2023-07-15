@@ -5,11 +5,11 @@
 <head>
 <title>물품 삭제</title>
 <script type="text/javascript">
-	function addToCart() {
+	function deleteToCart() {
 		if (confirm("물품을 삭제하시겠습니까?")) {
-			document.addForm.submit();
+			document.deleteForm.submit();
 		} else {
-			document.addForm.reset();
+			document.deleteForm.reset();
 		}
 	}
 </script>
@@ -27,9 +27,9 @@
 					</p>
 					<h5 th:text="${row['s_name']}" style="text-align:center;"></h5>
 					<span th:text="${row['s_price']}"></span>루나
-					<form name="addForm" th:action="@{/delete}" method="post"  style="margin-top:5px;">
+					<form name="deleteForm" th:action="@{/delete}" method="post"  style="margin-top:5px;">
 						<input type="hidden" name="name" th:value="${row['s_name']}" />
-						<button class="btn btn-danger" onclick="addToCart()"
+						<button class="btn btn-danger" onclick="deleteToCart()"
 							style="border-radius: 20px;">물품 삭제 &raquo;</button>
 					</form>
 					<br>

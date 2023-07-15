@@ -23,5 +23,7 @@ public interface ProductService {
 	
 	public void deleteCart(String userId, String name);
 	
-	public void updateProduct(String name, String s_name, String price, String fileName, byte[] imageData);
+	public void updateProduct(String name, String s_name, String price, String fileName);
+	
+	public boolean checkDuplicateProductName(String name);
 }

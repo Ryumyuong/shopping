@@ -13,8 +13,12 @@
     </select>
     
     <update id="updateProduct">
-    	update products set s_name = #{name}, s_price = #{price}, s_fileName = #{fileName}, s_fileData = #{fileData} where s_name = #{s_name} ;
+    	update products set s_name = #{name}, s_price = #{price}, s_fileName = #{fileName} where s_name = #{s_name} ;
     </update>
+    
+    <select id="checkDuplicateProductName" resultType="java.lang.Integer">
+    	select COUNT(*) from products where s_name = #{name}
+    </select>
     
     <insert id="inCart">
     	insert into cart(userId ,s_name, s_price) values(#{userId}, #{name}, #{price})

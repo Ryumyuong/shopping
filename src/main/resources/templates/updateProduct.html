@@ -4,8 +4,9 @@
 	layout:decorate="~{layout/default_layout}">
 <head>
 <title>물품 수정</title>
+</head>
 <script type="text/javascript">
-	function updateProduct() {
+	function updateToCart() {
 		if (confirm("물품을 수정하시겠습니까?")) {
 			document.updateProduct.submit();
 		} else {
@@ -13,8 +14,6 @@
 		}
 	}
 </script>
-</head>
-
 <body>
 	<th:block layout:fragment="content">
 		<div class="jumbotron">
@@ -23,29 +22,29 @@
 			</div>
 		</div>
 		<div class="container">
-			<form name="updateProduct" th:action="@{/updateProduct(s_name=${p.s_name})}"
+			<form name="updateProduct" th:action="@{/updateProduct(name=${p?.s_name})}"
 				class="form-horizontal" method="post" enctype="multipart/form-data">
 				<div class="form-group row">
 					<label class="col-sm-2">제품명</label>
 					<div class="col-sm-3">
-						<input type="text" id="name" name="name" class="form-control" th:value="${p.s_name}">
+						<input type="text" id="sname" name="sname" class="form-control" th:value="${p?.s_name}" readonly>
 					</div>
 				</div>
 				<div class="form-group row">
 					<label class="col-sm-2" >가격</label>
 					<div class="col-sm-3">
-						<input type="text" name="price" class="form-control" th:value="${p.s_price}">
+						<input type="text" name="price" class="form-control" th:value="${p?.s_price}">
 					</div>
 				</div>
 				<div class="form-gruop row">
 					<label class="col-sm-2" >이미지</label>
 					<div class="col-sm-5">
-						<input type="file" name="fileData" class="form-control" th:value="${p.s_fileData}">
+						<input type="file" name="fileData" class="form-control">
 					</div>
 				</div>
 				<div class="form-group row">
 					<div class="col-sm-offset-2 col-sm-10">
-						<button class="btn btn-info" onclick="addToCart()"
+						<button class="btn btn-info" onclick="updateToCart()"
 							style="border-radius: 20px;">물품 수정 &raquo;</button>
 					</div>
 				</div>
