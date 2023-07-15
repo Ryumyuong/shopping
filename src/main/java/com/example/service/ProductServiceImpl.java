@@ -17,7 +17,6 @@ public class ProductServiceImpl implements ProductService{
 	
 	@Override
 	public List<Product> productAll() {
-		System.out.println("ServiceImpl List " + productMapper.productAll());
 		return productMapper.productAll();
 	}
 
