@@ -8,8 +8,16 @@
     	select * from products
     </select>
     
+    <select id="productName" resultType="com.example.domain.Product">
+    	select * from products where s_name = #{name}
+    </select>
+    
+    <update id="updateProduct">
+    	update products set s_name = #{name}, s_price = #{price}, s_fileName = #{fileName}, s_fileData = #{fileData} where s_name = #{s_name} ;
+    </update>
+    
     <insert id="inCart">
-    	insert into cart(userId ,s_name, s_price, fileName) values(#{userId}, #{name}, #{price}, #{fileName})
+    	insert into cart(userId ,s_name, s_price) values(#{userId}, #{name}, #{price})
     </insert>
     
     <select id="product" resultType="com.example.domain.Cart">

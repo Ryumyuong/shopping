@@ -14,15 +14,16 @@ public class ProductServiceImpl implements ProductService{
 	
 	@Autowired
 	private ProductMapper productMapper;
-
+	
 	@Override
 	public List<Product> productAll() {
+		System.out.println("ServiceImpl List " + productMapper.productAll());
 		return productMapper.productAll();
 	}
 
 	@Override
-	public void inCart(String userId, String name, int price, String fileName) {
-		productMapper.inCart(userId, name, price, fileName);
+	public void inCart(String userId, String name, int price) {
+		productMapper.inCart(userId, name, price);
 	}
 
 	@Override
@@ -49,6 +50,19 @@ public class ProductServiceImpl implements ProductService{
 	public void deleteCart(String userId, String name) {
 		productMapper.deleteCart(userId, name);
 		
+	}
+
+	@Override
+	public void updateProduct(String name, String s_name, String price, String fileName, byte[] imageData) {
+		System.out.print("ServiceImpl update " + imageData);
+		productMapper.updateProduct(name, s_name, price, fileName, imageData);
+		
+	}
+
+	@Override
+	public Product productName(String name) {
+		
+		return productMapper.productName(name);
 	}
 	
 }

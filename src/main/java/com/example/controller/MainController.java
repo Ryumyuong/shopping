@@ -1,12 +1,19 @@
 package com.example.controller;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.Base64;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.domain.Cart;
 import com.example.domain.Product;
@@ -19,6 +26,9 @@ import lombok.RequiredArgsConstructor;
 public class MainController {
 	private final ProductService productService;
 	
+	@Value("${upload.path}")
+	private String uploadPath;
+	
 	@GetMapping("/")
 	public String main(Model model) {
 		List<Product> productList = productService.productAll();
@@ -27,11 +37,45 @@ public class MainController {
 	}
 	
 	@PostMapping("/")
-	public String addCart(Model model, String userId, String name, int price, String fileName) {
-		productService.inCart(userId, name, price, fileName);
+	public String addCart(Model model, String userId, String name, int price) {
+		productService.inCart(userId, name, price);
 		List<Product> productList = productService.productAll();
 		model.addAttribute("rs", productList);
 		return "main";
+	}
+	
+	@GetMapping("/update")
+	public String update(Model model) {
+		List<Product> productList = productService.productAll();
+		model.addAttribute("rs", productList);
+		return "update";
+	}
+	
+	@GetMapping("/updateProduct")
+	public String updateProduct(Model model, @RequestParam String name) {
+			Product product = productService.productName(name);
+			System.out.println("controller " + product);
+			model.addAttribute("p", product);
+		return "updateProduct";
+	}
+	
+	@PostMapping("/updateProduct")
+	public String updateComplete(Model model, @RequestParam String s_name, String name, String price, MultipartFile fileData) throws IOException, SQLException{
+		String filePath = uploadPath + "/" + fileData.getOriginalFilename();
+        FileCopyUtils.copy(fileData.getBytes(), new FileOutputStream(filePath));
+        byte[] imageData = fileData.getBytes();
+        String fileName = Base64.getEncoder().encodeToString(imageData);
+		productService.updateProduct(name, s_name, price, fileName, imageData);
+		List<Product> productList = productService.productAll();
+		model.addAttribute("rs", productList);
+		return "main";
+	}
+	
+	@GetMapping("/delete")
+	public String delete(Model model) {
+		List<Product> productList = productService.productAll();
+		model.addAttribute("rs", productList);
+		return "deleteProduct";
 	}
 	
 	@GetMapping("/cart")

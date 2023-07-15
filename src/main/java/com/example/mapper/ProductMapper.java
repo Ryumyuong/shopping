@@ -12,9 +12,12 @@ import com.example.domain.Product;
 @Repository
 @Mapper
 public interface ProductMapper {
+	
 	public List<Product> productAll();
 	
-	public void inCart(@Param("userId")String userId, @Param("name")String name, @Param("price")int price, @Param("fileName")String fileName);
+	public Product productName(@Param("name")String name);
+	
+	public void inCart(@Param("userId")String userId, @Param("name")String name, @Param("price")int price);
 	
 	public List<Cart> product(String userId);
 	
@@ -25,4 +28,6 @@ public interface ProductMapper {
 	public void deleteCartAll(@Param("userId")String userId);
 	
 	public void deleteCart(@Param("userId")String userId, @Param("name")String name);
+	
+	public void updateProduct(@Param("name")String name, @Param("s_name")String s_name, @Param("price")String price, @Param("fileName")String fileName, @Param("fileData")byte[] imageData);
 }
