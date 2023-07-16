@@ -17,14 +17,14 @@
 					<p>
 						<img th:src="'data:image/png;base64,' + ${row.s_fileName}" alt="Product Image" />
 					</p>
-					<h5 th:text="${row['s_name']}" style="text-align:center;"></h5>
+					<p th:text="${row['s_name']}" style="text-align:center;"></p>
 					<br>
 					<p th:text="${row['s_description']}"></p>
 					<br>
-					<span th:text="${row['s_price']}"></span>루나
+					<span th:text="${row['s_price']}" style="font-weight:bold"></span><span>  루나</span>
 					<br><br><br>
 						<input type="hidden" name="name" th:value="${row['s_name']}" />
-						<a th:href="@{/updateProduct(name=${row['s_name']})}" 
+						<a th:href="@{/runa/updateProduct(name=${row['s_name']})}" 
 						style="padding:10px; padding-left:30px;padding-right:30px; color:black;border: 2px solid black; background:#e8e8e8;">물품 수정 &raquo;</a>
 					<br>
 				</div>

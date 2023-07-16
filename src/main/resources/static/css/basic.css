@@ -23,6 +23,9 @@ a {
 	text-decoration: none;
 	color:black;
 }
+a:hover {
+	color:black;
+}
 
 #preview {
 	width: 100px;

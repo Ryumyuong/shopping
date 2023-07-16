@@ -14,7 +14,7 @@
 		</div>
 		<br><br>
 		<div class="container" style="width:720px;">
-			<form name="updateProduct" th:action="@{/updateProduct(name=${p?.s_name})}"
+			<form name="updateProduct" th:action="@{/runa/updateProduct(name=${p?.s_name})}"
 				class="form-horizontal" method="post" enctype="multipart/form-data">
 				<div class="form-group row">
 					<label class="col-sm-2">물품명</label>
@@ -33,7 +33,7 @@
 				<div class="form-group row">
 					<label class="col-sm-2">물품 설명</label>
 					<div class="col-sm-3">
-						<textarea name="description" class="form-control" th:value="${p?.s_description}"></textarea>
+						<textarea name="description" class="form-control" th:text="${p?.s_description}"></textarea>
 					</div>
 				</div>
 				<br><br>

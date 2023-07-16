@@ -10,4 +10,8 @@ import com.example.domain.User;
 @Mapper
 public interface LoginMapper {
 	public User loginCom(@Param("userId")String userId, @Param("password")String password);
+	
+	public User loginSearch(@Param("userId")String userId);
+	
+	public void newLogin(@Param("userId")String userId, @Param("password")String encodePwd, @Param("username")String username, @Param("phone")String phone ,@Param("address")String address);
 }

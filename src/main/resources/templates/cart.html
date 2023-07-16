@@ -15,7 +15,7 @@
 	<br><br>
 	<div class="container" style="width:720px;">
 		<div>
-			<a th:href="@{/cart/deleteAll?userId=user}"
+			<a th:href="@{/cart/deleteAll(userId=${user.userId})}"
 				class="btn btn-danger" style="float:left;">모두 삭제하기</a>
 		</div>
 		<div style="padding-top: 50px">
@@ -52,7 +52,7 @@
 						<span>루나</span>
 					</td>
 					<td style="vertical-align: middle;">
-					<a th:href="@{/cart/delete(userId=user, name=${cartItem['s_name']})}"
+					<a th:href="@{/cart/delete(userId=${user.userId}, name=${cartItem['s_name']})}"
 						class="badge badge-danger" style="text-decoration:none; color:red; font-size:15px;">삭제</a>
 					</td>
 				</tr>
@@ -68,11 +68,11 @@
 				</tr>
 			</table>
 			<br>
-			<a th:href="@{/}" class="btn btn-secondary">
+			<a th:href="@{/runa/main}" class="btn btn-secondary">
 				&laquo; 쇼핑 계속하기</a>
 				
 			<div style="text-align: right;">
-				<a th:href="@{/order?userId=user}"
+				<a th:href="@{/cart/order(userId=${user.userId})}"
 					class="btn btn-success" >주문하기
 				</a>
 			</div>

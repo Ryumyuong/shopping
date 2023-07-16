@@ -38,17 +38,14 @@
 					 <span th:text="${row['s_price']}" style="font-weight:bold"></span><span>  루나</span>
 					<br>
 					<br>
-					<form name="addForm" th:action="@{/}" method="post"
+					<form name="addForm" th:action="@{/cart/main}" method="post"
 						style="margin-top: 5px;">
-						<input type="hidden" name="userId" value="user" /> <input
-							type="hidden" name="name" th:value="${row['s_name']}" /> <input
-							type="hidden" name="description"
-							th:value="${row['s_description']}" /> <input type="hidden"
-							name="price" th:value="${row['s_price']}" />
-						<textarea name="fileName" th:text="${row['s_fileName']}"
-							style="display: none;"></textarea>
-						<button onclick="addToCart()"
-							style="padding: 10px; padding-left: 30px; padding-right: 30px">장바구니 &raquo;</button>
+						<input type="hidden" name="userId" th:value="${user.userId}" />
+						<input type="hidden" name="name" th:value="${row['s_name']}" />
+						<input type="hidden" name="description" th:value="${row['s_description']}" />
+						<input type="hidden" name="price" th:value="${row['s_price']}" />
+						<textarea name="fileName" th:text="${row['s_fileName']}" style="display: none;"></textarea>
+						<button onclick="addToCart()" style="padding: 10px; padding-left: 30px; padding-right: 30px">장바구니에 넣기</button>
 					</form>
 					<br>
 				</div>

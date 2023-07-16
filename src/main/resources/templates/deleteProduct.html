@@ -17,14 +17,14 @@
 					<p>
 						<img th:src="'data:image/png;base64,' + ${row.s_fileName}" alt="Product Image" />
 					</p>
-					<h5 th:text="${row['s_name']}" style="text-align:center;"></h5>
+					<p th:text="${row['s_name']}" style="text-align:center;"></p>
 					<br>
 					<p th:text="${row['s_description']}"></p>
 					<br>
-					<span th:text="${row['s_price']}"></span>루나
+					<span th:text="${row['s_price']}" style="font-weight:bold"></span><span>  루나</span>
 					<br><br>
-					<form name="deleteForm" th:action="@{/delete(name=${row['s_name']})}" method="post"  style="margin-top:5px;">
-						<button style="padding:10px; padding-left:30px;padding-right:30px">물품 삭제 &raquo;</button>
+					<form name="deleteForm" th:action="@{/runa/delete(name=${row['s_name']})}" method="post"  style="margin-top:5px;">
+						<button style="padding:10px; padding-left:30px;padding-right:30px;color:red">물품 삭제 &raquo;</button>
 					</form>
 					<br>
 				</div>

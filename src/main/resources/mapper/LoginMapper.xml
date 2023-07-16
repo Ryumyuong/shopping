@@ -6,5 +6,13 @@
 	<select id="loginCom" resultType="com.example.domain.User">
 		select * from user where userId = #{userId} and password = #{password} 
 	</select>
+	
+	<select id="loginSearch" resultType="com.example.domain.User">
+		select * from user where userId = #{userId}
+	</select>
+	
+	<insert id="newLogin">
+		insert into user (userId, password, username, phone, address) values(#{userId}, #{password}, #{username}, #{phone}, #{address})
+	</insert>
 
 </mapper>

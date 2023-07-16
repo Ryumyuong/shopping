@@ -16,4 +16,10 @@ public class LoginServiceImpl implements LoginService{
 		
 		return loginMapper.loginCom(userId, password);
 	}
+
+	@Override
+	public void newLogin(String userId, String encodePwd, String username, String phone, String address) {
+		loginMapper.newLogin(userId, encodePwd, username, phone, address);
+		
+	}
 }
