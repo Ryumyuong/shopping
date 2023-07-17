@@ -38,7 +38,6 @@ public class CartController {
 	
 	@PostMapping("main")
 	public String addCart(Model model, String userId, String name, String description, int price, String fileName) throws IOException{
-        System.out.println("fileName " + fileName);
 		cartService.inCart(userId, name, description, price, fileName);
 		List<Product> productList = productService.productAll();
 		model.addAttribute("rs", productList);

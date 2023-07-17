@@ -1,12 +1,10 @@
 package com.example.controller;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.security.Principal;
 import java.util.Base64;
 import java.util.List;
-
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -49,7 +47,6 @@ public class MainController {
 	@GetMapping("updateProduct")
 	public String updateProduct(Model model, @RequestParam String name) {
 			Product product = productService.productName(name);
-			System.out.println("controller " + product);
 			model.addAttribute("p", product);
 		return "updateProduct";
 	}
@@ -58,6 +55,10 @@ public class MainController {
 	public String updateComplete(Model model, @RequestParam String name, String sname, String description, String price, MultipartFile fileData) throws IOException{
 		if(fileData != null) {
 			String filePath = uploadPath + "/" + fileData.getOriginalFilename();
+			File dir = new File(uploadPath);
+	        if (!dir.exists()) {
+	            dir.mkdirs();
+	        }
 	        FileCopyUtils.copy(fileData.getBytes(), new FileOutputStream(filePath));
 		}
 		byte[] imageData = fileData.getBytes();
