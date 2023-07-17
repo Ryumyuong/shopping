@@ -39,6 +39,7 @@ public class CartController {
 	@PostMapping("main")
 	public String addCart(Model model, String userId, String name, String description, int price, String fileName) throws IOException{
 		cartService.inCart(userId, name, description, price, fileName);
+		System.out.println("장바구니 등록 " + userId + " " + name);
 		List<Product> productList = productService.productAll();
 		model.addAttribute("rs", productList);
 		return "redirect:/runa/main";
@@ -47,6 +48,7 @@ public class CartController {
 	@GetMapping("delete")
 	public String cartDelete(Model model, @RequestParam("userId") String userId, @RequestParam("name") String name) {
 		cartService.deleteCart(userId, name);
+		System.out.println("장바구니 삭제 " + userId + " " + name);
 		List<Cart> cartList = cartService.product(userId);
 		Cart total = cartService.total(userId);
 		model.addAttribute("cartItems", cartList);
@@ -57,6 +59,7 @@ public class CartController {
 	@GetMapping("deleteAll")
 	public String cartDeleteAll(Model model, @RequestParam("userId") String userId) {
 		cartService.deleteCartAll(userId);
+		System.out.println("장바구니 전체삭제 " + userId);
 		List<Product> productList = productService.productAll();
 		model.addAttribute("rs", productList);
 		return "main";
