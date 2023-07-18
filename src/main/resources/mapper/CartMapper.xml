@@ -29,7 +29,7 @@
     </select>
     
     <insert id="order">
-    	insert into orders(username, userId, phone, address, order_menu, order_price) values(#{username}, #{userId}, #{phone}, #{address}, #{order_menu}, #{total});
+    	insert into orders(order_time, username, userId, phone, address, order_menu, order_price) values(DATE_ADD(CURRENT_TIME, INTERVAL 9 HOUR) ,#{username}, #{userId}, #{phone}, #{address}, #{order_menu}, #{total});
     </insert>
     
     <update id="orderCom">
