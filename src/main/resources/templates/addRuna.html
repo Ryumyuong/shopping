@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default_layout}">
+
+<body>
+<th:block layout:fragment="content">
+	<div class="jumbotron">
+		<div class="container" style="text-align:center">
+			<h1 class="display-3">루나 현황</h1>
+		</div>
+	</div>
+	<br><br>
+	<div class="container">
+		<div style="padding-top: 50px">
+			<table style="text-align:center">
+				<tr>
+					<th style="width:100px;text-align:center">이름</th>
+					<th style="width:150px;">아이디</th>
+					<th style="width:300px;">전화번호</th>
+					<th style="width:500px;">주소</th>
+					<th style="width:350px;">루나</th>
+					<th style="width:300px;">비고</th>
+				</tr>
+				<tr th:each="user : ${userList}">
+					<td>
+						<p th:text="${user['username']}" style="padding-top:20px;"></p>
+					</td>
+					<td style="vertical-align: middle;">
+						<span th:text="${user['userId']}"></span>
+					</td>
+					<td style="vertical-align: middle;">
+						<span th:text="${user['phone']}"></span>
+					</td>
+					<td style="vertical-align: middle;">
+						<span th:text="${user['address']}"></span>
+					</td>
+					<td style="vertical-align: middle;">
+						<span th:text="${user['money']}"></span>
+						<span> 루나</span>
+					<td>
+					<form th:action="@{/addRuna}" method="post">
+						<input type="text" name="money" size="5">
+						<input type="hidden" name="userId" th:value="${user['userId']}">
+						<span>루나</span><button style="border:0px;background:white;color:blue"> 추가</button>
+					</form>
+					</td>
+				</tr>
+			</table>
+			<br>
+			<a th:href="@{/runa/main}" class="btn btn-secondary">
+				&laquo; 메인 페이지로</a>
+				
+		</div>
+	</div>
+</th:block>
+</body>
+
+</html>

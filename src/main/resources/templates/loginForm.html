@@ -18,9 +18,9 @@
 							 <input type="password" class="form-control" name="password" id="password"	placeholder="비밀번호">
 						</div>
 
-						<p th:if="${loginErrorMsg}" class="error"
-							th:text="${loginErrorMsg}"
-							style="background: yellow; padding: 5px"></p>
+						<div th:if="${param.error}" class="alert alert-danger">
+						    로그인에 실패했습니다. 아이디와 비밀번호를 확인하세요.
+						</div>
 						<button>로그인</button>
 					</form>
 				</div>

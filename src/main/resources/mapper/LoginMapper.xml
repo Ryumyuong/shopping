@@ -14,5 +14,21 @@
 	<insert id="newLogin">
 		insert into user (userId, password, username, phone, address) values(#{userId}, #{password}, #{username}, #{phone}, #{address})
 	</insert>
+	
+	<select id="userList" resultType="com.example.domain.User">
+		select * from user where id <![CDATA[<>]]> 1
+	</select>
+	
+	<update id="updateUser">
+		update user set userId = #{userId}, password = #{password}, phone = #{phone}, address = #{address} where username = #{username}
+	</update>
+	
+	<update id="deleteUser">
+		delete from user where userId = #{userId}
+	</update>
+	
+	<update id="addRuna">
+		update user set money = #{money} where userId = #{userId}
+	</update>
 
 </mapper>

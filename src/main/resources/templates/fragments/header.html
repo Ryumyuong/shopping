@@ -9,21 +9,18 @@
 				<a class="navbar-brand" th:href="@{/runa/main}" style="color:black;"
 					>루나몰</a>
 			</div>
-
 			<ul class="navbar-nav mr-auto">
-				<li th:if="${user.userId}"></li>
-				<li class="nav-item" th:unless="${user.userId}"><a class="nav-links"
-					th:href="@{/}">로그인</a></li>
 				<li class="nav-item"><a
-					style="color: black;padding-right:5px" th:href="@{/member/memberInformation.jsp}" th:text="${user.userId}"></a><span>님</span></li>
+					style="color: black;padding-right:5px" th:href="@{/updateUser}" th:text="${user.userId}"></a><span>님</span></li>
 				<li class="nav-item"><a
-					style="color: black; font-weight:bold;padding-right:5px" th:href="@{/member/memberInformation.jsp}" th:text="${user.userId}"></a><span>루나</span></li>
+					style="color: black; font-weight:bold;padding-right:5px" th:href="@{/updateUser}" th:text="${user.money}"></a><span>루나</span></li>
 					
 				<li class="nav-item"><a class="nav-links"
 					th:href="@{/logout}"> 로그아웃</a></li>
 				<li class="nav-item" th:if="${user.userId} == 'admin'"><a class="nav-links"
 					th:href="@{/newLogin}"> 회원 가입</a></li>
 				<li class="nav-item"><a class="nav-links" th:href="@{/cart/main(userId=${user.userId})}">나의 장바구니</a></li>
+				<li class="nav-item"><a class="nav-links" th:href="@{/cart/orderList(username=${user.username})}">주문 목록</a></li>
 			</ul>
 		</div>
 	</nav>
@@ -31,13 +28,12 @@
 		<div class="container">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item"><a class="nav-links"
-					th:href="@{/member/memberList.jsp}"> 회원 목록</a></li>
+					th:href="@{/userList}">회원 목록</a></li>
 				<li class="nav-item"><a class="nav-links"
-					th:href="@{insertProduct}"> 물건 등록</a></li>
-				<li class="nav-item"><a class="nav-links" th:href="@{update}"> 물건
-						수정</a></li>
-				<li class="nav-item"><a class="nav-links" th:href="@{delete}"> 물건
-						삭제</a></li>
+					th:href="@{insertProduct}">물건 등록</a></li>
+				<li class="nav-item"><a class="nav-links" th:href="@{/runa/update}">물건 수정</a></li>
+				<li class="nav-item"><a class="nav-links" th:href="@{/runa/delete}">물건 삭제</a></li>
+				<li class="nav-item"><a class="nav-links" th:href="@{/addRuna}">루나 추가</a></li>
 			</ul>
 		</div>
 	</nav>

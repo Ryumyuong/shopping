@@ -20,9 +20,21 @@
 		) AS subquery
     </select>
     
-    <update id="order">
-    	update cart set c_condition = "O" where userId = #{userId} ;
+    <insert id="order">
+    	insert into orders(username, userId, phone, address, order_menu, order_price) values(#{username}, #{userId}, #{phone}, #{address}, #{order_menu}, #{total});
+    </insert>
+    
+    <update id="orderCom">
+    	update cart set c_condition = "O" where userId = #{userId}
     </update>
+    
+    <select id="orderListAll" resultType="com.example.domain.Orders">
+    	select * from orders
+    </select>
+    
+    <select id="orderList" resultType="com.example.domain.Orders">
+    	select * from orders where username = #{username}
+    </select>
     
     <delete id="deleteCartAll">
     	delete from cart where userId = #{userId} and c_condition = "X"

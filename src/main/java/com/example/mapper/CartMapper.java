@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.example.domain.Cart;
+import com.example.domain.Orders;
 
 @Repository
 @Mapper
@@ -17,7 +18,13 @@ public interface CartMapper {
 	
 	public Cart total(String userId);
 	
-	public void order(@Param("userId")String userId);
+	public void order(@Param("username")String username, @Param("userId")String userId, @Param("phone")String phone, @Param("address")String address, @Param("order_menu")String order_menu, @Param("total")int total);
+	
+	public void orderCom(@Param("userId")String userId);
+	
+	public List<Orders> orderListAll();
+	
+	public List<Orders> orderList(@Param("username")String username);
 	
 	public void deleteCartAll(@Param("userId")String userId);
 	

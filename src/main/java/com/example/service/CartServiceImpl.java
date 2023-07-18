@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.domain.Cart;
+import com.example.domain.Orders;
 import com.example.mapper.CartMapper;
 
 @Service
@@ -29,8 +30,23 @@ public class CartServiceImpl implements CartService{
 	}
 	
 	@Override
-	public void order(String userId) {
-		cartMapper.order(userId);
+	public void order(String username, String userId, String phone, String address, String order_menu, int total) {
+		cartMapper.order(username, userId, phone, address, order_menu, total);
+	}
+	
+	@Override
+	public void orderCom(String userId) {
+		cartMapper.orderCom(userId);	
+	}
+	
+	@Override
+	public List<Orders> orderListAll() {
+		return cartMapper.orderListAll();
+	}
+	
+	@Override
+	public List<Orders> orderList(String username) {
+		return cartMapper.orderList(username);
 	}
 	
 	@Override
