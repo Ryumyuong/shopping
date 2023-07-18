@@ -9,14 +9,14 @@
 <th:block layout:fragment="content">
 	<div class="jumbotron">
 		<div class="container" style="text-align:center">
-			<h1 class="display-3">주문목록</h1>
+			<h1 class="display-3">루나 사용 목록</h1>
 		</div>
 	</div>
 	<br><br>
 	<div class="container">
 		<div  style="text-align:right" th:if="${user.userId} == 'admin'">
-			<form th:action="@{/cart/orderListSearch}" method="get">
-				<span>검색 : </span><input type="text" name="name" placeholder="이름을 입력하세요">
+			<form th:action="@{/cart/runaListSearch}" method="get">
+				<span>아이디 검색 : </span><input type="text" name="userId" placeholder="아이디를 입력하세요">
 				<button type="submit">검색</button>
 			</form>
 		</div>
@@ -25,37 +25,32 @@
 				<tr>
 					<th style="width:150px;">주문날짜</th>
 					<th style="width:100px;">이름</th>
-					<th style="width:100px;" >아이디</th>
 					<th style="width:150px;">전화번호</th>
 					<th style="width:500px;">주소</th>
 					<th style="width:350px;">주문목록</th>
-					<th style="width:150px;">금액</th>
+					<th style="width:200px;">금액</th>
 				</tr>
-				<tr th:each="order : ${orderList}">
+				<tr th:each="runa : ${orderList}">
 					<td>
-						<p th:text="${order['order_time']}" style="padding-top:20px;"></p>
+						<p th:text="${runa['order_time']}" style="padding-top:20px;"></p>
 					</td>
 					<td>
-						<span th:text="${order['username']}"></span>
+						<span th:text="${runa['username']}"></span>
 					</td>
 					<td>
-						<span th:text="${order['userId']}" style="color:black"></span>
+						<span th:text="${runa['phone']}"></span>
 					</td>
 					<td>
-						<span th:text="${order['phone']}"></span>
+						<span th:text="${runa['address']}"></span>
 					</td>
 					<td>
-						<span th:text="${order['address']}"></span>
+						<span th:text="${runa['order_menu']}"></span>
 					</td>
 					<td>
-						<span th:text="${order['order_menu']}"></span>
-					</td>
-					<td>
-						<span>-</span><span th:text="${order['order_price']}"></span><span> 루나</span>
+						<span>-</span><span th:text="${runa['order_price']}"></span><span> 루나</span>
 					</td>
 				</tr>
 				<tr>
-					<td></td>
 					<td></td>
 					<td></td>
 					<td></td>
@@ -68,8 +63,6 @@
 				</tr>
 			</table>
 			<br>
-			<a th:href="@{/runa/main}" class="btn btn-secondary">
-				&laquo; 쇼핑 계속하기</a>
 		</div>
 	</div>
 </th:block>

@@ -13,14 +13,13 @@
 				<li class="nav-item"><a
 					style="color: black;padding-right:5px" th:href="@{/updateUser}" th:text="${user.userId}"></a><span>님</span></li>
 				<li class="nav-item"><a
-					style="color: black; font-weight:bold;padding-right:5px" th:href="@{/updateUser}" th:text="${user.money}"></a><span>루나</span></li>
+					style="color: black; font-weight:bold;padding-right:5px" th:href="@{/cart/runaList(userId=${user.userId})}" th:text="${user.money}"></a><span>루나</span></li>
 					
 				<li class="nav-item"><a class="nav-links"
 					th:href="@{/logout}"> 로그아웃</a></li>
 				<li class="nav-item" th:if="${user.userId} == 'admin'"><a class="nav-links"
 					th:href="@{/newLogin}"> 회원 가입</a></li>
 				<li class="nav-item"><a class="nav-links" th:href="@{/cart/main(userId=${user.userId})}">나의 장바구니</a></li>
-				<li class="nav-item"><a class="nav-links" th:href="@{/cart/orderList(username=${user.username})}">주문 목록</a></li>
 			</ul>
 		</div>
 	</nav>

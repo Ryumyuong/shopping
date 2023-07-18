@@ -18,11 +18,15 @@ public interface CartService {
 	
 	public List<Orders> orderListAll();
 	
-	public List<Orders> orderList(String username);
+	public List<Orders> orderList(String userId);
 	
 	public void orderCom(@Param("userId")String userId);
 	
 	public void deleteCartAll(String userId);
 	
 	public void deleteCart(String userId, String name);
+	
+	public int runaTotal(String userId);
+	
+	public int runaTotalAll();
 }

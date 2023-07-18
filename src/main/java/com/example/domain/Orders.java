@@ -17,4 +17,5 @@ public class Orders {
 	private String address;
 	private String order_menu;
 	private int order_price;
+	private int total;
 }

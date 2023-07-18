@@ -24,9 +24,13 @@ public interface CartMapper {
 	
 	public List<Orders> orderListAll();
 	
-	public List<Orders> orderList(@Param("username")String username);
+	public List<Orders> orderList(@Param("userId")String userId);
 	
 	public void deleteCartAll(@Param("userId")String userId);
 	
 	public void deleteCart(@Param("userId")String userId, @Param("name")String name);
+	
+	public int runaTotal(@Param("userId")String userId);
+	
+	public int runaTotalAll();
 }

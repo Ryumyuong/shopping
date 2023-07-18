@@ -20,6 +20,14 @@
 		) AS subquery
     </select>
     
+    <select id="runaTotal" resultType="int">
+	    select sum(order_price) as total from orders where userId = #{userId}
+    </select>
+    
+    <select id="runaTotalAll" resultType="int">
+	    select sum(order_price) as total from orders where userId &lt;&gt; "admin"
+    </select>
+    
     <insert id="order">
     	insert into orders(username, userId, phone, address, order_menu, order_price) values(#{username}, #{userId}, #{phone}, #{address}, #{order_menu}, #{total});
     </insert>
@@ -33,7 +41,7 @@
     </select>
     
     <select id="orderList" resultType="com.example.domain.Orders">
-    	select * from orders where username = #{username}
+    	select * from orders where userId = #{userId}
     </select>
     
     <delete id="deleteCartAll">

@@ -45,8 +45,8 @@ public class CartServiceImpl implements CartService{
 	}
 	
 	@Override
-	public List<Orders> orderList(String username) {
-		return cartMapper.orderList(username);
+	public List<Orders> orderList(String userId) {
+		return cartMapper.orderList(userId);
 	}
 	
 	@Override
@@ -58,6 +58,16 @@ public class CartServiceImpl implements CartService{
 	public void deleteCart(String userId, String name) {
 		cartMapper.deleteCart(userId, name);
 		
+	}
+
+	@Override
+	public int runaTotal(String userId) {
+		return cartMapper.runaTotal(userId);
+	}
+	
+	@Override
+	public int runaTotalAll() {
+		return cartMapper.runaTotalAll();
 	}
 
 }

@@ -116,9 +116,8 @@ public class LoginController {
 	@PostMapping("/addRuna")
 	public String addRuna(Model model, String userId, int money) {
 		User user = loginMapper.loginSearch(userId);
-		System.out.println("userMoney " + user.getMoney());
 		money += user.getMoney();
-		System.out.println("money" + money);
+		System.out.println("더해진 루나 " + money);
 		loginService.addRuna(userId, money);
 		List<User> userList = loginService.userList();
 		model.addAttribute("userList", userList);

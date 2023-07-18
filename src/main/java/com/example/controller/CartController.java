@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.domain.Cart;
 import com.example.domain.Orders;
 import com.example.domain.Product;
+import com.example.domain.User;
+import com.example.mapper.LoginMapper;
 import com.example.service.CartService;
+import com.example.service.LoginService;
 import com.example.service.ProductService;
 
 import lombok.RequiredArgsConstructor;
@@ -25,6 +28,8 @@ import lombok.RequiredArgsConstructor;
 public class CartController {
 	private final CartService cartService;
 	private final ProductService productService;
+	private final LoginMapper loginMapper;
+	private final LoginService loginService;
 	
 	@GetMapping("main")
 	public String cart(Model model, @RequestParam("userId") String userId) {
@@ -74,8 +79,20 @@ public class CartController {
 	}
 	
 	@PostMapping("order")
-	  public String orderCom(Principal principal, String username, String phone, String address, int total){
+	  public String orderCom(Model model, Principal principal, String username, String phone, String address, int total){
 		String userId = principal.getName();
+		User user = loginMapper.loginSearch(userId);
+		int money = user.getMoney();
+		money -= total;
+		if(money < 0) {
+			List<Cart> cartList = cartService.product(userId);
+			model.addAttribute("cartItems", cartList);
+			Cart totals = cartService.total(userId);
+			model.addAttribute("total",totals);
+			model.addAttribute("loginErrorMsg", "루나가 부족합니다.");
+			return "order";
+		} else {
+		loginService.addRuna(userId, money);
 		List<Cart> cartList = cartService.product(userId);
 		String order_menu = "";
 		for (Cart item : cartList) {
@@ -88,34 +105,42 @@ public class CartController {
 		cartService.order(username, userId, phone, address, order_menu, total);
 		cartService.orderCom(userId);
 		return "orderComplete";
-	}
-	
-	@GetMapping("orderList")
-	public String orderList(Model model, @RequestParam String username) {
-
-		if(username.equals("관리자")) {
-			List<Orders> orderList = cartService.orderListAll();
-			model.addAttribute("orderList", orderList);
-			return "orderList";
-		} else {
-			List<Orders> orderList = cartService.orderList(username);
-			model.addAttribute("orderList", orderList);
-			return "orderList";
 		}
 	}
 	
-	@GetMapping("orderListSearch")
-	public String orderListSearch(Model model, @RequestParam String name) {
-
-		if(name == null) {
+	@GetMapping("runaList")
+	public String runaList(Model model, Principal principal, @RequestParam String userId) {
+		if(userId.equals("admin")) {
 			List<Orders> orderList = cartService.orderListAll();
+			int total = cartService.runaTotalAll();
+			model.addAttribute("total", total);
 			model.addAttribute("orderList", orderList);
-			return "orderList";
+			return "runaList";
 		} else {
-			List<Orders> orderList = cartService.orderList(name);
+			List<Orders> orderList = cartService.orderList(userId);
+			int total = cartService.runaTotal(principal.getName());
+			model.addAttribute("total", total);
 			model.addAttribute("orderList", orderList);
-			return "orderList";
+			return "runaList";
 		}
 	}
+	
+	@GetMapping("runaListSearch")
+	public String runaListSearch(Model model, Principal principal, @RequestParam String userId) {
 
+		if(userId == "") {
+			List<Orders> orderList = cartService.orderListAll();
+			int total = cartService.runaTotalAll();
+			model.addAttribute("total", total);
+			model.addAttribute("orderList", orderList);
+			return "runaList";
+		} else {
+			List<Orders> orderList = cartService.orderList(userId);
+			int total = cartService.runaTotal(userId);
+			model.addAttribute("total", total);
+			model.addAttribute("orderList", orderList);
+			return "runaList";
+		}
+	}
+	
 }
