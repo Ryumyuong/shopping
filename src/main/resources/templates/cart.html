@@ -14,6 +14,8 @@
 	</div>
 	<br><br>
 	<div class="container" style="width:720px;">
+		<div th:if="${loginErrorMsg}" class="alert alert-danger"
+							th:text="${loginErrorMsg}"></div>
 		<div>
 			<a th:href="@{/cart/deleteAll(userId=${user.userId})}"
 				class="btn btn-danger" style="float:left;">모두 삭제하기</a>

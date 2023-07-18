@@ -26,6 +26,8 @@
 			<div th:if="${duplicateWarning}" class="alert alert-danger">
 				중복된 물품명이 있습니다.
 			</div>
+			<div th:if="${loginErrorMsg}" class="alert alert-danger"
+							th:text="${loginErrorMsg}"></div>
 			<form name="addProduct" th:action="@{/runa/insertProduct}"
 				class="form-horizontal" method="post" enctype="multipart/form-data">
 				<div class="form-group row">
@@ -38,7 +40,7 @@
 				<div class="form-group row">
 					<label class="col-sm-2">가격</label>
 					<div class="col-sm-3">
-						<input type="text" name="price" class="form-control">
+						<input type="text" name="price" class="form-control" value=0>
 					</div>
 				</div>
 				<br><br>

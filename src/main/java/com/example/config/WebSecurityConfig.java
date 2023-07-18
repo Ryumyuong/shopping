@@ -23,7 +23,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	    http.authorizeRequests()
 	        .mvcMatchers("/runa/main", "/cart/**").hasAnyRole("USER", "ADMIN") 
-	        .mvcMatchers("/runa/**", "/newLogin", "/addRuna").hasRole("ADMIN")
+	        .mvcMatchers("/runa/**", "/newLogin", "/addRuna", "/updateUser", "/userList").hasRole("ADMIN")
 	        .anyRequest().permitAll()
 	        .and()
 	        .formLogin()

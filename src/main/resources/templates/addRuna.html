@@ -40,7 +40,7 @@
 						<span> 루나</span>
 					<td>
 					<form th:action="@{/addRuna}" method="post">
-						<input type="text" name="money" size="5">
+						<input type="text" name="money" size="5" value=0>
 						<input type="hidden" name="userId" th:value="${user['userId']}">
 						<span>루나</span><button style="border:0px;background:white;color:blue"> 추가</button>
 					</form>

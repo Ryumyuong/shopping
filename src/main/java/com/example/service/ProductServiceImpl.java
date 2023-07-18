@@ -21,12 +21,12 @@ public class ProductServiceImpl implements ProductService{
 	}
 	
 	@Override
-	public void insertProduct(String name, String description, String price, String fileName) {
+	public void insertProduct(String name, int price, String description,  String fileName) {
 		productMapper.insertProduct(name, description, price, fileName);	
 	}
 
 	@Override
-	public void updateProduct(String name, String s_name, String description, String price, String fileName) {
+	public void updateProduct(String name, String s_name, String description, int price, String fileName) {
 		productMapper.updateProduct(name, s_name, description, price, fileName);	
 	}
 	

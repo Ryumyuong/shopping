@@ -74,37 +74,66 @@ public class CartController {
 		List<Cart> cartList = cartService.product(userId);
 		model.addAttribute("cartItems", cartList);
 		Cart total = cartService.total(userId);
+		if(total == null) {
+			model.addAttribute("cartItems", cartList);
+			model.addAttribute("total",total);
+			model.addAttribute("loginErrorMsg", "물품을 정하세요");
+			return "cart";
+		} 
 		model.addAttribute("total",total);
 		return "order";
 	}
 	
 	@PostMapping("order")
 	  public String orderCom(Model model, Principal principal, String username, String phone, String address, int total){
-		String userId = principal.getName();
-		User user = loginMapper.loginSearch(userId);
-		int money = user.getMoney();
-		money -= total;
-		if(money < 0) {
-			List<Cart> cartList = cartService.product(userId);
+		if(username == "") {
+			List<Cart> cartList = cartService.product(principal.getName());
 			model.addAttribute("cartItems", cartList);
-			Cart totals = cartService.total(userId);
+			Cart totals = cartService.total(principal.getName());
+			model.addAttribute("loginErrorMsg", "받는사람을 입력하세요");
 			model.addAttribute("total",totals);
-			model.addAttribute("loginErrorMsg", "루나가 부족합니다.");
 			return "order";
-		} else {
-		loginService.addRuna(userId, money);
-		List<Cart> cartList = cartService.product(userId);
-		String order_menu = "";
-		for (Cart item : cartList) {
-	        String s_name = item.getS_name();
-	        int count = item.getCount();
-	        
-	        order_menu += s_name + " " + count + "개 ";
-	    }
-		System.out.println("order_menu " + order_menu);
-		cartService.order(username, userId, phone, address, order_menu, total);
-		cartService.orderCom(userId);
-		return "orderComplete";
+		} else if(phone == "") {
+			List<Cart> cartList = cartService.product(principal.getName());
+			model.addAttribute("cartItems", cartList);
+			Cart totals = cartService.total(principal.getName());
+			model.addAttribute("loginErrorMsg", "전화번호를 입력하세요");
+			model.addAttribute("total",totals);
+			return "order";
+		} else if(address == "") {
+			List<Cart> cartList = cartService.product(principal.getName());
+			model.addAttribute("cartItems", cartList);
+			Cart totals = cartService.total(principal.getName());
+			model.addAttribute("loginErrorMsg", "주소를 입력하세요");
+			model.addAttribute("total",totals);
+			return "order";
+		} else  {
+			String userId = principal.getName();
+			User user = loginMapper.loginSearch(userId);
+			int money = user.getMoney();
+			money -= total;
+			if(money < 0) {
+				List<Cart> cartList = cartService.product(userId);
+				model.addAttribute("cartItems", cartList);
+				Cart totals = cartService.total(userId);
+				model.addAttribute("total",totals);
+				model.addAttribute("loginErrorMsg", "루나가 부족합니다.");
+				return "order";
+			} else {
+				loginService.addRuna(userId, money);
+				List<Cart> cartList = cartService.product(userId);
+				String order_menu = "";
+				for (Cart item : cartList) {
+			        String s_name = item.getS_name();
+			        int count = item.getCount();
+			        
+			        order_menu += s_name + " " + count + "개 ";
+			    }
+				System.out.println("order_menu " + order_menu);
+				cartService.order(username, userId, phone, address, order_menu, total);
+				cartService.orderCom(userId);
+				return "orderComplete";
+			}
 		}
 	}
 	

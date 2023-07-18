@@ -52,21 +52,28 @@ public class MainController {
 	}
 	
 	@PostMapping("updateProduct")
-	public String updateComplete(Model model, @RequestParam String name, String sname, String description, String price, MultipartFile fileData) throws IOException{
-		if(fileData != null) {
-			String filePath = uploadPath + "/" + fileData.getOriginalFilename();
-			File dir = new File(uploadPath);
-	        if (!dir.exists()) {
-	            dir.mkdirs();
-	        }
-	        FileCopyUtils.copy(fileData.getBytes(), new FileOutputStream(filePath));
+	public String updateComplete(Model model, @RequestParam String name, String sname, String description, int price, MultipartFile fileData) throws IOException{
+		if(price == 0) {
+			model.addAttribute("loginErrorMsg", "가격을 입력하세요");
+			Product product = productService.productName(name);
+			model.addAttribute("p", product);
+		return "updateProduct";
+		} else {
+			if(fileData != null) {
+				String filePath = uploadPath + "/" + fileData.getOriginalFilename();
+				File dir = new File(uploadPath);
+		        if (!dir.exists()) {
+		            dir.mkdirs();
+		        }
+		        FileCopyUtils.copy(fileData.getBytes(), new FileOutputStream(filePath));
+			}
+			byte[] imageData = fileData.getBytes();
+			String fileName = Base64.getEncoder().encodeToString(imageData);
+			productService.updateProduct(sname, name, description, price, fileName);
+			List<Product> productList = productService.productAll();
+			model.addAttribute("rs", productList);
+			return "redirect:main";
 		}
-		byte[] imageData = fileData.getBytes();
-		String fileName = Base64.getEncoder().encodeToString(imageData);
-		productService.updateProduct(sname, name, description, price, fileName);
-		List<Product> productList = productService.productAll();
-		model.addAttribute("rs", productList);
-		return "redirect:main";
 	}
 	
 	@GetMapping("insertProduct")
@@ -75,20 +82,29 @@ public class MainController {
 	}
 	
 	@PostMapping("insertProduct")
-	public String insertComplete(Model model, String name, String description, String price, MultipartFile fileData) throws IOException{
-		boolean isDuplicate = productService.checkDuplicateProductName(name);
-		if(isDuplicate) {
-			model.addAttribute("duplicateWarning", true);
+	public String insertComplete(Model model, String name, String description, int price, MultipartFile fileData) throws IOException{
+		if(name == "") {
+			model.addAttribute("loginErrorMsg", "제품명을 입력하세요");
+			return "insertProduct";
+		} else if(price == 0) {
+			model.addAttribute("loginErrorMsg", "가격을 입력하세요");
 			return "insertProduct";
 		} else {
-		String filePath = uploadPath + "/" + fileData.getOriginalFilename();
-        FileCopyUtils.copy(fileData.getBytes(), new FileOutputStream(filePath));
-        byte[] imageData = fileData.getBytes();
-        String fileName = Base64.getEncoder().encodeToString(imageData);
-        productService.insertProduct(name, description, price, fileName);
-		List<Product> productList = productService.productAll();
-		model.addAttribute("rs", productList);
-		return "redirect:main";
+			
+			boolean isDuplicate = productService.checkDuplicateProductName(name);
+			if(isDuplicate) {
+				model.addAttribute("duplicateWarning", true);
+				return "insertProduct";
+			} else {
+			String filePath = uploadPath + "/" + fileData.getOriginalFilename();
+	        FileCopyUtils.copy(fileData.getBytes(), new FileOutputStream(filePath));
+	        byte[] imageData = fileData.getBytes();
+	        String fileName = Base64.getEncoder().encodeToString(imageData);
+	        productService.insertProduct(name, price, description, fileName);
+			List<Product> productList = productService.productAll();
+			model.addAttribute("rs", productList);
+			return "redirect:main";
+			}
 		}
 	}
 	

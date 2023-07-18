@@ -8,12 +8,15 @@
 <body>
 	<th:block layout:fragment="content">
 		<div class="jumbotron">
+			
 			<div class="container" style="text-align:center">
 				<h1 class="display-3">물품 수정</h1>
 			</div>
 		</div>
 		<br><br>
 		<div class="container" style="width:720px;">
+		<div th:if="${loginErrorMsg}" class="alert alert-danger"
+							th:text="${loginErrorMsg}"></div>
 			<form name="updateProduct" th:action="@{/runa/updateProduct(name=${p?.s_name})}"
 				class="form-horizontal" method="post" enctype="multipart/form-data">
 				<div class="form-group row">
