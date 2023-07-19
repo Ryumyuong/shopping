@@ -11,9 +11,11 @@ public interface ProductService {
 	
 	public Product productName(String name);
 	
-	public void insertProduct(String name, int price, String description, String fileName); 
+	public List<Product> productCategory(String category);
 	
-	public void updateProduct(String name, String s_name, String description, int price, String fileName);
+	public void insertProduct(String category, String name, int price, String description, String fileName); 
+	
+	public void updateProduct(String category, String name, String s_name, String description, int price, String fileName);
 	
 	public void deleteProduct(String name);
 	

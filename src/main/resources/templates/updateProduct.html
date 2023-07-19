@@ -10,7 +10,7 @@
 		<div class="jumbotron">
 			
 			<div class="container" style="text-align:center">
-				<h1 class="display-3">물품 수정</h1>
+				<p class="display-3">물품 수정</p>
 			</div>
 		</div>
 		<br><br>
@@ -19,6 +19,18 @@
 							th:text="${loginErrorMsg}"></div>
 			<form name="updateProduct" th:action="@{/runa/updateProduct(name=${p?.s_name})}"
 				class="form-horizontal" method="post" enctype="multipart/form-data">
+				<div class="form-group row">
+					<label class="col-sm-2">종류</label>
+					<select id="select" name="category" style="width:150px;margin-left:10px">
+			            <option value="전자">전자/기기</option>
+			            <option value="생활가전">생활가전</option>
+			            <option value="식음료">식음료</option>
+			            <option value="운동">운동</option>
+			            <option value="여가문화">여가문화</option>
+			            <option value="VVIP">VVIP</option>
+			        </select>
+				</div>
+				<br><br>
 				<div class="form-group row">
 					<label class="col-sm-2">물품명</label>
 					<div class="col-sm-3">

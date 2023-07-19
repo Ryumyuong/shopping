@@ -20,14 +20,18 @@ public class ProductServiceImpl implements ProductService{
 		return productMapper.productAll();
 	}
 	
+	public List<Product> productCategory(String category) {
+		return productMapper.productCategory(category);
+	}
+	
 	@Override
-	public void insertProduct(String name, int price, String description,  String fileName) {
-		productMapper.insertProduct(name, description, price, fileName);	
+	public void insertProduct(String category, String name, int price, String description,  String fileName) {
+		productMapper.insertProduct(category, name, description, price, fileName);	
 	}
 
 	@Override
-	public void updateProduct(String name, String s_name, String description, int price, String fileName) {
-		productMapper.updateProduct(name, s_name, description, price, fileName);	
+	public void updateProduct(String category, String name, String s_name, String description, int price, String fileName) {
+		productMapper.updateProduct(category, name, s_name, description, price, fileName);	
 	}
 	
 	@Override

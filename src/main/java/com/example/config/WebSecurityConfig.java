@@ -31,7 +31,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	        .usernameParameter("userId")
 	        .passwordParameter("password")
 	        .loginProcessingUrl("/")
-	        .defaultSuccessUrl("/runa/main")
+	        .defaultSuccessUrl("/runa/main?category=")
 	        .failureUrl("/?error=true")
 	        .and()
 	        .logout()

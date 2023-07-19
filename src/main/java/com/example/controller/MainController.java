@@ -31,16 +31,23 @@ public class MainController {
 	private String uploadPath;
 	
 	@GetMapping("main")
-	public String main(Model model) {
-		List<Product> productList = productService.productAll();
-		model.addAttribute("rs", productList);
-		return "main";
+	public String main(Model model, @RequestParam String category) {
+		if(category == "") {
+			category = "전자";
+			List<Product> productListCategory = productService.productCategory(category);
+			model.addAttribute("rs", productListCategory);
+			return "main";
+		} else {
+			List<Product> productListCategory = productService.productCategory(category);
+			model.addAttribute("rs", productListCategory);
+			return "main";
+		}
 	}
 	
 	@GetMapping("update")
-	public String update(Model model) {
-		List<Product> productList = productService.productAll();
-		model.addAttribute("rs", productList);
+	public String update(Model model, @RequestParam String category) {
+		List<Product> productListCategory = productService.productCategory(category);
+		model.addAttribute("rs", productListCategory);
 		return "update";
 	}
 	
@@ -52,7 +59,7 @@ public class MainController {
 	}
 	
 	@PostMapping("updateProduct")
-	public String updateComplete(Model model, @RequestParam String name, String sname, String description, int price, MultipartFile fileData) throws IOException{
+	public String updateComplete(Model model, @RequestParam String name, String category, String sname, String description, int price, MultipartFile fileData) throws IOException{
 		if(price == 0) {
 			model.addAttribute("loginErrorMsg", "가격을 입력하세요");
 			Product product = productService.productName(name);
@@ -69,7 +76,7 @@ public class MainController {
 			}
 			byte[] imageData = fileData.getBytes();
 			String fileName = Base64.getEncoder().encodeToString(imageData);
-			productService.updateProduct(sname, name, description, price, fileName);
+			productService.updateProduct(sname,category, name, description, price, fileName);
 			List<Product> productList = productService.productAll();
 			model.addAttribute("rs", productList);
 			return "redirect:main";
@@ -82,15 +89,17 @@ public class MainController {
 	}
 	
 	@PostMapping("insertProduct")
-	public String insertComplete(Model model, String name, String description, int price, MultipartFile fileData) throws IOException{
+	public String insertComplete(Model model, @RequestParam String category, String name, String description, int price, MultipartFile fileData) throws IOException{
 		if(name == "") {
 			model.addAttribute("loginErrorMsg", "제품명을 입력하세요");
 			return "insertProduct";
 		} else if(price == 0) {
 			model.addAttribute("loginErrorMsg", "가격을 입력하세요");
 			return "insertProduct";
+		} else if(category == ""){
+			model.addAttribute("loginErrorMsg", "종류를 입력하세요");
+			return "insertProduct";
 		} else {
-			
 			boolean isDuplicate = productService.checkDuplicateProductName(name);
 			if(isDuplicate) {
 				model.addAttribute("duplicateWarning", true);
@@ -100,7 +109,7 @@ public class MainController {
 	        FileCopyUtils.copy(fileData.getBytes(), new FileOutputStream(filePath));
 	        byte[] imageData = fileData.getBytes();
 	        String fileName = Base64.getEncoder().encodeToString(imageData);
-	        productService.insertProduct(name, price, description, fileName);
+	        productService.insertProduct(category, name, price, description, fileName);
 			List<Product> productList = productService.productAll();
 			model.addAttribute("rs", productList);
 			return "redirect:main";
@@ -109,9 +118,9 @@ public class MainController {
 	}
 	
 	@GetMapping("delete")
-	public String delete(Model model) {
-		List<Product> productList = productService.productAll();
-		model.addAttribute("rs", productList);
+	public String delete(Model model, @RequestParam String category) {
+		List<Product> productListCategory = productService.productCategory(category);
+		model.addAttribute("rs", productListCategory);
 		return "deleteProduct";
 	}
 	
@@ -120,6 +129,6 @@ public class MainController {
 		productService.deleteProduct(name);
 		List<Product> productList = productService.productAll();
 		model.addAttribute("rs", productList);
-		return "redirect:main";
+		return "deleteProduct";
 	}
 }

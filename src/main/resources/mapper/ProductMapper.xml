@@ -12,12 +12,16 @@
     	select * from products where s_name = #{name}
     </select>
     
+    <select id="productCategory" resultType="com.example.domain.Product">
+    	select * from products where s_category = #{category}
+    </select>
+    
     <insert id="insertProduct">
-    	insert into products(s_name, s_price, s_description, s_fileName) values(#{name}, #{price},#{description}, #{fileName})
+    	insert into products(s_category, s_name, s_price, s_description, s_fileName) values(#{category}, #{name}, #{price},#{description}, #{fileName})
     </insert>
     
     <update id="updateProduct">
-    	update products set s_name = #{name}, s_description = #{description}, s_price = #{price}, s_fileName = #{fileName} where s_name = #{s_name} ;
+    	update products set s_category = #{category}, s_name = #{name}, s_description = #{description}, s_price = #{price}, s_fileName = #{fileName} where s_name = #{s_name} ;
     </update>
     
     <delete id="deleteProduct">

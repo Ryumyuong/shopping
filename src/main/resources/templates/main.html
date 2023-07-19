@@ -23,6 +23,17 @@
 				style="margin-left: 30px; margin-top: 30px; margin-bottom: 20px; font-size: 50px; text-align: center">전체
 				상품</div>
 			<br>
+			<ul>
+		        <li>
+		            <a class="tab" th:href="@{/runa/main(category=전자)}"><span>전자/기기</span></a>
+		            <a class="tab" th:href="@{/runa/main(category=생활가전)}"><span th:text="생활가전"></span></a>
+		            <a class="tab" th:href="@{/runa/main(category=식음료)}"><span th:text="식음료"></span></a>
+		            <a class="tab" th:href="@{/runa/main(category=운동)}"><span th:text="운동"></span></a>
+		            <a class="tab" th:href="@{/runa/main(category=여가문화)}"><span th:text="여가문화"></span></a>
+		            <a class="tab" th:href="@{/runa/main(category=VVIP)}"><span th:text="VVIP"></span></a>
+		        </li>
+		    </ul>
+		    <hr style="border:1px solid grey">
 			<div>
 				<div th:each="row : ${rs}"
 					style="display: inline-block; margin: 30px; text-align: center;">

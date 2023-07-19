@@ -6,7 +6,7 @@
 	<nav class="navbar navbar-expand navbar-dark" style="background-color:#ffc723">
 		<div class="container">
 			<div class="navbar-header">
-				<a class="navbar-brand" th:href="@{/runa/main}" style="color:black;"
+				<a class="navbar-brand" th:href="@{/runa/main(category=전자)}" style="color:black;"
 					>루나몰</a>
 			</div>
 			<ul class="navbar-nav mr-auto">
@@ -30,8 +30,8 @@
 					th:href="@{/userList}">회원 목록</a></li>
 				<li class="nav-item"><a class="nav-links"
 					th:href="@{/runa/insertProduct}">물건 등록</a></li>
-				<li class="nav-item"><a class="nav-links" th:href="@{/runa/update}">물건 수정</a></li>
-				<li class="nav-item"><a class="nav-links" th:href="@{/runa/delete}">물건 삭제</a></li>
+				<li class="nav-item"><a class="nav-links" th:href="@{/runa/update(category=전자)}">물건 수정</a></li>
+				<li class="nav-item"><a class="nav-links" th:href="@{/runa/delete(category=전자)}">물건 삭제</a></li>
 				<li class="nav-item"><a class="nav-links" th:href="@{/addRuna}">루나 추가</a></li>
 			</ul>
 		</div>
