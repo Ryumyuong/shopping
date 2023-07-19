@@ -30,7 +30,7 @@
 					<br>
 					<span th:text="${row['s_price']}" style="font-weight:bold"></span><span>  루나</span>
 					<br><br>
-					<form name="deleteForm" th:action="@{/runa/delete(name=${row['s_name']})}" method="post"  style="margin-top:5px;">
+					<form name="deleteForm" th:action="@{/runa/delete(name=${row['s_name']}, category=${row['s_category']})}" method="post"  style="margin-top:5px;">
 						<button style="padding:10px; padding-left:30px;padding-right:30px;color:red">물품 삭제 &raquo;</button>
 					</form>
 					<br>

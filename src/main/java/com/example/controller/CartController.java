@@ -1,6 +1,8 @@
 package com.example.controller;
 
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.security.Principal;
 import java.util.List;
 
@@ -41,12 +43,14 @@ public class CartController {
 	}
 	
 	@PostMapping("main")
-	public String addCart(Model model, String userId, String name, String description, int price, String fileName) throws IOException{
-		cartService.inCart(userId, name, description, price, fileName);
-		System.out.println("장바구니 등록 " + userId + " " + name);
+	public String addCart(Model model, @RequestParam String category, String userId, String name, String description, int price, String fileName, int count) throws IOException{
+		for(int i = 0; i < count; i++) {
+			cartService.inCart(userId, name, description, price, fileName);
+			System.out.println("장바구니 등록 " + userId + " " + name);
+		}
 		List<Product> productList = productService.productAll();
 		model.addAttribute("rs", productList);
-		return "redirect:/runa/main";
+		return "redirect:/runa/main?category=" + URLEncoder.encode(category, StandardCharsets.UTF_8);
 	}
 	
 	@GetMapping("delete")
@@ -66,7 +70,7 @@ public class CartController {
 		System.out.println("장바구니 전체삭제 " + userId);
 		List<Product> productList = productService.productAll();
 		model.addAttribute("rs", productList);
-		return "main";
+		return "redirect:/runa/main?category=";
 	}
 	
 	@GetMapping("order")

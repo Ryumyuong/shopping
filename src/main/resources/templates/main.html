@@ -11,7 +11,32 @@
 			document.addForm.reset();
 		}
 	}
+	
+	
+
 </script>
+<script th:inline="javascript">
+	function decreaseQuantity(inputId) {
+	    var inputField = document.getElementById(inputId);
+	    var inputFieldIn = document.getElementById(inputId + '인');
+	    var currentValue = parseInt(inputField.value);
+	    var currentValueIn = parseInt(inputFieldIn.value);
+	    if (currentValue > 1) {
+	        inputField.value = currentValue - 1;
+	        inputFieldIn.value = currentValueIn - 1;
+	    }
+	}
+	
+	function increaseQuantity(inputId) {
+	    var inputField = document.getElementById(inputId);
+	    var inputFieldIn = document.getElementById(inputId + '인');
+	    var currentValue = parseInt(inputField.value);
+	    var currentValueIn = parseInt(inputFieldIn.value);
+	    inputField.value = currentValue + 1;
+	    inputFieldIn.value = currentValueIn + 1;
+	}
+</script>
+
 
 </head>
 
@@ -31,7 +56,7 @@
 		    </ul>
 		    <hr style="border:1px solid grey">
 			<div>
-				<div th:each="row : ${rs}"
+				<div th:each="row, iterStat : ${rs}"
 					style="display: inline-block; margin: 30px; text-align: center;">
 					<p>
 						<img th:src="'data:image/png;base64,' + ${row.s_fileName}"
@@ -43,14 +68,20 @@
 					
 					<br><br>
 					 <span th:text="${row['s_price']}" style="font-weight:bold"></span><span>  루나</span>
+					<br><br>
+					<div>
+					<button th:onclick="'decreaseQuantity(\'' + ${iterStat.index} + '\')'" style="border:1px solid;background:white;">-</button>
+						<input type="text" th:id="${iterStat.index}" value="1" readonly style="width:30px;"/>
+					<button th:onclick="'increaseQuantity(\'' + ${iterStat.index} + '\')'" style="border:1px solid;background:white;">+</button>
+					</div>
 					<br>
-					<br>
-					<form name="addForm" th:action="@{/cart/main}" method="post"
+					<form name="addForm" th:action="@{/cart/main(category=${row['s_category']})}" method="post"
 						style="margin-top: 5px;">
 						<input type="hidden" name="userId" th:value="${user.userId}" />
 						<input type="hidden" name="name" th:value="${row['s_name']}" />
 						<input type="hidden" name="description" th:value="${row['s_description']}" />
 						<input type="hidden" name="price" th:value="${row['s_price']}" />
+						<input type="hidden" th:id="${iterStat.index} + '인'" value="1" name="count"/>
 						<textarea name="fileName" th:text="${row['s_fileName']}" style="display: none;"></textarea>
 						<button onclick="addToCart()" style="padding: 10px; padding-left: 30px; padding-right: 30px">장바구니에 넣기</button>
 					</form>

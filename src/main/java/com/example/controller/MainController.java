@@ -3,6 +3,8 @@ package com.example.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.List;
 
@@ -79,7 +81,7 @@ public class MainController {
 			productService.updateProduct(sname,category, name, description, price, fileName);
 			List<Product> productList = productService.productAll();
 			model.addAttribute("rs", productList);
-			return "redirect:main";
+			return "redirect:update?category=" + URLEncoder.encode(category, StandardCharsets.UTF_8);
 		}
 	}
 	
@@ -112,7 +114,7 @@ public class MainController {
 	        productService.insertProduct(category, name, price, description, fileName);
 			List<Product> productList = productService.productAll();
 			model.addAttribute("rs", productList);
-			return "redirect:main";
+			return "redirect:main?category=" + URLEncoder.encode(category, StandardCharsets.UTF_8);
 			}
 		}
 	}
@@ -125,10 +127,10 @@ public class MainController {
 	}
 	
 	@PostMapping("delete")
-	public String deleteProduct(Model model, @RequestParam String name) {
+	public String deleteProduct(Model model, @RequestParam String name, @RequestParam String category) {
 		productService.deleteProduct(name);
 		List<Product> productList = productService.productAll();
 		model.addAttribute("rs", productList);
-		return "deleteProduct";
+		return "redirect:delete?category=" + URLEncoder.encode(category, StandardCharsets.UTF_8);
 	}
 }

@@ -50,7 +50,7 @@ public class LoginController {
 				String encodePwd = passwordEncoder.encode(password);
 				loginService.newLogin(userId, encodePwd, username, phone, address);
 				
-				return "redirect:/runa/main";
+				return "redirect:/runa/main?category=";
 			} else {
 			model.addAttribute("loginErrorMsg", "이미 존재하는 아이디 입니다.");
 			return "newLogin";
@@ -90,7 +90,7 @@ public class LoginController {
 				String encodePwd = passwordEncoder.encode(password);
 				loginService.updateUser(userId, encodePwd, username, phone, address);
 				
-				return "redirect:/runa/main";
+				return "redirect:/runa/main?category=";
 			} else {
 			model.addAttribute("loginErrorMsg", "이미 존재하는 아이디 입니다.");
 			return "updateUser";
