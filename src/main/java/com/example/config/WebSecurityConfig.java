@@ -21,7 +21,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-	    http.authorizeRequests()
+		http.authorizeRequests()
 	        .mvcMatchers("/runa/main", "/cart/**").hasAnyRole("USER", "ADMIN") 
 	        .mvcMatchers("/runa/**", "/newLogin", "/addRuna", "/userList").hasRole("ADMIN")
 	        .anyRequest().permitAll()
