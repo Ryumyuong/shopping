@@ -9,7 +9,7 @@
 		<div class="container" style="width:720px;">
 		<div th:if="${loginErrorMsg}" class="alert alert-danger"
 							th:text="${loginErrorMsg}"></div>
-			<form name="updateProduct" th:action="@{/runa/updateProduct(name=${p?.s_name})}"
+			<form name="updateProduct" th:action="@{/runa/updateProduct}"
 				class="form-horizontal" method="post" enctype="multipart/form-data">
 				<div class="form-group row">
 					<label class="col-sm-2">종류</label>
@@ -26,7 +26,7 @@
 				<div class="form-group row">
 					<label class="col-sm-2">물품명</label>
 					<div class="col-sm-3">
-						<input type="text" id="sname" name="sname" class="form-control" th:value="${p?.s_name}" readonly>
+						<input type="text" id="sname" name="name" class="form-control" th:value="${p?.s_name}" readonly>
 					</div>
 				</div>
 				<br><br>

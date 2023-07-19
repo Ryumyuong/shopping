@@ -21,7 +21,7 @@
     </insert>
     
     <update id="updateProduct">
-    	update products set s_category = #{category}, s_name = #{name}, s_description = #{description}, s_price = #{price}, s_fileName = #{fileName} where s_name = #{s_name} ;
+    	update products set s_category = #{category}, s_description = #{description}, s_price = #{price}, s_fileName = #{fileName} where s_name = #{name} ;
     </update>
     
     <delete id="deleteProduct">

@@ -61,7 +61,7 @@ public class MainController {
 	}
 	
 	@PostMapping("updateProduct")
-	public String updateComplete(Model model, @RequestParam String name, String category, String sname, String description, int price, MultipartFile fileData) throws IOException{
+	public String updateComplete(Model model, String category, String name, String description, int price, MultipartFile fileData) throws IOException{
 		if(price == 0) {
 			model.addAttribute("loginErrorMsg", "가격을 입력하세요");
 			Product product = productService.productName(name);
@@ -78,7 +78,7 @@ public class MainController {
 			}
 			byte[] imageData = fileData.getBytes();
 			String fileName = Base64.getEncoder().encodeToString(imageData);
-			productService.updateProduct(sname,category, name, description, price, fileName);
+			productService.updateProduct(category, name, description, price, fileName);
 			List<Product> productList = productService.productAll();
 			model.addAttribute("rs", productList);
 			return "redirect:update?category=" + URLEncoder.encode(category, StandardCharsets.UTF_8);
