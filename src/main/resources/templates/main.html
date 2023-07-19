@@ -3,7 +3,6 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layout/default_layout}">
 <head>
-<title>가게 목록</title>
 <script type="text/javascript">
 	function addToCart() {
 		if (confirm("물품을 장바구니에 추가하시겠습니까?")) {
@@ -19,10 +18,7 @@
 <body>
 	<th:block layout:fragment="content">
 		<div class="container" style="text-align: center">
-			<div
-				style="margin-left: 30px; margin-top: 30px; margin-bottom: 20px; font-size: 50px; text-align: center">전체
-				상품</div>
-			<br>
+		<br><br><br>
 			<ul>
 		        <li>
 		            <a class="tab" th:href="@{/runa/main(category=전자)}"><span>전자/기기</span></a>
