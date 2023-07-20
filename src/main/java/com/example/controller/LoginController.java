@@ -73,7 +73,9 @@ public class LoginController {
 	}
 
 	@PostMapping("/updateUser")
-	public String updateUser(Model model, Principal principal, String userId, String password, String username, String phone, String address) {
+	public String updateUser(Model model, Principal principal, @RequestParam String updateUser, String userId, String password, String username, String phone, String address) {
+		User user = loginMapper.loginSearch(updateUser);
+		model.addAttribute("update", user);
 		if(userId == "") {
 			model.addAttribute("loginErrorMsg", "아이디를 입력하세요");
 			return "updateUser";
@@ -87,8 +89,8 @@ public class LoginController {
 			model.addAttribute("loginErrorMsg", "주소를 입력하세요");
 			return "updateUser";
 		} else {
-			User user = loginMapper.loginSearch(userId);
-			if(user == null || principal.getName().equals(userId)) {
+			user = loginMapper.loginSearch(userId);
+			if(user == null || updateUser.equals(userId)) {
 				String encodePwd = passwordEncoder.encode(password);
 				loginService.updateUser(userId, encodePwd, username, phone, address);
 				
