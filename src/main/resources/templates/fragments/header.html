@@ -11,7 +11,7 @@
 			</div>
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item"><a
-					style="color: black;padding-right:5px" th:href="@{/updateUser}" th:text="${user.userId}"></a><span>님</span></li>
+					style="color: black;padding-right:5px" th:href="@{/updateUser(userId=${user.userId})}" th:text="${user.userId}"></a><span>님</span></li>
 				<li class="nav-item"><a
 					style="color: black; font-weight:bold;padding-right:5px" th:href="@{/cart/runaList(userId=${user.userId})}" th:text="${user.money}"></a><span>루나</span></li>
 					

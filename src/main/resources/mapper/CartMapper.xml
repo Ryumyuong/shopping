@@ -21,7 +21,7 @@
     </select>
     
     <select id="runaTotal" resultType="int">
-	    select sum(order_price) as total from orders where userId = #{userId}
+	    SELECT IFNULL(SUM(order_price), 0) AS total from orders where userId = #{userId}
     </select>
     
     <select id="runaTotalAll" resultType="int">

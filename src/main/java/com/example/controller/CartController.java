@@ -142,24 +142,26 @@ public class CartController {
 	}
 	
 	@GetMapping("runaList")
-	public String runaList(Model model, Principal principal, @RequestParam String userId) {
+	public String runaList(Model model, @RequestParam String userId) {
 		if(userId.equals("admin")) {
 			List<Orders> orderList = cartService.orderListAll();
+			System.out.println("시작 " + cartService.runaTotalAll());
 			int total = cartService.runaTotalAll();
 			model.addAttribute("total", total);
 			model.addAttribute("orderList", orderList);
 			return "runaList";
 		} else {
 			List<Orders> orderList = cartService.orderList(userId);
-			int total = cartService.runaTotal(principal.getName());
+			int total = cartService.runaTotal(userId);
 			model.addAttribute("total", total);
 			model.addAttribute("orderList", orderList);
 			return "runaList";
+			}
 		}
-	}
+	
 	
 	@GetMapping("runaListSearch")
-	public String runaListSearch(Model model, Principal principal, @RequestParam String userId) {
+	public String runaListSearch(Model model, @RequestParam String userId) {
 
 		if(userId == "") {
 			List<Orders> orderList = cartService.orderListAll();

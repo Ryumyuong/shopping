@@ -11,15 +11,15 @@
 		</div>
 	</div>
 	<br><br>
-	<div class="container" style="width:720px;">
-		<div style="padding-top: 50px">
+	<div class="container" style="width:960px">
+		<div style="padding-top: 50px;">
 			<table style="text-align:center">
 				<tr>
 					<th style="width:100px;text-align:center">이름</th>
 					<th style="width:150px;">아이디</th>
 					<th style="width:150px;">전화번호</th>
-					<th style="width:350px;">주소</th>
-					<th style="width:100px;">비고</th>
+					<th style="width:500px;">주소</th>
+					<th style="width:150px;">비고</th>
 				</tr>
 				<tr th:each="user : ${userList}">
 					<td>
@@ -34,6 +34,8 @@
 					<td style="vertical-align: middle;">
 						<span th:text="${user['address']}"></span>
 					<td>
+					<a th:href="@{/updateUser(userId=${user.userId})}"
+						class="badge badge-danger" style="color:blue; font-size:15px;">수정</a>
 					<a th:href="@{/delete(userId=${user.userId})}"
 						class="badge badge-danger" style="color:red; font-size:15px;">삭제</a>
 					</td>

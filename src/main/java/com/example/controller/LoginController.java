@@ -66,7 +66,9 @@ public class LoginController {
 	}
 	
 	@GetMapping("/updateUser")
-	public String updateUser() {
+	public String updateUser(Model model, @RequestParam String userId) {
+		User user = loginMapper.loginSearch(userId);
+		model.addAttribute("update", user);
 		return "updateUser";
 	}
 
