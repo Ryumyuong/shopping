@@ -131,7 +131,7 @@ public class CartController {
 			        String s_name = item.getS_name();
 			        int count = item.getCount();
 			        
-			        order_menu += s_name + " " + count + "개 ";
+			        order_menu += s_name + " " + count + "개\n";
 			    }
 				System.out.println("order_menu " + order_menu);
 				cartService.order(username, userId, phone, address, order_menu, total);
@@ -145,7 +145,10 @@ public class CartController {
 	public String runaList(Model model, @RequestParam String userId) {
 		if(userId.equals("admin")) {
 			List<Orders> orderList = cartService.orderListAll();
-			System.out.println("시작 " + cartService.runaTotalAll());
+			for(Orders order : orderList) {
+				 String modifiedOrderMenu = order.getOrder_menu().replace("\n", "<br>");
+				 order.setOrder_menu(modifiedOrderMenu);
+			}
 			int total = cartService.runaTotalAll();
 			model.addAttribute("total", total);
 			model.addAttribute("orderList", orderList);
@@ -176,6 +179,16 @@ public class CartController {
 			model.addAttribute("orderList", orderList);
 			return "runaList";
 		}
+	}
+	
+	@GetMapping("runaDeliver")
+	public String runaDeliver(Model model, @RequestParam String date) {
+		cartService.orderDeliver(date);
+		List<Orders> orderList = cartService.orderListAll();
+		int total = cartService.runaTotalAll();
+		model.addAttribute("total", total);
+		model.addAttribute("orderList", orderList);
+		return "runaList";
 	}
 	
 }

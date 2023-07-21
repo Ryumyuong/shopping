@@ -33,13 +33,11 @@ public class CustomUserDetails implements UserDetails {
 
 	@Override
 	public String getPassword() {
-		System.out.println("getPassword " + user.getPassword());
 		return user.getPassword();
 	}
 
 	@Override
 	public String getUsername() {
-		System.out.println("getUserId " + user.getUserId());
 		return user.getUserId();
 	}
 

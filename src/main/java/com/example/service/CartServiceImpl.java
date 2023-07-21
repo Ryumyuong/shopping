@@ -69,5 +69,10 @@ public class CartServiceImpl implements CartService{
 	public int runaTotalAll() {
 		return cartMapper.runaTotalAll();
 	}
+	
+	@Override
+	public void orderDeliver(String date) {
+		cartMapper.orderDeliver(date);
+	}
 
 }

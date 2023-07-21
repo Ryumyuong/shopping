@@ -29,4 +29,6 @@ public interface CartService {
 	public int runaTotal(String userId);
 	
 	public int runaTotalAll();
+	
+	public void orderDeliver(String date);
 }

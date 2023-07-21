@@ -37,7 +37,7 @@
     </update>
     
     <select id="orderListAll" resultType="com.example.domain.Orders">
-    	select * from orders
+    	select * from orders order by order_time DESC
     </select>
     
     <select id="orderList" resultType="com.example.domain.Orders">
@@ -51,4 +51,8 @@
     <delete id="deleteCart">
     	delete from cart where userId = #{userId} and s_name = #{name} and c_condition = "X"
     </delete>
+    
+    <update id="orderDeliver">
+    	update orders set deliver = "배송완료" where order_time = #{date}
+    </update>
 </mapper>

@@ -20,13 +20,13 @@
 		    </ul>
 			<div>
 				<div th:each="row : ${rs}"
-					style="display: inline-block; margin: 30px; text-align:center;">
+					style="display: inline-block; margin: 30px; text-align:center; width:300px; height:100px">
 					<p>
 						<img th:src="'data:image/png;base64,' + ${row.s_fileName}" alt="Product Image" />
 					</p>
 					<p th:text="${row['s_name']}" style="text-align:center;"></p>
 					<br>
-					<p th:text="${row['s_description']}"></p>
+					<p th:text="자세히보기"></p>
 					<br>
 					<span th:text="${row['s_price']}" style="font-weight:bold"></span><span>  루나</span>
 					<br><br>

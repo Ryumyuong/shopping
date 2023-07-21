@@ -27,8 +27,9 @@
 					<th style="width:100px;">이름</th>
 					<th style="width:150px;">전화번호</th>
 					<th style="width:500px;">주소</th>
-					<th style="width:350px;">주문목록</th>
+					<th style="width:400px;">주문목록</th>
 					<th style="width:200px;">금액</th>
+					<th style="width:120px">비고</th>
 				</tr>
 				<tr th:each="runa : ${orderList}">
 					<td>
@@ -44,10 +45,17 @@
 						<span th:text="${runa['address']}"></span>
 					</td>
 					<td>
-						<span th:text="${runa['order_menu']}"></span>
+						<span th:utext="${runa['order_menu']}"></span>
 					</td>
 					<td>
 						<span>-</span><span th:text="${runa['order_price']}"></span><span> 루나</span>
+					</td>
+					<td style="vertical-align:middle">
+						<div style="margin-bottom:10px" th:if="${runa['deliver']} =='배송전' and ${user.userId}=='admin'">
+							<a th:if="${user.userId} == 'admin'" th:href="@{/cart/runaDeliver(date=${runa['order_time']})}" style="color:blue;" th:text="전달완료"></a>
+						</div>
+						<p th:if="${runa['deliver']} == '배송전'"  th:text="${runa['deliver']}" style="margin-top:10px"></p>
+						<p th:unless="${runa['deliver']} == '배송전'" th:text="배송완료" style="margin-top:10px">
 					</td>
 				</tr>
 				<tr>
@@ -60,6 +68,7 @@
 						<span th:text="${total}"></span>
 						<span> 루나</span>
 					</td>
+					<td></td>
 				</tr>
 			</table>
 			<br>

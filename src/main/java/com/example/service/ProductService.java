@@ -17,6 +17,8 @@ public interface ProductService {
 	
 	public void updateProduct(String category, String name, String description, int price, String fileName);
 	
+	public void updateProduct2(String category, String name, String description, int price);
+	
 	public void deleteProduct(String name);
 	
 	public boolean checkDuplicateProductName(String name);

@@ -33,4 +33,6 @@ public interface CartMapper {
 	public int runaTotal(@Param("userId")String userId);
 	
 	public int runaTotalAll();
+	
+	public void orderDeliver(@Param("date") String date);
 }

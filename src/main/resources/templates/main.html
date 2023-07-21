@@ -57,14 +57,14 @@
 		    <hr style="border:1px solid grey">
 			<div>
 				<div th:each="row, iterStat : ${rs}"
-					style="display: inline-block; margin: 30px; text-align: center;">
+					style="display: inline-block; margin: 30px; text-align: center; width:300px; height:100px">
 					<p>
 						<img th:src="'data:image/png;base64,' + ${row.s_fileName}"
 							alt="Product Image" />
 					</p>
 					<p th:text="${row['s_name']}" style="text-align: center;"></p>
 					<br>
-					<a href="https://www.naver.com"th:text="${row['s_description']}" class="description"></a>
+					<a th:href="${row['s_description']}" th:text="자세히보기" class="description"></a>
 					
 					<br><br>
 					 <span th:text="${row['s_price']}" style="font-weight:bold"></span><span>  루나</span>

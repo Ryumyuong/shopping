@@ -8,6 +8,10 @@ h1 {
 ul {
 	list-style: none;
 }
+
+#admin {
+	margin-right: 50px;
+}
 table {
 	border-top: 2px solid black;
 }
