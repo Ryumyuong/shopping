@@ -142,9 +142,9 @@ public class CartController {
 	}
 	
 	@GetMapping("runaList")
-	public String runaList(Model model, @RequestParam String userId) {
+	public String runaList(Model model, @RequestParam String userId, @RequestParam int pageNumber, @RequestParam(defaultValue="10") int pageSize) {
 		if(userId.equals("admin")) {
-			List<Orders> orderList = cartService.orderListAll();
+			List<Orders> orderList = cartService.orderListAll(pageNumber, pageSize);
 			for(Orders order : orderList) {
 				 String modifiedOrderMenu = order.getOrder_menu().replace("\n", "<br>");
 				 order.setOrder_menu(modifiedOrderMenu);
@@ -152,43 +152,47 @@ public class CartController {
 			int total = cartService.runaTotalAll();
 			model.addAttribute("total", total);
 			model.addAttribute("orderList", orderList);
+			model.addAttribute("currentPage", pageNumber);
+			for(int i = 1;;i++) {
+				orderList = cartService.orderListAll(i, 10);
+				if(orderList.size() < 10) {
+					model.addAttribute("totalPages", i);
+					break;
+				}
+			}
 			return "runaList";
 		} else {
-			List<Orders> orderList = cartService.orderList(userId);
+			List<Orders> orderList = cartService.orderList(userId, pageNumber, pageSize);
 			int total = cartService.runaTotal(userId);
 			model.addAttribute("total", total);
 			model.addAttribute("orderList", orderList);
+			model.addAttribute("currentPage", pageNumber);
+			for(int i = 1;;i++) {
+				orderList = cartService.orderList(userId, i, 10);
+				if(orderList.size() < 10) {
+					model.addAttribute("totalPages", i);
+					break;
+				}
+			}
 			return "runaList";
 			}
 		}
 	
 	
-	@GetMapping("runaListSearch")
-	public String runaListSearch(Model model, @RequestParam String userId) {
+	@PostMapping("runaListSearch")
+	public String runaListSearch(Model model, String userId, @RequestParam int pageNumber) {
 
 		if(userId == "") {
-			List<Orders> orderList = cartService.orderListAll();
-			int total = cartService.runaTotalAll();
-			model.addAttribute("total", total);
-			model.addAttribute("orderList", orderList);
-			return "runaList";
+			return "redirect:runaList?userId=admin&pageNumber=" + pageNumber;
 		} else {
-			List<Orders> orderList = cartService.orderList(userId);
-			int total = cartService.runaTotal(userId);
-			model.addAttribute("total", total);
-			model.addAttribute("orderList", orderList);
-			return "runaList";
+			return "redirect:runaList?userId=" + URLEncoder.encode(userId, StandardCharsets.UTF_8) + "&pageNumber=" + pageNumber;
 		}
 	}
 	
 	@GetMapping("runaDeliver")
-	public String runaDeliver(Model model, @RequestParam String date) {
+	public String runaDeliver(Model model, @RequestParam String date, @RequestParam int pageNumber) {
 		cartService.orderDeliver(date);
-		List<Orders> orderList = cartService.orderListAll();
-		int total = cartService.runaTotalAll();
-		model.addAttribute("total", total);
-		model.addAttribute("orderList", orderList);
-		return "runaList";
+		return "redirect:runaList?userId=admin&pageNumber=" + pageNumber;
 	}
 	
 }

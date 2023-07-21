@@ -16,9 +16,9 @@ public interface CartService {
 	
 	public void order(String username, String userId, String phone, String address, String order_menu, int total);
 	
-	public List<Orders> orderListAll();
+	public List<Orders> orderListAll(int pageNumber, int pageSize);
 	
-	public List<Orders> orderList(String userId);
+	public List<Orders> orderList(String userId, int pageNumber, int pageSize);
 	
 	public void orderCom(@Param("userId")String userId);
 	

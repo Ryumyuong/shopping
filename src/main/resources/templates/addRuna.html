@@ -15,7 +15,7 @@
 		<div style="padding-top: 50px">
 			<table style="text-align:center">
 				<tr>
-					<th style="width:100px;text-align:center">이름</th>
+					<th style="width:150px;text-align:center">이름</th>
 					<th style="width:150px;">아이디</th>
 					<th style="width:300px;">전화번호</th>
 					<th style="width:500px;">주소</th>
@@ -47,6 +47,11 @@
 					</td>
 				</tr>
 			</table>
+			<hr>
+			<div style="text-align:right">
+		        <a th:if="${currentPage > 1}" th:href="@{/addRuna(pageNumber=${currentPage - 1})}" style="border:1px solid black;padding:5px;background:#dadada;margin-right:10px;">Previous</a>
+		        <a th:if="${currentPage < totalPages}" th:href="@{/addRuna(pageNumber=${currentPage + 1})}" style="border:1px solid black;padding:5px;background:#dadada">Next</a>
+		    </div>
 			<br>
 			<a th:href="@{/runa/main?category=}" class="btn btn-secondary">
 				&laquo; 메인 페이지로</a>

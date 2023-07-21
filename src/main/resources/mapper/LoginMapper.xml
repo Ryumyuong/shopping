@@ -16,7 +16,7 @@
 	</insert>
 	
 	<select id="userList" resultType="com.example.domain.User">
-		select * from user where id <![CDATA[<>]]> 1
+		select * from user where id <![CDATA[<>]]> 1 ORDER BY id desc LIMIT #{offset}, #{limit}
 	</select>
 	
 	<update id="updateUser">

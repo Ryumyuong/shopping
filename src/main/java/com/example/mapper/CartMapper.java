@@ -22,9 +22,9 @@ public interface CartMapper {
 	
 	public void orderCom(@Param("userId")String userId);
 	
-	public List<Orders> orderListAll();
+	public List<Orders> orderListAll(@Param("offset")int offset, @Param("limit") int pageSize);
 	
-	public List<Orders> orderList(@Param("userId")String userId);
+	public List<Orders> orderList(@Param("userId")String userId, @Param("offset")int offset, @Param("limit") int pageSize);
 	
 	public void deleteCartAll(@Param("userId")String userId);
 	

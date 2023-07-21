@@ -37,11 +37,11 @@
     </update>
     
     <select id="orderListAll" resultType="com.example.domain.Orders">
-    	select * from orders order by order_time DESC
+    	select * from orders order by order_time DESC LIMIT #{offset}, #{limit}
     </select>
     
     <select id="orderList" resultType="com.example.domain.Orders">
-    	select * from orders where userId = #{userId}
+    	select * from orders where userId = #{userId} order by order_time DESC LIMIT #{offset}, #{limit}
     </select>
     
     <delete id="deleteCartAll">

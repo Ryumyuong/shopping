@@ -36,11 +36,16 @@
 					<td>
 					<a th:href="@{/updateUser(userId=${user.userId})}"
 						class="badge badge-danger" style="color:blue; font-size:15px;">수정</a>
-					<a th:href="@{/delete(userId=${user.userId})}"
+					<a th:href="@{/delete(userId=${user.userId}, pageNumber=1)}"
 						class="badge badge-danger" style="color:red; font-size:15px;">삭제</a>
 					</td>
 				</tr>
 			</table>
+			<hr>
+			<div style="text-align:right">
+		        <a th:if="${currentPage > 1}" th:href="@{/userList(pageNumber=${currentPage - 1})}" style="border:1px solid black;padding:5px;background:#dadada;margin-right:10px;">Previous</a>
+		        <a th:if="${currentPage < totalPages}" th:href="@{/userList(pageNumber=${currentPage + 1})}" style="border:1px solid black;padding:5px;background:#dadada">Next</a>
+		    </div>
 			<br>
 			<a th:href="@{/runa/main?category=}" class="btn btn-secondary">
 				&laquo; 메인 페이지로</a>

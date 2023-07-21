@@ -40,13 +40,15 @@ public class CartServiceImpl implements CartService{
 	}
 	
 	@Override
-	public List<Orders> orderListAll() {
-		return cartMapper.orderListAll();
+	public List<Orders> orderListAll(int pageNumber, int pageSize) {
+		int offset = (pageNumber - 1) * pageSize;
+        return cartMapper.orderListAll(offset, pageSize);
 	}
 	
 	@Override
-	public List<Orders> orderList(String userId) {
-		return cartMapper.orderList(userId);
+	public List<Orders> orderList(String userId, int pageNumber, int pageSize) {
+		int offset = (pageNumber - 1) * pageSize;
+        return cartMapper.orderList(userId, offset, pageSize);
 	}
 	
 	@Override

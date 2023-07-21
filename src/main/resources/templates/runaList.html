@@ -15,7 +15,7 @@
 	<br><br>
 	<div class="container">
 		<div  style="text-align:right" th:if="${user.userId} == 'admin'">
-			<form th:action="@{/cart/runaListSearch}" method="get">
+			<form th:action="@{/cart/runaListSearch(pageNumber=1)}" method="post">
 				<span>아이디 검색 : </span><input type="text" name="userId" placeholder="아이디를 입력하세요">
 				<button type="submit">검색</button>
 			</form>
@@ -24,7 +24,7 @@
 			<table style="text-align:center">
 				<tr>
 					<th style="width:150px;">주문날짜</th>
-					<th style="width:100px;">이름</th>
+					<th style="width:150px;">이름</th>
 					<th style="width:150px;">전화번호</th>
 					<th style="width:500px;">주소</th>
 					<th style="width:400px;">주문목록</th>
@@ -52,7 +52,7 @@
 					</td>
 					<td style="vertical-align:middle">
 						<div style="margin-bottom:10px" th:if="${runa['deliver']} =='배송전' and ${user.userId}=='admin'">
-							<a th:if="${user.userId} == 'admin'" th:href="@{/cart/runaDeliver(date=${runa['order_time']})}" style="color:blue;" th:text="전달완료"></a>
+							<a th:if="${user.userId} == 'admin'" th:href="@{/cart/runaDeliver(date=${runa['order_time']}, pageNumber=1)}" style="color:blue;" th:text="전달완료"></a>
 						</div>
 						<p th:if="${runa['deliver']} == '배송전'"  th:text="${runa['deliver']}" style="margin-top:10px"></p>
 						<p th:unless="${runa['deliver']} == '배송전'" th:text="배송완료" style="margin-top:10px">
@@ -71,6 +71,11 @@
 					<td></td>
 				</tr>
 			</table>
+			<hr>
+			<div style="text-align:right;">
+		        <a th:if="${currentPage > 1}" th:href="@{/cart/runaList(userId=${user.userId}, pageNumber=${currentPage - 1})}" style="border:1px solid black;padding:5px;background:#dadada;margin-right:10px">Previous</a>
+		        <a th:if="${currentPage < totalPages}" th:href="@{/cart/runaList(userId=${user.userId}, pageNumber=${currentPage + 1})}" style="border:1px solid black;padding:5px;background:#dadada">Next</a>
+		    </div>
 			<br>
 		</div>
 	</div>

@@ -9,7 +9,7 @@ public interface LoginService {
 	
 	public void newLogin(String userId, String encodePwd, String username, String phone, String address);
 	
-	public List<User> userList();
+	public List<User> userList(int pageNumber, int PageSize);
 	
 	public void updateUser(String userId, String encodePwd, String username, String phone, String address);
 	

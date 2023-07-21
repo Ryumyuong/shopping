@@ -59,9 +59,17 @@ public class LoginController {
 	}
 	
 	@GetMapping("/userList")
-	public String userList(Model model) {
-		List<User> userList = loginService.userList();
+	public String userList(Model model, @RequestParam int pageNumber, @RequestParam(defaultValue = "10") int pageSize) {
+		List<User> userList = loginService.userList(pageNumber, pageSize);
 		model.addAttribute("userList", userList);
+		model.addAttribute("currentPage", pageNumber);
+		for(int i = 1;;i++) {
+			userList = loginService.userList(i, 10);
+			if(userList.size() < 10) {
+				model.addAttribute("totalPages", i);
+				break;
+			}
+		}
 		return "userList";
 	}
 	
@@ -103,28 +111,32 @@ public class LoginController {
 	}
 	
 	@GetMapping("/delete")
-	public String deleteUser(Model model, @RequestParam String userId) {
+	public String deleteUser(Model model, @RequestParam String userId , @RequestParam int pageNumber) {
 		loginService.deleteUser(userId);
-		List<User> userList = loginService.userList();
-		model.addAttribute("userList", userList);
-		return "userList";
+		return "redirect:userList?pageNumber=" + pageNumber;
 	}
 	
 	@GetMapping("/addRuna")
-	public String addRuna(Model model) {
-		List<User> userList = loginService.userList();
+	public String addRuna(Model model, @RequestParam int pageNumber, @RequestParam(defaultValue = "10") int pageSize) {
+		List<User> userList = loginService.userList(pageNumber, pageSize);
 		model.addAttribute("userList", userList);
+		model.addAttribute("currentPage", pageNumber);
+		for(int i = 1;;i++) {
+			userList = loginService.userList(i, 10);
+			if(userList.size() < 10) {
+				model.addAttribute("totalPages", i);
+				break;
+			}
+		}
 		return "addRuna";
 	}
 	
 	@PostMapping("/addRuna")
-	public String addRuna(Model model, String userId, int money) {
+	public String addRuna(Model model, String userId, int money, @RequestParam int pageNumber) {
 		User user = loginMapper.loginSearch(userId);
 		money += user.getMoney();
 		System.out.println("더해진 루나 " + money);
 		loginService.addRuna(userId, money);
-		List<User> userList = loginService.userList();
-		model.addAttribute("userList", userList);
-		return "redirect:/addRuna";
+		return "redirect:/addRuna?pageNumber=" + pageNumber;
 	}
 }

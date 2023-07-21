@@ -17,7 +17,7 @@ public interface LoginMapper {
 	
 	public void newLogin(@Param("userId")String userId, @Param("password")String encodePwd, @Param("username")String username, @Param("phone")String phone ,@Param("address")String address);
 	
-	public List<User> userList();
+	public List<User> userList(@Param("offset")int offset, @Param("limit")int pageSize);
 	
 	public void updateUser(@Param("userId")String userId, @Param("password")String encodePwd, @Param("username")String username, @Param("phone")String phone ,@Param("address")String address);
 	

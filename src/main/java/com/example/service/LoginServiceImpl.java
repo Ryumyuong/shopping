@@ -26,8 +26,9 @@ public class LoginServiceImpl implements LoginService{
 	}
 
 	@Override
-	public List<User> userList() {
-		return loginMapper.userList();
+	public List<User> userList(int pageNumber, int pageSize) {
+	        int offset = (pageNumber - 1) * pageSize;
+	        return loginMapper.userList(offset, pageSize);
 	}
 
 	@Override

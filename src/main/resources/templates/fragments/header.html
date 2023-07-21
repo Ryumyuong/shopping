@@ -6,14 +6,13 @@
 	<nav class="navbar navbar-expand navbar-dark" style="background-color:#ffc723">
 		<div class="container">
 			<div class="navbar-header">
-				<a class="navbar-brand" th:href="@{/runa/main(category=전자)}" style="color:black;"
-					>루나몰</a>
+				
 			</div>
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item"><a
 					style="color: black;padding-right:5px" th:href="@{/updateUser(userId=${user.userId})}" th:text="${user.userId}"></a><span>님</span></li>
 				<li class="nav-item"><a
-					style="color: black; font-weight:bold;padding-right:5px" th:href="@{/cart/runaList(userId=${user.userId})}" th:text="${user.money}"></a><span>루나</span></li>
+					style="color: black; font-weight:bold;padding-right:5px" th:href="@{/cart/runaList(userId=${user.userId}, pageNumber=1)}" th:text="${user.money}"></a><span>루나</span></li>
 					
 				<li class="nav-item"><a class="nav-links"
 					th:href="@{/logout}"> 로그아웃</a></li>
@@ -23,16 +22,19 @@
 			</ul>
 		</div>
 	</nav>
+	<div style="text-align:center;font-size:50px;background:#ffc723;padding:20px;">
+		<a th:href="@{/runa/main(category=)}">루나홀</a>
+	</div>
 	<nav class="navbar navbar-expand navbar-dark" style="background-color:#ffc723;text-align:center" th:if="${user.userId} == 'admin'">
 		<div class="container">
 			<ul class="navbar-nav mr-auto">
 				<li id="admin" class="nav-item"><a class="nav-links"
-					th:href="@{/userList}">회원 목록</a></li>
+					th:href="@{/userList(pageNumber=1)}">회원 목록</a></li>
 				<li id="admin" class="nav-item"><a class="nav-links"
 					th:href="@{/runa/insertProduct}">물품 등록</a></li>
 				<li id="admin" class="nav-item"><a class="nav-links" th:href="@{/runa/update(category=전자)}">물품 수정</a></li>
 				<li id="admin" class="nav-item"><a class="nav-links" th:href="@{/runa/delete(category=전자)}">물품 삭제</a></li>
-				<li id="admin" class="nav-item"><a class="nav-links" th:href="@{/addRuna}">루나 추가</a></li>
+				<li id="admin" class="nav-item"><a class="nav-links" th:href="@{/addRuna(pageNumber=1)}">루나 추가</a></li>
 			</ul>
 		</div>
 	</nav>
