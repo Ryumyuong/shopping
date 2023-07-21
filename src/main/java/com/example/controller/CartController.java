@@ -15,12 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.domain.Cart;
 import com.example.domain.Orders;
-import com.example.domain.Product;
 import com.example.domain.User;
 import com.example.mapper.LoginMapper;
 import com.example.service.CartService;
 import com.example.service.LoginService;
-import com.example.service.ProductService;
 
 import lombok.RequiredArgsConstructor;
 
