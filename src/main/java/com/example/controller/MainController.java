@@ -65,9 +65,7 @@ public class MainController {
 			MultipartFile fileData) throws IOException {
 		if (price == 0) {
 			model.addAttribute("loginErrorMsg", "가격을 입력하세요");
-			Product product = productService.productName(name);
-			model.addAttribute("p", product);
-			return "updateProduct";
+			return "redirect:updateProduct?name=" + URLEncoder.encode(name, StandardCharsets.UTF_8);
 		} else if(fileData.getOriginalFilename().equals(" ")){
 			System.out.println("file1 " + fileData.getOriginalFilename());
 			String filePath = uploadPath + "/" + fileData.getOriginalFilename();
@@ -79,15 +77,11 @@ public class MainController {
 			byte[] imageData = fileData.getBytes();
 			String fileName = Base64.getEncoder().encodeToString(imageData);
 			productService.updateProduct(category, name, description, price, fileName);
-			List<Product> productList = productService.productAll();
-			model.addAttribute("rs", productList);
 			return "redirect:update?category=" + URLEncoder.encode(category, StandardCharsets.UTF_8);
 
 		} else {
 			System.out.println("file2 " + fileData.getOriginalFilename());
 			productService.updateProduct2(category, name, description, price);
-			List<Product> productList = productService.productAll();
-			model.addAttribute("rs", productList);
 			return "redirect:update?category=" + URLEncoder.encode(category, StandardCharsets.UTF_8);			
 		}
 	}
@@ -120,8 +114,6 @@ public class MainController {
 				byte[] imageData = fileData.getBytes();
 				String fileName = Base64.getEncoder().encodeToString(imageData);
 				productService.insertProduct(category, name, price, description, fileName);
-				List<Product> productList = productService.productAll();
-				model.addAttribute("rs", productList);
 				return "redirect:main?category=" + URLEncoder.encode(category, StandardCharsets.UTF_8);
 			}
 		}
@@ -137,8 +129,6 @@ public class MainController {
 	@PostMapping("delete")
 	public String deleteProduct(Model model, @RequestParam String name, @RequestParam String category) {
 		productService.deleteProduct(name);
-		List<Product> productList = productService.productAll();
-		model.addAttribute("rs", productList);
 		return "redirect:delete?category=" + URLEncoder.encode(category, StandardCharsets.UTF_8);
 	}
 }
