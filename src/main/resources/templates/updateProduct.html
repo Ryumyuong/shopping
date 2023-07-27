@@ -26,7 +26,8 @@
 				<div class="form-group row">
 					<label class="col-sm-2">물품명</label>
 					<div class="col-sm-3">
-						<input type="text" id="sname" name="name" class="form-control" th:value="${p?.s_name}" readonly>
+						<input type="hidden" id="name" name="name" th:value="${p?.s_name}">
+						<input type="text" id="sname" name="sname" class="form-control" th:value="${p?.s_name}">
 					</div>
 				</div>
 				<br><br>

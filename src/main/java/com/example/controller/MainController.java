@@ -61,7 +61,7 @@ public class MainController {
 	}
 
 	@PostMapping("updateProduct")
-	public String updateComplete(Model model, String category, String name, String description, int price,
+	public String updateComplete(Model model, String category, String name, String sname, String description, int price,
 			MultipartFile fileData) throws IOException {
 		if (price == 0) {
 			model.addAttribute("loginErrorMsg", "가격을 입력하세요");
@@ -76,12 +76,12 @@ public class MainController {
 			FileCopyUtils.copy(fileData.getBytes(), new FileOutputStream(filePath));
 			byte[] imageData = fileData.getBytes();
 			String fileName = Base64.getEncoder().encodeToString(imageData);
-			productService.updateProduct(category, name, description, price, fileName);
+			productService.updateProduct(category, name, sname, description, price, fileName);
 			return "redirect:update?category=" + URLEncoder.encode(category, StandardCharsets.UTF_8);
 
 		} else {
 			System.out.println("file2 " + fileData.getOriginalFilename());
-			productService.updateProduct2(category, name, description, price);
+			productService.updateProduct2(category, name, sname, description, price);
 			return "redirect:update?category=" + URLEncoder.encode(category, StandardCharsets.UTF_8);			
 		}
 	}

@@ -21,11 +21,11 @@
     </insert>
     
     <update id="updateProduct">
-    	update products set s_category = #{category}, s_description = #{description}, s_price = #{price}, s_fileName = #{fileName} where s_name = #{name} ;
+    	update products set s_category = #{category}, s_name = #{sname}, s_description = #{description}, s_price = #{price}, s_fileName = #{fileName} where s_name = #{name} ;
     </update>
     
     <update id="updateProduct2">
-    	update products set s_category = #{category}, s_description = #{description}, s_price = #{price} where s_name = #{name} ;
+    	update products set s_category = #{category}, s_name = #{sname}, s_description = #{description}, s_price = #{price} where s_name = #{name} ;
     </update>
     
     <delete id="deleteProduct">

@@ -21,9 +21,9 @@ public interface ProductMapper {
 	
 	public void insertProduct(@Param("category")String category, @Param("name")String name, @Param("description")String description, @Param("price")int price, @Param("fileName")String fileName);
 	
-	public void updateProduct(@Param("category")String category, @Param("name")String name, @Param("description")String description, @Param("price")int price, @Param("fileName")String fileName);
+	public void updateProduct(@Param("category")String category, @Param("name")String name, @Param("sname")String sname, @Param("description")String description, @Param("price")int price, @Param("fileName")String fileName);
 	
-	public void updateProduct2(@Param("category")String category, @Param("name")String name, @Param("description")String description, @Param("price")int price);
+	public void updateProduct2(@Param("category")String category, @Param("name")String name, @Param("sname")String sname, @Param("description")String description, @Param("price")int price);
 	
 	public void deleteProduct(@Param("name")String name);
 	

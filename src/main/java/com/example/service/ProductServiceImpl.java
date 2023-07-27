@@ -30,13 +30,13 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public void updateProduct(String category, String name, String description, int price, String fileName) {
-		productMapper.updateProduct(category, name, description, price, fileName);	
+	public void updateProduct(String category, String name, String sname, String description, int price, String fileName) {
+		productMapper.updateProduct(category, name, sname, description, price, fileName);	
 	}
 	
 	@Override
-	public void updateProduct2(String category, String name, String description, int price) {
-		productMapper.updateProduct2(category, name, description, price);	
+	public void updateProduct2(String category, String name, String sname, String description, int price) {
+		productMapper.updateProduct2(category, name, sname, description, price);	
 	}
 	
 	@Override
