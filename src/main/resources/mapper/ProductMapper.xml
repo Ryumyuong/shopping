@@ -5,15 +5,15 @@
 <mapper namespace="com.example.mapper.ProductMapper">
     
     <select id="productAll" resultType="com.example.domain.Product">
-    	select * from products
+    	select * from products order by s_id desc
     </select>
     
     <select id="productName" resultType="com.example.domain.Product">
-    	select * from products where s_name = #{name}
+    	select * from products where s_name = #{name} order by s_id desc
     </select>
     
     <select id="productCategory" resultType="com.example.domain.Product">
-    	select * from products where s_category = #{category}
+    	select * from products where s_category = #{category} order by s_id desc
     </select>
     
     <insert id="insertProduct">

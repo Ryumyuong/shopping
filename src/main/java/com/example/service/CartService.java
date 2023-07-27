@@ -30,5 +30,9 @@ public interface CartService {
 	
 	public int runaTotalAll();
 	
-	public void orderDeliver(String date);
+	public void orderDeliver(String id);
+	
+	public void orderUnDeliver(String id);
+	
+	public void orderUnDeliver2(String id);
 }

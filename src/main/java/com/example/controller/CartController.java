@@ -43,7 +43,6 @@ public class CartController {
 	public String addCart(Model model, @RequestParam String category, String userId, String name, String description, int price, String fileName, int count) throws IOException{
 		for(int i = 0; i < count; i++) {
 			cartService.inCart(userId, name, description, price, fileName);
-			System.out.println("장바구니 등록 " + userId + " " + name);
 		}
 		return "redirect:/runa/main?category=" + URLEncoder.encode(category, StandardCharsets.UTF_8);
 	}
@@ -52,7 +51,7 @@ public class CartController {
 	public String cartDelete(Model model, @RequestParam("userId") String userId, @RequestParam("name") String name) {
 		cartService.deleteCart(userId, name);
 		System.out.println("장바구니 삭제 " + userId + " " + name);
-		return "redirect:main?userid=" + URLEncoder.encode(userId, StandardCharsets.UTF_8);
+		return "redirect:main?userId=" + URLEncoder.encode(userId, StandardCharsets.UTF_8);
 	}
 	
 	@GetMapping("deleteAll")
@@ -159,7 +158,7 @@ public class CartController {
 	
 	
 	@PostMapping("runaListSearch")
-	public String runaListSearch(Model model, String userId, @RequestParam int pageNumber) {
+	public String runaListSearch(String userId, @RequestParam int pageNumber) {
 
 		if(userId == "") {
 			return "redirect:runaList?userId=admin&pageNumber=" + pageNumber;
@@ -169,8 +168,19 @@ public class CartController {
 	}
 	
 	@GetMapping("runaDeliver")
-	public String runaDeliver(Model model, @RequestParam String date, @RequestParam int pageNumber) {
-		cartService.orderDeliver(date);
+	public String runaDeliver(@RequestParam String id, @RequestParam int pageNumber) {
+		cartService.orderDeliver(id);
+		return "redirect:runaList?userId=admin&pageNumber=" + pageNumber;
+	}
+	
+	@GetMapping("runaUnDeliver")
+	public String runaUnDeliver(@RequestParam String id, @RequestParam int pageNumber, @RequestParam String userId, @RequestParam int money) {
+		cartService.orderUnDeliver(id);
+		cartService.orderUnDeliver2(id);
+		User user = loginMapper.loginSearch(userId);
+		System.out.println(money  + " " + user.getMoney());
+		money += user.getMoney();
+		loginService.addRuna(userId, money);
 		return "redirect:runaList?userId=admin&pageNumber=" + pageNumber;
 	}
 	

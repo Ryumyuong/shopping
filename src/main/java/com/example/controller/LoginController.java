@@ -139,4 +139,18 @@ public class LoginController {
 		loginService.addRuna(userId, money);
 		return "redirect:/addRuna?pageNumber=" + pageNumber;
 	}
+	
+	@PostMapping("/minRuna")
+	public String minRuna(Model model, String userId, int money, @RequestParam int pageNumber) {
+		User user = loginMapper.loginSearch(userId);
+		money = user.getMoney() - money;
+		if(money < 0) {
+			model.addAttribute("ErrorMsg","루나가 부족합니다.");
+			return "redirect:/addRuna?pageNumber=" + pageNumber;
+		} else {
+			System.out.println("줄어든 루나 " + money);
+			loginService.addRuna(userId, money);
+			return "redirect:/addRuna?pageNumber=" + pageNumber;
+		}
+	}
 }

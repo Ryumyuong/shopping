@@ -53,6 +53,14 @@
     </delete>
     
     <update id="orderDeliver">
-    	update orders set deliver = "배송완료" where order_time = #{date}
+    	update orders set deliver = "배송완료" where id = #{id}
     </update>
+    
+    <update id="orderUnDeliver2">
+    	update orders set deliver = "환불처리" where id = #{id}
+    </update>
+    
+    <delete id="orderUnDeliver">
+    	delete from orders where id = #{id}
+    </delete>
 </mapper>

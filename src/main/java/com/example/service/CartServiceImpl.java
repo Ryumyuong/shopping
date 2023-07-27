@@ -73,8 +73,18 @@ public class CartServiceImpl implements CartService{
 	}
 	
 	@Override
-	public void orderDeliver(String date) {
-		cartMapper.orderDeliver(date);
+	public void orderDeliver(String id) {
+		cartMapper.orderDeliver(id);
+	}
+
+	@Override
+	public void orderUnDeliver(String id) {
+		cartMapper.orderUnDeliver(id);
+	}
+	
+	@Override
+	public void orderUnDeliver2(String id) {
+		cartMapper.orderUnDeliver2(id);
 	}
 
 }

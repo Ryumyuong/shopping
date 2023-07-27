@@ -51,6 +51,7 @@
 		            <a class="tab" th:href="@{/runa/main(category=식음료)}"><span th:text="식음료"></span></a>
 		            <a class="tab" th:href="@{/runa/main(category=운동)}"><span th:text="운동"></span></a>
 		            <a class="tab" th:href="@{/runa/main(category=여가문화)}"><span th:text="여가문화"></span></a>
+		            <a class="tab" th:href="@{/runa/main(category=업무)}"><span th:text="업무"></span></a>
 		            <a class="tab" th:href="@{/runa/main(category=VVIP)}"><span th:text="VVIP"></span></a>
 		        </li>
 		    </ul>
@@ -67,7 +68,8 @@
 					<a th:href="${row['s_description']}" th:text="자세히보기" class="description"></a>
 					
 					<br><br>
-					 <span th:text="${row['s_price']}" style="font-weight:bold"></span><span>  루나</span>
+					 <span th:if="${row['s_price']} == 0">가격문의</span>
+					 <span th:unless="${row['s_price']} == 0" th:text="${row['s_price']}" style="font-weight:bold"></span><span th:unless="${row['s_price']} == 0">  루나</span>
 					<br><br>
 					<div>
 					<button th:onclick="'decreaseQuantity(\'' + ${iterStat.index} + '\')'" style="border:1px solid;background:white;">-</button>

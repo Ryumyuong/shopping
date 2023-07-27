@@ -13,6 +13,8 @@
 	<br><br>
 	<div class="container">
 		<div style="padding-top: 50px">
+		<div th:if="${ErrorMsg}" class="alert alert-danger"
+							th:text="${ErrorMsg}"></div>
 			<table style="text-align:center">
 				<tr>
 					<th style="width:150px;text-align:center">이름</th>
@@ -43,6 +45,11 @@
 						<input type="text" name="money" size="5" value=0>
 						<input type="hidden" name="userId" th:value="${user['userId']}">
 						<span>루나</span><button style="border:0px;background:white;color:blue"> 추가</button>
+					</form>
+					<form th:action="@{/minRuna(pageNumber=1)}" method="post">
+						<input type="text" name="money" size="5" value=0>
+						<input type="hidden" name="userId" th:value="${user['userId']}">
+						<span>루나</span><button style="border:0px;background:white;color:red"> 삭제</button>
 					</form>
 					</td>
 				</tr>

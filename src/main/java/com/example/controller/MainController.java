@@ -63,11 +63,9 @@ public class MainController {
 	@PostMapping("updateProduct")
 	public String updateComplete(Model model, String category, String name, String sname, String description, int price,
 			MultipartFile fileData) throws IOException {
-		if (price == 0) {
-			model.addAttribute("loginErrorMsg", "가격을 입력하세요");
-			return "redirect:updateProduct?name=" + URLEncoder.encode(name, StandardCharsets.UTF_8);
-		} else if(fileData.getOriginalFilename().equals(" ")){
-			System.out.println("file1 " + fileData.getOriginalFilename());
+		System.out.println("file -" + fileData.getOriginalFilename() + "-");
+		if(fileData.getOriginalFilename() != ""){
+			System.out.println("file1 -" + fileData.getOriginalFilename() + "-");
 			String filePath = uploadPath + "/" + fileData.getOriginalFilename();
 			File dir = new File(uploadPath);
 			if (!dir.exists()) {
@@ -94,11 +92,9 @@ public class MainController {
 	@PostMapping("insertProduct")
 	public String insertComplete(Model model, @RequestParam String category, String name, String description, int price,
 			MultipartFile fileData) throws IOException {
+		System.out.println("price" + price);
 		if (name == "") {
 			model.addAttribute("loginErrorMsg", "제품명을 입력하세요");
-			return "insertProduct";
-		} else if (price == 0) {
-			model.addAttribute("loginErrorMsg", "가격을 입력하세요");
 			return "insertProduct";
 		} else if (category == "") {
 			model.addAttribute("loginErrorMsg", "종류를 입력하세요");
