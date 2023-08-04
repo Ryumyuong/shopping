@@ -52,7 +52,7 @@
 					</td>
 					<td style="vertical-align:middle">
 						<div style="margin-bottom:10px" th:if="${runa['deliver']} =='배송전' and ${user.userId}=='admin'">
-							<a th:href="@{/cart/runaDeliver(id=${runa['order_time']}, pageNumber=1)}" style="color:blue;" th:text="전달완료"></a>
+							<a th:href="@{/cart/runaDeliver(id=${runa['id']}, pageNumber=1)}" style="color:blue;" th:text="전달완료"></a>
 						</div>
 						<div style="margin-bottom:10px" th:if="${user.userId}=='admin'">
 							<a th:href="@{/cart/runaUnDeliver(id=${runa['id']}, pageNumber=1, userId=${runa['userId']}
