@@ -14,9 +14,9 @@
 	</div>
 	<br><br>
 	<div class="container">
-		<div  style="text-align:right" th:if="${user.userId} == 'admin'">
+		<div class="searchId" th:if="${user.userId} == 'admin'">
 			<form th:action="@{/cart/runaListSearch(pageNumber=1)}" method="post">
-				<span>아이디 검색 : </span><input type="text" name="userId" placeholder="아이디를 입력하세요">
+				<span>아이디 검색 : </span><input class="" type="text" name="userId" placeholder="아이디를 입력하세요">
 				<button type="submit">검색</button>
 			</form>
 		</div>
@@ -24,10 +24,10 @@
 			<table style="text-align:center">
 				<tr>
 					<th style="width:150px;">주문날짜</th>
-					<th style="width:150px;">이름</th>
+					<th style="width:100px;">이름</th>
 					<th style="width:150px;">전화번호</th>
 					<th style="width:500px;">주소</th>
-					<th style="width:400px;">주문목록</th>
+					<th style="width:500px;">주문목록</th>
 					<th style="width:200px;">금액</th>
 					<th style="width:120px">비고</th>
 				</tr>

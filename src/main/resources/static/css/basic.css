@@ -87,3 +87,41 @@ video {
 body {
 	font-family: 'Basic', sans-serif;
 }
+
+.loginForm {
+	border:1px solid grey;
+	padding: 50px;
+	width:400px;
+	margin: auto;
+	border-radius:5px;
+}
+
+.products {
+	display:inline-block;
+	margin:30px;
+	text-align:center;
+	width:300px;
+	height:100px;
+}
+
+.searchId {
+	text-align:right;
+}
+
+@media(max-width:414px) {
+	.loginForm {
+	width:300px;
+	}
+	
+	.menu {
+	width:334px;
+	}
+	
+	.products{
+	width:340px;
+	margin:0px;
+	margin-top:30px;
+	}
+	
+	
+}
