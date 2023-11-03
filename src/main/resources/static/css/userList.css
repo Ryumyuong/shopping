@@ -1,0 +1,50 @@
+.name {
+	width:100px;
+}
+
+.id {
+	width:150px;
+}
+
+.tel {
+	width:150px;
+}
+
+.add {
+	width:500px;
+}
+
+.other {
+	width:150px;
+}
+
+.table {
+	padding-top:50px;
+}
+
+.badge badge-danger {
+	
+}
+
+@media(max-width:414px){
+	.table {
+	font-size:10px;
+	}
+	
+	.name {
+	width:80px;
+	}
+	.id {
+	width:80px;
+	}
+	.tel {
+	width:80px;
+	}
+	.add {
+	width:80px;
+	}
+	.other {
+	width:80px;
+	}
+
+	}

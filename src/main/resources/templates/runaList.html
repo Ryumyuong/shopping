@@ -4,85 +4,86 @@
 	layout:decorate="~{layout/default_layout}">
 <head>
 <title>장바구니</title>
+<link rel="stylesheet" type="text/css" href = "/css/runaList.css">
 </head>
 <body>
-<th:block layout:fragment="content">
-	<div class="jumbotron">
-		<div class="container" style="text-align:center">
-			<h1 class="display-3">루나 사용 목록</h1>
+	<th:block layout:fragment="content">
+		<div class="jumbotron">
+			<div class="container" style="text-align: center">
+				<h1 class="display-3">루나 사용 목록</h1>
+			</div>
 		</div>
-	</div>
-	<br><br>
-	<div class="container">
-		<div class="searchId" th:if="${user.userId} == 'admin'">
-			<form th:action="@{/cart/runaListSearch(pageNumber=1)}" method="post">
-				<span>아이디 검색 : </span><input class="" type="text" name="userId" placeholder="아이디를 입력하세요">
-				<button type="submit">검색</button>
-			</form>
+		<br>
+		<br>
+		<div class="container">
+			<div class="searchId" th:if="${user.userId} == 'admin'">
+				<form th:action="@{/cart/runaListSearch(pageNumber=1)}"
+					method="post">
+					<span>아이디 검색 : </span><input class="" type="text" name="userId"
+						placeholder="아이디를 입력하세요">
+					<button type="submit">검색</button>
+				</form>
+			</div>
+			<div class="table">
+				<table style="text-align: center">
+					<tr>
+						<th class="orderD">주문날짜</th>
+						<th class="name" >이름</th>
+						<th class="tel">전화번호</th>
+						<th class="add">주소</th>
+						<th class="orderL">주문목록</th>
+						<th class="price">금액</th>
+						<th class="other">비고</th>
+					</tr>
+					<tr th:each="runa : ${orderList}">
+						<td>
+							<p th:text="${runa['order_time']}" style="padding-top: 20px;"></p>
+						</td>
+						<td><span th:text="${runa['username']}"></span></td>
+						<td><span th:text="${runa['phone']}"></span></td>
+						<td><span th:text="${runa['address']}"></span></td>
+						<td><span th:utext="${runa['order_menu']}"></span></td>
+						<td><span>-</span><span th:text="${runa['order_price']}"></span><span>
+								루나</span></td>
+						<td style="vertical-align: middle">
+							<div style="margin-bottom: 10px"
+								th:if="${runa['deliver']} =='배송전' and ${user.userId}=='admin'">
+								<a
+									th:href="@{/cart/runaDeliver(id=${runa['id']}, pageNumber=1)}"
+									style="color: blue;" th:text="전달완료"></a>
+							</div>
+							<div style="margin-bottom: 10px" th:if="${user.userId}=='admin'">
+								<a
+									th:href="@{/cart/runaUnDeliver(id=${runa['id']}, pageNumber=1, userId=${runa['userId']}
+							, money=${runa['order_price']})}"
+									style="color: blue;" th:text="환불하기"></a>
+							</div>
+							<p th:text="${runa['deliver']}" style="margin-top: 10px"></p>
+						</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td>총액</td>
+						<td><span th:text="${total}"></span> <span> 루나</span></td>
+						<td></td>
+					</tr>
+				</table>
+				<hr>
+				<div style="text-align: right;">
+					<a th:if="${currentPage > 1}"
+						th:href="@{/cart/runaList(userId=${user.userId}, pageNumber=${currentPage - 1})}"
+						style="border: 1px solid black; padding: 5px; background: #dadada; margin-right: 10px">Previous</a>
+					<a th:if="${currentPage < totalPages}"
+						th:href="@{/cart/runaList(userId=${user.userId}, pageNumber=${currentPage + 1})}"
+						style="border: 1px solid black; padding: 5px; background: #dadada">Next</a>
+				</div>
+				<br>
+			</div>
 		</div>
-		<div style="padding-top: 50px;">
-			<table style="text-align:center">
-				<tr>
-					<th style="width:150px;">주문날짜</th>
-					<th style="width:100px;">이름</th>
-					<th style="width:150px;">전화번호</th>
-					<th style="width:500px;">주소</th>
-					<th style="width:500px;">주문목록</th>
-					<th style="width:200px;">금액</th>
-					<th style="width:120px">비고</th>
-				</tr>
-				<tr th:each="runa : ${orderList}">
-					<td>
-						<p th:text="${runa['order_time']}" style="padding-top:20px;"></p>
-					</td>
-					<td>
-						<span th:text="${runa['username']}"></span>
-					</td>
-					<td>
-						<span th:text="${runa['phone']}"></span>
-					</td>
-					<td>
-						<span th:text="${runa['address']}"></span>
-					</td>
-					<td>
-						<span th:utext="${runa['order_menu']}"></span>
-					</td>
-					<td>
-						<span>-</span><span th:text="${runa['order_price']}"></span><span> 루나</span>
-					</td>
-					<td style="vertical-align:middle">
-						<div style="margin-bottom:10px" th:if="${runa['deliver']} =='배송전' and ${user.userId}=='admin'">
-							<a th:href="@{/cart/runaDeliver(id=${runa['id']}, pageNumber=1)}" style="color:blue;" th:text="전달완료"></a>
-						</div>
-						<div style="margin-bottom:10px" th:if="${user.userId}=='admin'">
-							<a th:href="@{/cart/runaUnDeliver(id=${runa['id']}, pageNumber=1, userId=${runa['userId']}
-							, money=${runa['order_price']})}" style="color:blue;" th:text="환불하기"></a>
-						</div>
-						<p th:text="${runa['deliver']}" style="margin-top:10px"></p>
-					</td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td>총액</td>
-					<td>
-						<span th:text="${total}"></span>
-						<span> 루나</span>
-					</td>
-					<td></td>
-				</tr>
-			</table>
-			<hr>
-			<div style="text-align:right;">
-		        <a th:if="${currentPage > 1}" th:href="@{/cart/runaList(userId=${user.userId}, pageNumber=${currentPage - 1})}" style="border:1px solid black;padding:5px;background:#dadada;margin-right:10px">Previous</a>
-		        <a th:if="${currentPage < totalPages}" th:href="@{/cart/runaList(userId=${user.userId}, pageNumber=${currentPage + 1})}" style="border:1px solid black;padding:5px;background:#dadada">Next</a>
-		    </div>
-			<br>
-		</div>
-	</div>
-</th:block>
+	</th:block>
 </body>
 
 </html>

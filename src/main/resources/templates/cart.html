@@ -4,6 +4,7 @@
 	layout:decorate="~{layout/default_layout}">
 <head>
 <title>장바구니</title>
+<link rel="stylesheet" type="text/css" href = "/css/cart.css">
 </head>
 <body>
 <th:block layout:fragment="content">
@@ -20,14 +21,14 @@
 			<a th:href="@{/cart/deleteAll(userId=${user.userId})}"
 				class="btn btn-danger" style="float:left;">모두 삭제하기</a>
 		</div>
-		<div style="padding-top: 50px">
+		<div class="table">
 			<table style="text-align:center">
-				<tr>
-					<th style="width:350px;">상품명</th>
-					<th style="width:150px;">가격</th>
-					<th style="width:80px;">수량</th>
-					<th style="width:150px;">금액</th>
-					<th style="width:100px;">비고</th>
+				<tr class="menu">
+					<th class="product">상품명</th>
+					<th class="price">가격</th>
+					<th class="count">수량</th>
+					<th class="money">금액</th>
+					<th class="other">비고</th>
 				</tr>
 				<tr th:each="cartItem : ${cartItems}">
 					<td >

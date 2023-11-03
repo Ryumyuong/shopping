@@ -108,6 +108,11 @@ body {
 	text-align:right;
 }
 
+.nav-item {
+	color:black;
+	padding-right:5px;
+}
+
 @media(max-width:414px) {
 	.loginForm {
 	width:300px;
@@ -123,5 +128,12 @@ body {
 	margin-top:30px;
 	}
 	
+	.nav-item {
+	font-size:12px;
+	margin-right:5px;
+	}
 	
+	#admin {
+	margin-right:5px;
+	}
 }

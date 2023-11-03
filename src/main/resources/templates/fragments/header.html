@@ -1,13 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-	<head>
-		<style>
-			@media(max-width:414px) {
-				
-			}
-		</style>
-	</head>
 
 <th:block th:fragment="headerFragment">
 	<nav class="navbar navbar-expand navbar-dark" style="background-color:#ffc723">
@@ -17,9 +10,9 @@
 			</div>
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item"><a
-					style="color: black;padding-right:5px" th:href="@{/updateUser(userId=${user.userId})}" th:text="${user.userId}"></a><span>님</span></li>
+					 th:href="@{/updateUser(userId=${user.userId})}" th:text="${user.userId}"></a><span>님</span></li>
 				<li class="nav-item"><a
-					style="color: black; font-weight:bold;padding-right:5px" th:href="@{/cart/runaList(userId=${user.userId}, pageNumber=1)}" th:text="${user.money}"></a><span>루나</span></li>
+					style="font-weight:bold" th:href="@{/cart/runaList(userId=${user.userId}, pageNumber=1)}" th:text="${user.money}"></a><span>루나</span></li>
 					
 				<li class="nav-item"><a class="nav-links"
 					th:href="@{/logout}"> 로그아웃</a></li>

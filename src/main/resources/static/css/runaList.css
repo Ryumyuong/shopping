@@ -1,0 +1,38 @@
+.orderD {
+	width:150px;
+}
+
+.name {
+	width:100px;
+}
+
+.tel {
+	width:150px;
+}
+
+.add {
+	width:500px;
+}
+
+.orderL {
+	width:500px;
+}
+
+.price {
+	width:200px;
+}
+
+.other {
+	width:120px;
+}
+
+.table {
+	padding-top:50px;
+}
+
+@media(max-width:414px) {
+	.table {
+	font-size:11px;
+	}
+	
+}

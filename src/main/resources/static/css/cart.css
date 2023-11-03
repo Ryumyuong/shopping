@@ -1,0 +1,50 @@
+.table {
+	padding-top:50px;
+}
+
+.products {
+	width:350px;
+}
+
+.price {
+	150px;
+}
+
+.count {
+	width:80px;
+}
+
+.money {
+	width:150px;
+}
+
+.other {
+	width:100px;
+}
+
+@media(max-width:414px){
+	.table {
+	font-size:10px;
+	}
+	
+	.product {
+	width:80px;
+	}
+	
+	.price {
+	width:80px;
+	}
+	
+	.count {
+	width:80px;
+	}
+	
+	.money {
+	width:80px;
+	}
+	
+	.other {
+	width:80px;
+	}
+	
+}
