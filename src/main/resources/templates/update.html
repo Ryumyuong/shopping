@@ -4,37 +4,42 @@
 	layout:decorate="~{layout/default_layout}">
 <body>
 	<th:block layout:fragment="content">
-	<div class="container" style="text-align: center">
-		<div style=margin-left:30px;margin-top:30px;margin-bottom:20px;font-size:50px;>물품 수정</div>
-			<br>
-			<ul>
-		        <li>
-		            <a class="tab" th:href="@{/runa/update(category=전자)}"><span>전자/기기</span></a>
-		            <a class="tab" th:href="@{/runa/update(category=생활가전)}"><span th:text="생활가전"></span></a>
-		            <a class="tab" th:href="@{/runa/update(category=식음료)}"><span th:text="식음료"></span></a>
-		            <a class="tab" th:href="@{/runa/update(category=운동)}"><span th:text="운동"></span></a>
-		            <a class="tab" th:href="@{/runa/update(category=여가문화)}"><span th:text="여가문화"></span></a>
-		            <a class="tab" th:href="@{/runa/update(category=업무)}"><span th:text="업무"></span></a>
-		            <a class="tab" th:href="@{/runa/update(category=VVIP)}"><span th:text="VVIP"></span></a>
-		        </li>
-		    </ul>
-			<div>
-				<div th:each="row : ${rs}"
-					style="display: inline-block; margin: 30px; text-align:center; width:300px; height:100px">
-					<p>
-						<img th:src="'data:image/png;base64,' + ${row.s_fileName}" alt="Product Image" />
-					</p>
-					<p th:text="${row['s_name']}" style="text-align:center;"></p>
-					<br>
-					<p th:text="자세히보기"></p>
-					<br>
-					<span th:if="${row['s_price']} == 0">가격문의</span>
-					 <span th:unless="${row['s_price']} == 0" th:text="${row['s_price']}" style="font-weight:bold"></span><span th:unless="${row['s_price']} == 0">  루나</span>
-					<br><br><br>
-						<input type="hidden" name="name" th:value="${row['s_name']}" />
-						<a th:href="@{/runa/updateProduct(name=${row['s_name']})}" 
-						style="padding:10px; padding-left:30px;padding-right:30px; color:black;border: 2px solid black; background:#e8e8e8;">물품 수정 &raquo;</a>
-					<br>
+		<link rel="stylesheet" type="text/css" href="/css/main.css">
+		<link rel="stylesheet" type="text/css" href="/css/update.css">
+		<div class="main">
+			<div class="center">
+				<div class="Pupdate">물품 수정</div>
+				<br>
+				<ul class="menu-ul">
+					<li class="menu-li"><a class="tab"
+						th:href="@{/runa/update(category=전자)}"><span>전자/기기</span></a> <a
+						class="tab" th:href="@{/runa/update(category=생활가전)}"><span
+							th:text="생활가전"></span></a> <a class="tab"
+						th:href="@{/runa/update(category=식음료)}"><span th:text="식음료"></span></a>
+						<a class="tab" th:href="@{/runa/update(category=운동)}"><span
+							th:text="운동"></span></a> <a class="tab"
+						th:href="@{/runa/update(category=여가문화)}"><span th:text="여가문화"></span></a>
+						<a class="tab" th:href="@{/runa/update(category=업무)}"><span
+							th:text="업무"></span></a> <a class="tab"
+						th:href="@{/runa/update(category=VVIP)}"><span th:text="VVIP"></span></a>
+					</li>
+				</ul>
+				<hr>
+				<div>
+					<div th:each="row : ${rs}" class="products">
+						<p>
+							<img th:src="'data:image/png;base64,' + ${row.s_fileName}"
+								alt="Product Image" />
+						</p>
+						<p th:text="${row['s_name']}"></p>
+						<span th:if="${row['s_price']} == 0">가격문의</span> <span
+							th:unless="${row['s_price']} == 0" th:text="${row['s_price']}"
+							class="price"></span><span th:unless="${row['s_price']} == 0">
+							루나</span> <br> <br> <br> <input type="hidden" name="name"
+							th:value="${row['s_name']}" /> <a
+							th:href="@{/runa/updateProduct(name=${row['s_name']})}"
+							class="btn-cart">물품 수정 &raquo;</a> <br><br><br>
+					</div>
 				</div>
 			</div>
 		</div>

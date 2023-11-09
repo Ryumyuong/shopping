@@ -1,0 +1,43 @@
+.title {
+	text-align: center;
+	background: #ffc723;
+	padding-top: 1px;
+	padding-bottom: 40px;
+	height:182px;
+}
+
+.Title {
+	font-size: 50px;
+	margin-top: 50px;
+}
+
+.loginForm {
+	border: 1px solid grey;
+	padding: 50px;
+	width: 400px;
+	margin: auto;
+	border-radius: 5px;
+}
+
+.input {
+	width: 300px;
+}
+
+.inputId {
+	width: 100%;
+	line-height: 1.5;
+}
+
+.inputPw {
+	width: 100%;
+	line-height: 1.5;
+	margin-top: 8px;
+}
+
+button {
+	width:300px;
+	border: 1px solid #ced4da;
+	border-radius:5px;
+	padding: 5px 50px;
+	background:#FFC723;
+}

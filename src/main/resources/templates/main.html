@@ -11,29 +11,26 @@
 			document.addForm.reset();
 		}
 	}
-	
-	
-
 </script>
 <script th:inline="javascript">
 	function decreaseQuantity(inputId) {
-	    var inputField = document.getElementById(inputId);
-	    var inputFieldIn = document.getElementById(inputId + '인');
-	    var currentValue = parseInt(inputField.value);
-	    var currentValueIn = parseInt(inputFieldIn.value);
-	    if (currentValue > 1) {
-	        inputField.value = currentValue - 1;
-	        inputFieldIn.value = currentValueIn - 1;
-	    }
+		var inputField = document.getElementById(inputId);
+		var inputFieldIn = document.getElementById(inputId + '인');
+		var currentValue = parseInt(inputField.value);
+		var currentValueIn = parseInt(inputFieldIn.value);
+		if (currentValue > 1) {
+			inputField.value = currentValue - 1;
+			inputFieldIn.value = currentValueIn - 1;
+		}
 	}
-	
+
 	function increaseQuantity(inputId) {
-	    var inputField = document.getElementById(inputId);
-	    var inputFieldIn = document.getElementById(inputId + '인');
-	    var currentValue = parseInt(inputField.value);
-	    var currentValueIn = parseInt(inputFieldIn.value);
-	    inputField.value = currentValue + 1;
-	    inputFieldIn.value = currentValueIn + 1;
+		var inputField = document.getElementById(inputId);
+		var inputFieldIn = document.getElementById(inputId + '인');
+		var currentValue = parseInt(inputField.value);
+		var currentValueIn = parseInt(inputFieldIn.value);
+		inputField.value = currentValue + 1;
+		inputFieldIn.value = currentValueIn + 1;
 	}
 </script>
 
@@ -42,56 +39,67 @@
 
 <body>
 	<th:block layout:fragment="content">
-		<div class="container" style="text-align: center">
-		<br><br><br>
-			<ul class="menu">
-		        <li>
-		            <a class="tab" th:href="@{/runa/main(category=전자)}"><span>전자/기기</span></a>
-		            <a class="tab" th:href="@{/runa/main(category=생활가전)}"><span th:text="생활가전"></span></a>
-		            <a class="tab" th:href="@{/runa/main(category=식음료)}"><span th:text="식음료"></span></a>
-		            <a class="tab" th:href="@{/runa/main(category=운동)}"><span th:text="운동"></span></a>
-		            <a class="tab" th:href="@{/runa/main(category=여가문화)}"><span th:text="여가문화"></span></a>
-		            <a class="tab" th:href="@{/runa/main(category=업무)}"><span th:text="업무"></span></a>
-		            <a class="tab" th:href="@{/runa/main(category=VVIP)}"><span th:text="VVIP"></span></a>
-		        </li>
-		    </ul>
-		    <hr style="border:1px solid grey">
+		<link rel="stylesheet" type="text/css" href="/css/main.css">
+		<div class="center">
+			<br> <br> <br>
+			<ul class="menu-ul">
+				<li class="menu-li"><a class="tab"
+					th:href="@{/runa/main(category=전자)}"><span>전자/기기</span></a> <a
+					class="tab" th:href="@{/runa/main(category=생활가전)}"><span
+						th:text="생활가전"></span></a> <a class="tab"
+					th:href="@{/runa/main(category=식음료)}"><span th:text="식음료"></span></a>
+					<a class="tab" th:href="@{/runa/main(category=운동)}"><span
+						th:text="운동"></span></a> <a class="tab"
+					th:href="@{/runa/main(category=여가문화)}"><span th:text="여가문화"></span></a>
+					<a class="tab" th:href="@{/runa/main(category=업무)}"><span
+						th:text="업무"></span></a> <a class="tab"
+					th:href="@{/runa/main(category=VVIP)}"><span th:text="VVIP"></span></a>
+				</li>
+			</ul>
+			<hr>
 			<div>
 				<div class="products" th:each="row, iterStat : ${rs}">
 					<p>
-						<img th:src="'data:image/png;base64,' + ${row.s_fileName}"
-							alt="Product Image" />
+						<a th:href="${row['s_description']}" target="_blank"
+							class="description"><img
+							th:src="'data:image/png;base64,' + ${row.s_fileName}"
+							alt="Product Image" /></a>
 					</p>
-					<p th:text="${row['s_name']}" style="text-align: center;"></p>
-					<br>
-					<a th:href="${row['s_description']}" th:text="자세히보기" class="description"></a>
-					
-					<br><br>
-					 <span th:if="${row['s_price']} == 0">가격문의</span>
-					 <span th:unless="${row['s_price']} == 0" th:text="${row['s_price']}" style="font-weight:bold"></span><span th:unless="${row['s_price']} == 0">  루나</span>
-					<br><br>
+					<p th:text="${row['s_name']}"></p>
+					<br> <a th:href="${row['s_description']}" th:text="자세히보기"
+						target="_blank" class="description"></a> <br> <br> <span
+						th:if="${row['s_price']} == 0">가격문의</span> <span class="price"
+						th:unless="${row['s_price']} == 0" th:text="${row['s_price']}"></span><span
+						th:unless="${row['s_price']} == 0"> 루나</span> <br> <br>
 					<div>
-					<button th:onclick="'decreaseQuantity(\'' + ${iterStat.index} + '\')'" style="border:1px solid;background:white;">-</button>
-						<input type="text" th:id="${iterStat.index}" value="1" readonly style="width:30px;"/>
-					<button th:onclick="'increaseQuantity(\'' + ${iterStat.index} + '\')'" style="border:1px solid;background:white;">+</button>
+						<button
+							th:onclick="'decreaseQuantity(\'' + ${iterStat.index} + '\')'"
+							class="btn-pm">-</button>
+						<input class="input-read" type="text" th:id="${iterStat.index}"
+							value="1" readonly />
+						<button
+							th:onclick="'increaseQuantity(\'' + ${iterStat.index} + '\')'"
+							class="btn-pm">+</button>
 					</div>
 					<br>
-					<form name="addForm" th:action="@{/cart/main(category=${row['s_category']})}" method="post"
-						style="margin-top: 5px;">
-						<input type="hidden" name="userId" th:value="${user.userId}" />
-						<input type="hidden" name="name" th:value="${row['s_name']}" />
-						<input type="hidden" name="description" th:value="${row['s_description']}" />
-						<input type="hidden" name="price" th:value="${row['s_price']}" />
-						<input type="hidden" th:id="${iterStat.index} + '인'" value="1" name="count"/>
-						<textarea name="fileName" th:text="${row['s_fileName']}" style="display: none;"></textarea>
-						<button onclick="addToCart()" style="padding: 10px; padding-left: 30px; padding-right: 30px">장바구니에 넣기</button>
+					<form name="addForm"
+						th:action="@{/cart/main(category=${row['s_category']})}"
+						method="post">
+						<input type="hidden" name="userId" th:value="${user.userId}" /> <input
+							type="hidden" name="name" th:value="${row['s_name']}" /> <input
+							type="hidden" name="description"
+							th:value="${row['s_description']}" /> <input type="hidden"
+							name="price" th:value="${row['s_price']}" /> <input
+							type="hidden" th:id="${iterStat.index} + '인'" value="1"
+							name="count" />
+						<textarea name="fileName" th:text="${row['s_fileName']}"></textarea>
+						<button onclick="addToCart()" class="btn-cart">장바구니에 넣기</button>
 					</form>
 					<br>
 				</div>
 			</div>
 		</div>
 	</th:block>
-	
 </body>
 </html>
 

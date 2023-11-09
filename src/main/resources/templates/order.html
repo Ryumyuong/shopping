@@ -5,62 +5,61 @@
 
 <body>
 	<th:block layout:fragment="content">
-		<div class="container" style="text-align:center">
-			<h1 class="display-3">주문</h1>
-		</div>
-		<br><br>
-		<div class="container">
-			<div class="row justify-content-center">
-				<div class="col-md-6 col-sm-8">
-					<div th:if="${loginErrorMsg}" class="alert alert-danger"
-							th:text="${loginErrorMsg}"></div>
+		<link rel="stylesheet" type="text/css" href="/css/order.css">
+		<div class="main">
+			<div class="center">
+				<h1>주문</h1>
+			</div>
+			<br> <br>
+			<div class="center">
+				<div class="form">
+					<div th:if="${loginErrorMsg}" class="danger"
+						th:text="${loginErrorMsg}"></div>
 					<form th:action="@{/cart/order}" method="post">
-						<div class="form-group mt-2">
-							<label for="password">받는사람:</label>
-							 <input type="text" class="form-control" name="username" id="username"	th:value="${user.username}">
+						<div class="form-group">
+							<label for="password">받는사람:</label> <input type="text"
+								class="form-control" name="username" id="username"
+								th:value="${user.username}">
 						</div>
-						<div class="form-group mt-2">
-							<label for="password">전화번호:</label>
-							 <input type="text" class="form-control" name="phone" id="phone" th:value="${user.phone}">
+						<div class="form-group">
+							<label for="password">전화번호:</label> <input type="text"
+								class="form-control" name="phone" id="phone"
+								th:value="${user.phone}">
 						</div>
-						<div class="form-group mt-2">
-							<label for="password">주소:</label>
-							 <input type="text" class="form-control" name="address" id="address" th:value="${user.address}">
+						<div class="form-group">
+							<label for="password">주소:</label> <input type="text"
+								class="form-control" name="address" id="address"
+								th:value="${user.address}">
 						</div>
-						<input type="hidden" name="total" th:value="${total?.total}" />
-						<br><br><br>
-						<table style="text-align:center">
+						<input type="hidden" name="total" th:value="${total?.total}" /> <br>
+						<br> <br>
+						<table>
 							<tr>
-								<th style="width:350px;text-align:center">상품</th>
-								<th style="width:150px;">가격</th>
-								<th style="width:80px;">수량</th>
-								<th style="width:150px;">금액</th>
+								<th class="th1">상품</th>
+								<th class="th2">가격</th>
+								<th class="th3">수량</th>
+								<th class="th4">금액</th>
 							</tr>
 							<tr th:each="cartItem : ${cartItems}">
 								<td>
-									<p th:text="${cartItem['s_name']}" style="padding-top:20px;"></p>
+									<p th:text="${cartItem['s_name']}" class="tdname"></p>
 								</td>
-								<td style="vertical-align: middle;">
-									<span th:text="${cartItem['s_price']}"></span>
-									<span>루나</span>
-								</td>
-								<td style="vertical-align: middle;">
-									<span th:text="${cartItem['count']}" style="color:black"></span>
-									<span style="color:black">개</span>
-								</td>
-								<td style="vertical-align: middle;">
-									<span th:text="${cartItem['cost']}"></span>
-									<span>루나</span>
-								</td>
+								<td class="tditem"><span th:text="${cartItem['s_price']}"></span>
+									<span>루나</span></td>
+								<td class="tditem"><span th:text="${cartItem['count']}"></span>
+									<span>개</span></td>
+								<td class="tditem"><span th:text="${cartItem['cost']}"></span>
+									<span>루나</span></td>
 							</tr>
 						</table>
-						<div style="float:right">
-						<span>총액 : </span>
-						<span th:text="${total?.total}"></span>
-						<span>루나</span>
+						<hr>
+						<div class="right">
+							<span>총액 : </span> <span th:text="${total?.total}"></span> <span>루나</span>
 						</div>
-						<br><br>
-						<button style="float:right">주문하기</button>
+						<br> <br>
+						<div class="right">
+							<button class="success">주문하기</button>
+						</div>
 					</form>
 				</div>
 			</div>

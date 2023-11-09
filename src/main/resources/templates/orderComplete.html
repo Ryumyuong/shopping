@@ -6,18 +6,21 @@
 <title>주문 완료</title>
 <body>
 	<th:block layout:fragment="content">
-		<div class="jumbotron">
-			<div class="container">
-				<h1 class="display-3">주문 완료</h1>
+	<link rel="stylesheet" type="text/css" href="/css/orderComplete.css">
+		<div class="main">
+			<div class="center">
+				<h1 class="left">주문 완료</h1>
 			</div>
-		</div>
-		<div class="container">
-			<h2 class="alert alert-danger">주문해주셔서 감사합니다.</h2>
-		</div>
-		<div class="container">
-			<p>
-				<a th:href="@{/runa/main?category=}" class="btn btn-secondary">&laquo; 메인으로</a>
-			</p>
+
+			<div class="center">
+				<h2 class="danger">주문해주셔서 감사합니다.</h2>
+			</div>
+			<div class="center">
+				<p class="left">
+					<a th:href="@{/runa/main?category=}" class="secondary">&laquo;
+						메인으로</a>
+				</p>
+			</div>
 		</div>
 	</th:block>
 </body>

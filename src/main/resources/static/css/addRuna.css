@@ -1,0 +1,48 @@
+.price {
+	width: 70px;
+}
+
+button {
+	font-size: 16px;
+}
+
+.thname {
+	width: 150px;
+}
+
+.thid {
+	width: 150px;
+}
+
+.thph {
+	width: 300px;
+}
+
+.thadd {
+	width: 500px;
+}
+
+.thruna {
+	width: 300px;
+}
+
+.thbl {
+	width: 350px;
+}
+
+.tditem {
+	vertical-align: middle;
+}
+
+button {
+	border: 0px;
+	background: white;
+}
+
+.btnadd {
+	color: blue;
+}
+
+.btndel {
+	color: red;
+}

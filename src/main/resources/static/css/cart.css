@@ -1,50 +1,77 @@
 .table {
-	padding-top:50px;
+	padding-top: 50px;
+}
+
+table {
+	width: 960px;
 }
 
 .products {
-	width:350px;
+	width: 350px;
 }
 
-.price {
-	150px;
+.price { 150px;
+	
 }
 
 .count {
-	width:80px;
+	width: 80px;
 }
 
 .money {
-	width:150px;
+	width: 150px;
 }
 
 .other {
-	width:100px;
+	width: 100px;
 }
 
-@media(max-width:414px){
-	.table {
-	font-size:10px;
-	}
-	
-	.product {
-	width:80px;
-	}
-	
-	.price {
-	width:80px;
-	}
-	
-	.count {
-	width:80px;
-	}
-	
-	.money {
-	width:80px;
-	}
-	
-	.other {
-	width:80px;
-	}
-	
+.btndanger {
+	float: left;
+	background: #DC3545;
+	padding: 10px;
+	border-radius: 5px;
+	color: white;
+}
+
+.image {
+	display: flex;
+}
+
+.item {
+	width: 100px;
+	height: 100px;
+	margin: 10px;
+}
+
+.size {
+	width: 100px;
+	height: 100px;
+}
+
+.text {
+	margin: auto;
+}
+
+.tditem {
+	vertical-align: middle;
+}
+
+.delete {
+	color: red;
+	font-weight: bold;
+	font-size: 15px;
+}
+
+.delete:hover {
+	color: red;
+}
+
+.tdmoney {
+	padding-top: 50px;
+	font-weight: bold;
+}
+
+.tdruna {
+	padding-top: 45px;
 }

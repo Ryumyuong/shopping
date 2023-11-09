@@ -1,0 +1,23 @@
+.loginForm {
+	width:500px;
+	margin:auto;
+	text-align:left;
+}
+
+.form-group {
+	margin-bottom:10px;
+}
+
+.form-control {
+	width:456px;
+	height:40px;
+}
+
+.btn {
+	text-align:right;
+}
+
+button {
+	padding:5px 20px;
+	margin-right:43px;
+}

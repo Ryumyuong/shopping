@@ -4,68 +4,66 @@
 	layout:decorate="~{layout/default_layout}">
 
 <body>
-<th:block layout:fragment="content">
-	<div class="jumbotron">
-		<div class="container" style="text-align:center">
-			<h1 class="display-3">루나 현황</h1>
+	<th:block layout:fragment="content">
+		<link rel="stylesheet" type="text/css" href="/css/addRuna.css">
+		<div class="center">
+			<h1>루나 현황</h1>
 		</div>
-	</div>
-	<br><br>
-	<div class="container">
-		<div style="padding-top: 50px">
-		<div th:if="${ErrorMsg}" class="alert alert-danger"
-							th:text="${ErrorMsg}"></div>
-			<table style="text-align:center">
-				<tr>
-					<th style="width:150px;text-align:center">이름</th>
-					<th style="width:150px;">아이디</th>
-					<th style="width:300px;">전화번호</th>
-					<th style="width:500px;">주소</th>
-					<th style="width:350px;">루나</th>
-					<th style="width:300px;">비고</th>
-				</tr>
-				<tr th:each="user : ${userList}">
-					<td>
-						<p th:text="${user['username']}" style="padding-top:20px;"></p>
-					</td>
-					<td style="vertical-align: middle;">
-						<span th:text="${user['userId']}"></span>
-					</td>
-					<td style="vertical-align: middle;">
-						<span th:text="${user['phone']}"></span>
-					</td>
-					<td style="vertical-align: middle;">
-						<span th:text="${user['address']}"></span>
-					</td>
-					<td style="vertical-align: middle;">
-						<span th:text="${user['money']}"></span>
-						<span> 루나</span>
-					<td>
-					<form th:action="@{/addRuna(pageNumber=1)}" method="post">
-						<input type="text" name="money" size="5" value=0>
-						<input type="hidden" name="userId" th:value="${user['userId']}">
-						<span>루나</span><button style="border:0px;background:white;color:blue"> 추가</button>
-					</form>
-					<form th:action="@{/minRuna(pageNumber=1)}" method="post">
-						<input type="text" name="money" size="5" value=0>
-						<input type="hidden" name="userId" th:value="${user['userId']}">
-						<span>루나</span><button style="border:0px;background:white;color:red"> 삭제</button>
-					</form>
-					</td>
-				</tr>
-			</table>
-			<hr>
-			<div style="text-align:right">
-		        <a th:if="${currentPage > 1}" th:href="@{/addRuna(pageNumber=${currentPage - 1})}" style="border:1px solid black;padding:5px;background:#dadada;margin-right:10px;">Previous</a>
-		        <a th:if="${currentPage < totalPages}" th:href="@{/addRuna(pageNumber=${currentPage + 1})}" style="border:1px solid black;padding:5px;background:#dadada">Next</a>
-		    </div>
-			<br>
-			<a th:href="@{/runa/main?category=}" class="btn btn-secondary">
-				&laquo; 메인 페이지로</a>
-				
+		<br>
+		<br>
+		<div class="center">
+			<div>
+				<div th:if="${ErrorMsg}" class="danger" th:text="${ErrorMsg}"></div>
+				<table>
+					<tr>
+						<th class="thname">이름</th>
+						<th class="thid">아이디</th>
+						<th class="thph">전화번호</th>
+						<th class="thadd">주소</th>
+						<th class="thruna">루나</th>
+						<th class="thbl">비고</th>
+					</tr>
+					<tr th:each="user : ${userList}">
+						<td>
+							<p th:text="${user['username']}"></p>
+						</td>
+						<td class="tditem"><span th:text="${user['userId']}"></span></td>
+						<td class="tditem"><span th:text="${user['phone']}"></span></td>
+						<td class="tditem"><span th:text="${user['address']}"></span></td>
+						<td class="tditem"><span th:text="${user['money']}"></span> <span>
+								루나</span>
+						<td>
+							<form th:action="@{/addRuna(pageNumber=1)}" method="post">
+								<input class="price" type="text" name="money" size="5" value=0>
+								<input type="hidden" name="userId" th:value="${user['userId']}">
+								<span>루나</span>
+								<button class="btnadd">추가</button>
+							</form>
+							<form th:action="@{/minRuna(pageNumber=1)}" method="post">
+								<input class="price" type="text" name="money" size="5" value=0>
+								<input type="hidden" name="userId" th:value="${user['userId']}">
+								<span>루나</span>
+								<button class="btndel">삭제</button>
+							</form>
+						</td>
+					</tr>
+				</table>
+				<hr>
+				<div class="right">
+					<a th:if="${currentPage > 1}"
+						th:href="@{/addRuna(pageNumber=${currentPage - 1})}"
+						class="previous">Previous</a> <a
+						th:if="${currentPage < totalPages}"
+						th:href="@{/addRuna(pageNumber=${currentPage + 1})}" class="next">Next</a>
+				</div>
+				<br>
+				<div class="left">
+					<a th:href="@{/runa/main?category=}" class="secondary"> &laquo;
+						메인 페이지로</a>
+				</div>
+			</div>
 		</div>
-	</div>
-</th:block>
+	</th:block>
 </body>
 
 </html>

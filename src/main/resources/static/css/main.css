@@ -1,0 +1,70 @@
+.menu-ul {
+	display: block;
+}
+
+.menu-li {
+	display: block;
+}
+
+.tab {
+	margin-right: 20px;
+	font-size: 24px;
+	font-weight: bold;
+	color: grey
+}
+
+.tab:hover {
+	background: blue;
+	padding: 5px;
+	border-radius: 5px;
+}
+
+hr {
+	border: 1px solid grey;
+}
+
+.products {
+	display: inline-block;
+	margin: 5px;
+	text-align: center;
+	width: 300px;
+	height: 230px;
+	border:1px solid #ced4da;
+}
+
+.description:hover {
+	color:blue;
+}
+
+.price {
+	font-weight: bold;
+}
+
+.btn-pm {
+	border: 1px solid;
+	background: white;
+	padding-top:3.1px;
+}
+
+.btn-cart {
+	border: 1px solid black;
+	padding: 10px;
+	padding-left: 30px;
+	padding-right: 30px;
+}
+
+textarea {
+	display: none;
+}
+
+form {
+	margin-top: 5px;
+}
+
+.input-read {
+	text-align:center;
+	padding:1px 2px;
+	width: 30px;
+	border-radius: 0px;
+	border: 1px solid black;
+}

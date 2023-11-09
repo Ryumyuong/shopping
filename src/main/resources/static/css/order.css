@@ -1,0 +1,51 @@
+.main {
+	margin:150px auto;
+}
+
+.form {
+	width:720px;
+	margin:auto;
+	text-align:left;
+}
+
+.form-group {
+	margin-bottom:10px;
+}
+
+.form-control {
+	width:720px;
+	height:40px;
+}
+
+table {
+	text-align:center;
+}
+
+.th1 {
+	width: 350px;
+}
+
+.th2 {
+	width: 150px;
+}
+
+.th3 {
+	width: 80px;
+}
+
+.th4 {
+	width: 150px;
+}
+
+.tdname {
+	padding-top: 20px;
+}
+
+.tditem {
+	vertical-align:middle;
+}
+
+.success {
+	padding:5px;
+	border:2px solid black;
+}

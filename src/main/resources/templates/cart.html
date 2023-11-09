@@ -4,81 +4,73 @@
 	layout:decorate="~{layout/default_layout}">
 <head>
 <title>장바구니</title>
-<link rel="stylesheet" type="text/css" href = "/css/cart.css">
+<link rel="stylesheet" type="text/css" href="/css/cart.css">
 </head>
 <body>
-<th:block layout:fragment="content">
-	<div class="jumbotron">
-		<div class="container" style="text-align:center">
-			<h1 class="display-3">장바구니</h1>
-		</div>
-	</div>
-	<br><br>
-	<div class="container" style="width:720px;">
-		<div th:if="${loginErrorMsg}" class="alert alert-danger"
-							th:text="${loginErrorMsg}"></div>
-		<div>
-			<a th:href="@{/cart/deleteAll(userId=${user.userId})}"
-				class="btn btn-danger" style="float:left;">모두 삭제하기</a>
-		</div>
-		<div class="table">
-			<table style="text-align:center">
-				<tr class="menu">
-					<th class="product">상품명</th>
-					<th class="price">가격</th>
-					<th class="count">수량</th>
-					<th class="money">금액</th>
-					<th class="other">비고</th>
-				</tr>
-				<tr th:each="cartItem : ${cartItems}">
-					<td >
-						<div style="display:flex">
-							<div style="width:100px;height:100px;margin:10px">
-								<img th:src="'data:image/png;base64,' + ${cartItem.fileName}" alt="Product Image" style="width:100px;height:100px;"/>
-							</div>
-							<div th:text="${cartItem['s_name']}" style="margin:auto"></div>
-						</div>
-					</td>
-					<td style="vertical-align: middle;">
-						<span th:text="${cartItem['s_price']}"></span>
-						<span>루나</span>
-					</td>
-					<td style="vertical-align: middle;">
-						<span th:text="${cartItem['count']}" style="color:black"></span>
-						<span style="color:black">개</span>
-					</td>
-					<td style="vertical-align: middle;">
-						<span th:text="${cartItem['cost']}"></span>
-						<span>루나</span>
-					</td>
-					<td style="vertical-align: middle;">
-					<a th:href="@{/cart/delete(userId=${user.userId}, name=${cartItem['s_name']})}"
-						class="badge badge-danger" style="text-decoration:none; color:red; font-size:15px;">삭제</a>
-					</td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td style="padding-top: 50px;font-weight:bold">총액</td>
-					<td style="padding-top: 45px;">
-						<span th:text="${total?.total}"></span>
-						<span>루나</span>
-					</td>
-					<td></td>
-				</tr>
-			</table>
-			<br>
-			<a th:href="@{/runa/main?category=}" class="btn btn-secondary">
-				&laquo; 쇼핑 계속하기</a>
-				
-			<div style="text-align: right;">
-				<a th:href="@{/cart/order(userId=${user.userId})}"
-					class="btn btn-success" >주문하기
-				</a>
+	<th:block layout:fragment="content">
+		<div class="main">
+			<div class="center">
+				<h1>장바구니</h1>
+			</div>
+			<br> <br>
+			<div class="center">
+				<div th:if="${loginErrorMsg}" class="danger"
+					th:text="${loginErrorMsg}"></div>
+				<div>
+					<a th:href="@{/cart/deleteAll(userId=${user.userId})}"
+						class="btndanger">모두 삭제하기</a>
+				</div>
+				<div class="table">
+					<table>
+						<tr class="menu">
+							<th class="product">상품명</th>
+							<th class="price">가격</th>
+							<th class="count">수량</th>
+							<th class="money">금액</th>
+							<th class="other">비고</th>
+						</tr>
+						<tr th:each="cartItem : ${cartItems}">
+							<td>
+								<div class="image">
+									<div class="item">
+										<img th:src="'data:image/png;base64,' + ${cartItem.fileName}"
+											alt="Product Image" class="size" />
+									</div>
+									<div th:text="${cartItem['s_name']}" class="text"></div>
+								</div>
+							</td>
+							<td class="tditem"><span th:text="${cartItem['s_price']}"></span>
+								<span>루나</span></td>
+							<td class="tditem"><span th:text="${cartItem['count']}"></span>
+								<span>개</span></td>
+							<td class="tditem"><span th:text="${cartItem['cost']}"></span>
+								<span>루나</span></td>
+							<td class="tditem"><a
+								th:href="@{/cart/delete(userId=${user.userId}, name=${cartItem['s_name']})}"
+								class="delete">삭제</a></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td class="tdmoney">총액</td>
+							<td class="tdruna"><span
+								th:text="${total?.total}"></span> <span>루나</span></td>
+							<td></td>
+						</tr>
+					</table>
+					<br>
+					<div class="left">
+						<a th:href="@{/runa/main?category=}" class="secondary">
+							&laquo; 쇼핑 계속하기 </a>
+					</div>
+					<div class="right">
+						<a th:href="@{/cart/order(userId=${user.userId})}" class="success">주문하기
+						</a>
+					</div>
+				</div>
 			</div>
 		</div>
-	</div>
-</th:block>
+	</th:block>
 </body>
 
 </html>

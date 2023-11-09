@@ -22,29 +22,24 @@
 	padding-top:50px;
 }
 
-.badge badge-danger {
-	
+.tditem {
+	vertical-align:middle;
 }
 
-@media(max-width:414px){
-	.table {
-	font-size:10px;
-	}
-	
-	.name {
-	width:80px;
-	}
-	.id {
-	width:80px;
-	}
-	.tel {
-	width:80px;
-	}
-	.add {
-	width:80px;
-	}
-	.other {
-	width:80px;
-	}
+.tdupdate {
+	color:blue;
+	font-size:15px;
+	font-weight:bold;
+	padding: 0.35em 0.65em;
+}
 
-	}
+.tddelete {
+	color:red;
+	font-size:15px;
+	font-weight:bold;
+	padding: 0.35em 0.65em;
+}
+
+.btnse {
+	text-align:left;
+}

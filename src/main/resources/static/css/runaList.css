@@ -1,38 +1,60 @@
 .orderD {
-	width:150px;
+	width: 150px;
 }
 
 .name {
-	width:100px;
+	width: 100px;
 }
 
 .tel {
-	width:150px;
+	width: 150px;
 }
 
 .add {
-	width:500px;
+	width: 500px;
 }
 
 .orderL {
-	width:500px;
+	width: 500px;
 }
 
 .price {
-	width:200px;
+	width: 200px;
 }
 
 .other {
-	width:120px;
+	width: 120px;
 }
 
 .table {
-	padding-top:50px;
+	padding-top: 50px;
 }
 
-@media(max-width:414px) {
-	.table {
-	font-size:11px;
-	}
-	
+.center {
+	width: 1284px;
+}
+
+.searchId {
+	text-align: right;
+}
+
+.ltd {
+	vertical-align: middle;
+}
+
+.state {
+	margin-bottom: 10px;
+}
+
+.click {
+	color: blue;
+}
+
+.click:hover {
+	color:black;
+}
+
+.deliver {
+	margin-top: 10px;
+	margin-bottom: 0px;
 }

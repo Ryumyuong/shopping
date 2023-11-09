@@ -1,0 +1,33 @@
+
+.nav1 {
+	flex-wrap: nowrap;
+    justify-content: flex-start;
+    background-color:#ffc723;
+}
+
+.navbar {
+	display: flex;
+    flex-wrap: inherit;
+    align-items: center;
+    justify-content: space-between;
+    width:1284px;
+    margin:auto;
+}
+
+.nav {
+	position: relative;
+}
+
+.nav-ul {
+	flex-direction: row;
+}
+
+li {
+	margin-right:20px;
+}
+
+.nav-a:hover {
+	background:blue;
+	padding:5px;
+	border-radius:5px;
+}

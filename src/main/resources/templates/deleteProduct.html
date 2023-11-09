@@ -5,37 +5,45 @@
 
 <body>
 	<th:block layout:fragment="content">
-		<div class="container" style="text-align:center">
-		<div style="margin-left:30px;margin-top:30px;margin-bottom:20px;font-size:50px;">물품 삭제</div>
-			<br>
-			<ul>
-		        <li>
-		            <a class="tab" th:href="@{/runa/delete(category=전자)}"><span>전자/기기</span></a>
-		            <a class="tab" th:href="@{/runa/delete(category=생활가전)}"><span th:text="생활가전"></span></a>
-		            <a class="tab" th:href="@{/runa/delete(category=식음료)}"><span th:text="식음료"></span></a>
-		            <a class="tab" th:href="@{/runa/delete(category=운동)}"><span th:text="운동"></span></a>
-		            <a class="tab" th:href="@{/runa/delete(category=여가문화)}"><span th:text="여가문화"></span></a>
-		            <a class="tab" th:href="@{/runa/delete(category=업무)}"><span th:text="업무"></span></a>
-		            <a class="tab" th:href="@{/runa/delete(category=VVIP)}"><span th:text="VVIP"></span></a>
-		        </li>
-		    </ul>
-			<div>
-				<div th:each="row : ${rs}"
-					style="display: inline-block; margin: 30px; text-align:center; width:300px; height:100px">
-					<p>
-						<img th:src="'data:image/png;base64,' + ${row.s_fileName}" alt="Product Image" />
-					</p>
-					<p th:text="${row['s_name']}" style="text-align:center;"></p>
-					<br>
-					<p th:text="자세히보기"></p>
-					<br>
-					<span th:if="${row['s_price']} == 0">가격문의</span>
-					 <span th:unless="${row['s_price']} == 0" th:text="${row['s_price']}" style="font-weight:bold"></span><span th:unless="${row['s_price']} == 0">  루나</span>
-					<br><br>
-					<form name="deleteForm" th:action="@{/runa/delete(name=${row['s_name']}, category=${row['s_category']})}" method="post"  style="margin-top:5px;">
-						<button style="padding:10px; padding-left:30px;padding-right:30px;color:red">물품 삭제 &raquo;</button>
-					</form>
-					<br>
+		<link rel="stylesheet" type="text/css" href="/css/main.css">
+		<link rel="stylesheet" type="text/css" href="/css/deleteProduct.css">
+		<div class="main">
+			<div class="center">
+				<div class="Pdelete">물품 삭제</div>
+				<br>
+				<ul class="menu-ul">
+					<li class="menu-li"><a class="tab"
+						th:href="@{/runa/delete(category=전자)}"><span>전자/기기</span></a> <a
+						class="tab" th:href="@{/runa/delete(category=생활가전)}"><span
+							th:text="생활가전"></span></a> <a class="tab"
+						th:href="@{/runa/delete(category=식음료)}"><span th:text="식음료"></span></a>
+						<a class="tab" th:href="@{/runa/delete(category=운동)}"><span
+							th:text="운동"></span></a> <a class="tab"
+						th:href="@{/runa/delete(category=여가문화)}"><span th:text="여가문화"></span></a>
+						<a class="tab" th:href="@{/runa/delete(category=업무)}"><span
+							th:text="업무"></span></a> <a class="tab"
+						th:href="@{/runa/delete(category=VVIP)}"><span th:text="VVIP"></span></a>
+					</li>
+				</ul>
+				<hr>
+				<div>
+					<div th:each="row : ${rs}" class="products">
+						<p>
+							<img th:src="'data:image/png;base64,' + ${row.s_fileName}"
+								alt="Product Image" />
+						</p>
+						<p th:text="${row['s_name']}"></p>
+						<span th:if="${row['s_price']} == 0">가격문의</span> <span
+							th:unless="${row['s_price']} == 0" th:text="${row['s_price']}"
+							class="price"></span><span th:unless="${row['s_price']} == 0">
+							루나</span> <br> <br>
+						<form name="deleteForm"
+							th:action="@{/runa/delete(name=${row['s_name']}, category=${row['s_category']})}"
+							method="post">
+							<button class="btndelete">물품 삭제 &raquo;</button>
+						</form>
+						<br>
+					</div>
 				</div>
 			</div>
 		</div>
