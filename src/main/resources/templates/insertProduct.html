@@ -27,8 +27,8 @@
 						있습니다.</div>
 					<div th:if="${loginErrorMsg}" class="danger"
 						th:text="${loginErrorMsg}"></div>
-					<form name="addProduct" th:action="@{/runa/insertProduct}" method="post"
-						enctype="multipart/form-data">
+					<form name="addProduct" th:action="@{/runa/insertProduct}"
+						method="post" enctype="multipart/form-data">
 						<div class="form-group">
 							<label>종류</label> <select id="select" name="category">
 								<option value="전자">전자/기기</option>
@@ -42,29 +42,27 @@
 						</div>
 						<br> <br>
 						<div class="form-group">
-							<label>물품명</label>
-								<input type="text" id="name" name="name" class="form-control">
+							<label>물품명</label> <input type="text" id="name" name="name"
+								class="form-control">
 						</div>
 						<br> <br>
 						<div class="form-group">
-							<label>가격</label>
-								<input type="text" name="price" class="form-control" value=0>
+							<label>가격</label> <input type="text" name="price"
+								class="form-control" value=0>
 						</div>
 						<br> <br>
 						<div class="form-group">
-							<label>참고 주소</label>
-								<input type="text" name="description" class="form-control">
+							<label>참고 주소</label> <input type="text" name="description"
+								class="form-control">
 						</div>
 						<br> <br>
 						<div class="form-gruop">
-							<label>이미지</label>
-								<input type="file" name="fileData" class="form-control">
+							<label>이미지</label> <input type="file" name="fileData"
+								class="form-control">
 						</div>
 						<br> <br>
-						<div class="form-group">
-							<div class="right">
-								<button onclick="addProduct()">물품 등록 &raquo;</button>
-							</div>
+						<div class="right">
+							<button onclick="addProduct()">물품 등록 &raquo;</button>
 						</div>
 					</form>
 				</div>

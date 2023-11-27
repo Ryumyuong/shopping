@@ -1,3 +1,15 @@
+.mobile {
+	display: none;
+}
+
+.mobile2 {
+	display: none;
+}
+
+.price {
+	font-weight: bold;
+}
+
 h1 {
 	font-size: 3em;
 	font-weight: bold;
@@ -93,37 +105,37 @@ input {
 }
 
 button {
-	font-size:18px;
+	font-size: 18px;
 }
 
 button:not(:disabled) {
-    cursor: pointer;
+	cursor: pointer;
 }
 
 input[readonly] {
-    background-color: #e9ecef;
-    opacity: 1;
+	background-color: #e9ecef;
+	opacity: 1;
 }
 
 .main {
-	margin:100px 0px;
+	margin: 100px 0px;
 }
 
-.danger{
+.danger {
 	color: #842029;
-    background-color: #f8d7da;
-    border-color: #f5c2c7;
-    padding:16px;
-    border-radius:5px;
-    text-align:left;
+	background-color: #f8d7da;
+	border-color: #f5c2c7;
+	padding: 16px;
+	border-radius: 5px;
+	text-align: left;
 }
 
 .left {
-	text-align:left;
+	text-align: left;
 }
 
-.right{
-	text-align:right;
+.right {
+	text-align: right;
 }
 
 .secondary {
@@ -151,4 +163,26 @@ input[readonly] {
 	border: 1px solid black;
 	padding: 5px;
 	background: #dadada;
+}
+
+@media ( max-width :992px) {
+	.computer {
+		display: none;
+	}
+	.mobile {
+		display: block;
+	}
+	.center {
+		width: 90%;
+		margin: auto;
+	}
+}
+
+@media ( max-width :550px) {
+	.mobile {
+		display: none;
+	}
+	.mobile2 {
+		display: block;
+	}
 }

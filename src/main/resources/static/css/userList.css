@@ -1,45 +1,125 @@
 .name {
-	width:100px;
-}
-
-.id {
-	width:150px;
+	width: 15%;
 }
 
 .tel {
-	width:150px;
+	width: 20%;
 }
 
 .add {
-	width:500px;
+	width: 50%;
 }
 
 .other {
-	width:150px;
+	width: 15%;
 }
 
 .table {
-	padding-top:50px;
+	padding-top: 50px;
 }
 
 .tditem {
-	vertical-align:middle;
+	vertical-align: middle;
 }
 
 .tdupdate {
-	color:blue;
-	font-size:15px;
-	font-weight:bold;
+	color: blue;
+	font-size: 15px;
+	font-weight: bold;
 	padding: 0.35em 0.65em;
+}
+
+.tdupdate:hover {
+	color: blue;
 }
 
 .tddelete {
-	color:red;
-	font-size:15px;
-	font-weight:bold;
+	color: red;
+	font-size: 15px;
+	font-weight: bold;
 	padding: 0.35em 0.65em;
 }
 
+.tddelete:hover {
+	color: red;
+}
+
 .btnse {
-	text-align:left;
+	text-align: left;
+	margin-bottom: 100px;
+}
+
+@media ( max-width :992px) {
+	.name {
+		width: 15%;
+	}
+	.tel {
+		width: 25%;
+	}
+	.other {
+		width: 10%;
+	}
+}
+
+@media ( max-width :885px) {
+	.tel {
+		width: 23%;
+	}
+	.other {
+		width: 12%;
+	}
+}
+
+@media ( max-width :850px) {
+	.tel {
+		width: 21%;
+	}
+	.other {
+		width: 14%;
+	}
+}
+
+@media ( max-width :650px) {
+	.tel {
+		width: 20%;
+	}
+	.add {
+		width: 45%
+	}
+	.other {
+		width: 20%;
+	}
+}
+
+@media ( max-width :615px) {
+	.name {
+		width: 20%
+	}
+	.add {
+		width: 40%
+	}
+}
+
+@media ( max-width :550px) {
+	.name {
+		width: 20%
+	}
+	.tel {
+		width: 60%
+	}
+	.other {
+		width: 20%
+	}
+}
+
+@media ( max-width :455px) {
+	.name {
+		width: 25%
+	}
+	.tel {
+		width: 50%
+	}
+	.other {
+		width: 25%
+	}
 }

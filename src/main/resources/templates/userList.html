@@ -9,17 +9,14 @@
 
 <body>
 	<th:block layout:fragment="content">
-		<div class="main">
 			<div class="center">
 				<h1>회원목록</h1>
 			</div>
-			<br> <br>
-			<div class="center">
+			<div class="center computer">
 				<div class="table">
 					<table class="center">
 						<tr>
 							<th class="name">이름</th>
-							<th class="id">아이디</th>
 							<th class="tel">전화번호</th>
 							<th class="add">주소</th>
 							<th class="other">비고</th>
@@ -28,7 +25,6 @@
 							<td>
 								<p th:text="${user['username']}"></p>
 							</td>
-							<td class="tditem"><span th:text="${user['userId']}"></span></td>
 							<td class="tditem"><span th:text="${user['phone']}"></span></td>
 							<td class="tditem"><span th:text="${user['address']}"></span>
 							<td><a th:href="@{/updateUser(userId=${user.userId})}"
@@ -53,7 +49,78 @@
 					</div>
 				</div>
 			</div>
-		</div>
+			<div class="center mobile">
+				<div class="table">
+					<table class="center">
+						<tr>
+							<th class="name">이름</th>
+							<th class="tel">전화번호</th>
+							<th class="add">주소</th>
+							<th class="other">비고</th>
+						</tr>
+						<tr th:each="user : ${userList}">
+							<td>
+								<p th:text="${user['username']}"></p>
+							</td>
+							<td class="tditem"><span th:text="${user['phone']}"></span></td>
+							<td class="tditem"><span th:text="${user['address']}"></span>
+							<td><a th:href="@{/updateUser(userId=${user.userId})}"
+								class="tdupdate">수정</a> <a
+								th:href="@{/delete(userId=${user.userId}, pageNumber=1)}"
+								class="tddelete">삭제</a></td>
+						</tr>
+					</table>
+					<hr>
+					<div class="right">
+						<a th:if="${currentPage > 1}"
+							th:href="@{/userList(pageNumber=${currentPage - 1})}"
+							class="previous">Previous</a> <a
+							th:if="${currentPage < totalPages}"
+							th:href="@{/userList(pageNumber=${currentPage + 1})}"
+							class="next">Next</a>
+					</div>
+					<br>
+					<div class="btnse">
+						<a th:href="@{/runa/main?category=}" class="secondary">
+							&laquo; 메인 페이지로</a>
+					</div>
+				</div>
+			</div>
+			<div class="center mobile2">
+				<div class="table">
+					<table class="center">
+						<tr>
+							<th class="name">이름</th>
+							<th class="tel">전화번호</th>
+							<th class="other">비고</th>
+						</tr>
+						<tr th:each="user : ${userList}">
+							<td>
+								<p th:text="${user['username']}"></p>
+							</td>
+							<td class="tditem"><span th:text="${user['phone']}"></span></td>
+							<td><a th:href="@{/updateUser(userId=${user.userId})}"
+								class="tdupdate">수정</a> <a
+								th:href="@{/delete(userId=${user.userId}, pageNumber=1)}"
+								class="tddelete">삭제</a></td>
+						</tr>
+					</table>
+					<hr>
+					<div class="right">
+						<a th:if="${currentPage > 1}"
+							th:href="@{/userList(pageNumber=${currentPage - 1})}"
+							class="previous">Previous</a> <a
+							th:if="${currentPage < totalPages}"
+							th:href="@{/userList(pageNumber=${currentPage + 1})}"
+							class="next">Next</a>
+					</div>
+					<br>
+					<div class="btnse">
+						<a th:href="@{/runa/main?category=}" class="secondary">
+							&laquo; 메인 페이지로</a>
+					</div>
+				</div>
+			</div>
 	</th:block>
 </body>
 

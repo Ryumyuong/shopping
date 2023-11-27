@@ -7,23 +7,23 @@ table {
 }
 
 .products {
-	width: 350px;
+	width: 40%;
 }
 
-.price { 150px;
-	
+.prices {
+	width: 15%;
 }
 
 .count {
-	width: 80px;
+	width: 15%;
 }
 
 .money {
-	width: 150px;
+	width: 15%;
 }
 
 .other {
-	width: 100px;
+	width: 15%;
 }
 
 .btndanger {
@@ -68,10 +68,86 @@ table {
 }
 
 .tdmoney {
-	padding-top: 50px;
 	font-weight: bold;
 }
 
-.tdruna {
-	padding-top: 45px;
+@media ( max-width :992px) {
+	table {
+		width: 100%;
+	}
+	.image {
+		display: inline-block;
+	}
+	.product {
+		width: 40%;
+	}
+	.prices {
+		width: 20%;
+	}
+	.count {
+		width: 10%;
+	}
+	.money {
+		width: 20%;
+	}
+	.other {
+		width: 10%;
+	}
+}
+
+@media ( max-width :605px) {
+	.product {
+		width: 30%;
+	}
+	.prices {
+		width: 22%;
+	}
+	.count {
+		width: 15%;
+	}
+	.money {
+		width: 22%;
+	}
+	.other {
+		width: 16%;
+	}
+}
+
+@media ( max-width :550px) {
+	.prices {
+		width: 20%;
+	}
+	.count {
+		width: 15%;
+	}
+	.money {
+		width: 20%;
+	}
+	.other {
+		width: 15%;
+	}
+	th {
+		padding: 10px 0px;
+	}
+	.item {
+		width: 60px;
+		height: 60px;
+	}
+	
+	.size {
+		width: 60px;
+		height: 60px;
+	}
+}
+
+@media(max-width:420px) {
+	.product {
+		width: 20%;
+	}
+	.count {
+		width: 20%;
+	}
+	.other {
+		width: 20%;
+	}
 }

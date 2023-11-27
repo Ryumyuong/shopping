@@ -3,7 +3,7 @@
 	background: #ffc723;
 	padding-top: 1px;
 	padding-bottom: 40px;
-	height:182px;
+	height: 182px;
 }
 
 .Title {
@@ -35,9 +35,35 @@
 }
 
 button {
-	width:300px;
+	width: 300px;
 	border: 1px solid #ced4da;
-	border-radius:5px;
+	border-radius: 5px;
 	padding: 5px 50px;
-	background:#FFC723;
+	background: #FFC723;
+}
+
+.mobile {
+	display: none;
+}
+
+@media ( max-width :992px) {
+	.computer {
+		display: none;
+	}
+	.mobile {
+		display: block;
+	}
+}
+
+@media ( max-width :414px) {
+	.loginForm {
+		width: 90%;
+	}
+	.input {
+		width: 100%;
+	}
+	button {
+		width: 100%;
+	}
+	
 }

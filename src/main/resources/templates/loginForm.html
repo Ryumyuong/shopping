@@ -7,28 +7,56 @@
 <body>
 	<th:block layout:fragment="content">
 		<link rel="stylesheet" type="text/css" href="/css/loginForm.css">
-		<div class="title">
-			<p class="Title">루나몰</p>
+		<div class="computer">
+			<div class="title">
+				<p class="Title">루나몰</p>
+			</div>
+			<div class="main">
+				<div class="center">
+					<form th:action="@{/}" method="post">
+						<br>
+						<div class="loginForm">
+							<div class="input">
+								<input type="text" class="inputId" name="userId" id="userId"
+									placeholder="아이디">
+							</div>
+							<div class="input">
+								<input type="password" class="inputPw" name="password"
+									id="password" placeholder="비밀번호">
+							</div>
+							<div th:if="${param.error}" class="danger">로그인에 실패했습니다.
+								아이디와 비밀번호를 확인하세요.</div>
+							<br> <br>
+							<button>로그인</button>
+						</div>
+					</form>
+				</div>
+			</div>
 		</div>
-		<div class="main">
-			<div class="center">
-				<form th:action="@{/}" method="post">
-					<br>
-					<div class="loginForm">
-						<div class="input">
-							<input type="text" class="inputId" name="userId" id="userId"
-								placeholder="아이디">
+		<div class="mobile">
+			<div class="title">
+				<p class="Title">루나몰</p>
+			</div>
+			<div class="main">
+				<div class="center">
+					<form th:action="@{/}" method="post">
+						<br>
+						<div class="loginForm">
+							<div class="input">
+								<input type="text" class="inputId" name="userId" id="userId"
+									placeholder="아이디">
+							</div>
+							<div class="input">
+								<input type="password" class="inputPw" name="password"
+									id="password" placeholder="비밀번호">
+							</div>
+							<div th:if="${param.error}" class="danger">로그인에 실패했습니다.
+								아이디와 비밀번호를 확인하세요.</div>
+							<br> <br>
+							<button>로그인</button>
 						</div>
-						<div class="input">
-							<input type="password" class="inputPw" name="password"
-								id="password" placeholder="비밀번호">
-						</div>
-						<div th:if="${param.error}" class="danger">로그인에 실패했습니다. 아이디와
-							비밀번호를 확인하세요.</div>
-						<br> <br>
-						<button>로그인</button>
-					</div>
-				</form>
+					</form>
+				</div>
 			</div>
 		</div>
 	</th:block>

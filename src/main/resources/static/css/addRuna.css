@@ -7,27 +7,23 @@ button {
 }
 
 .thname {
-	width: 150px;
-}
-
-.thid {
-	width: 150px;
+	width: 10%;
 }
 
 .thph {
-	width: 300px;
+	width: 10%;
 }
 
 .thadd {
-	width: 500px;
+	width: 45%;
 }
 
 .thruna {
-	width: 300px;
+	width: 15%;
 }
 
 .thbl {
-	width: 350px;
+	width: 20%;
 }
 
 .tditem {
@@ -45,4 +41,37 @@ button {
 
 .btndel {
 	color: red;
+}
+
+@media ( max-width :992px) {
+	.thname {
+		width: 15%;
+	}
+	.thph {
+		width: 10%;
+	}
+	.thadd {
+		width: 30%;
+	}
+	.thruna {
+		width: 15%;
+	}
+	.thbl {
+		width: 30%;
+	}
+}
+
+@media ( max-width : 650px) {
+	.thadd {
+		display: none;
+	}
+	.tdadd {
+		display: none;
+	}
+	.thbl {
+		width: 25%;
+	}
+}
+
+@media ( max-width :414px) {
 }

@@ -1,29 +1,29 @@
 .orderD {
-	width: 150px;
+	width: 10%;
 }
 
 .name {
-	width: 100px;
+	width: 10%;
 }
 
 .tel {
-	width: 150px;
+	width: 10%;
 }
 
 .add {
-	width: 500px;
+	width: 25%;
 }
 
 .orderL {
-	width: 500px;
+	width: 25%;
 }
 
-.price {
-	width: 200px;
+.runa {
+	width: 10%;
 }
 
 .other {
-	width: 120px;
+	width: 10%;
 }
 
 .table {
@@ -31,7 +31,7 @@
 }
 
 .center {
-	width: 1284px;
+	width: 90%;
 }
 
 .searchId {
@@ -51,10 +51,72 @@
 }
 
 .click:hover {
-	color:black;
+	color: black;
 }
 
 .deliver {
 	margin-top: 10px;
 	margin-bottom: 0px;
+}
+
+@media ( max-width :992px) {
+	.orderD {
+		width: 20%;
+	}
+	.name {
+		width: 15%;
+	}
+	.orderL {
+		width: 25%;
+	}
+	.runa {
+		width: 20%;
+	}
+	.other {
+		width: 20%;
+	}
+}
+
+@media ( max-width :630px) {
+	.orderL {
+		width: 20%;
+	}
+	.runa {
+		width: 25%;
+	}
+}
+
+@media ( max-width :550px) {
+	.name {
+		padding: 10px 0px;
+		width: 15%;
+	}
+	.orderL {
+		padding: 10px 0px;
+		width: 35%;
+	}
+	.runa {
+		padding: 10px 0px;
+		width: 25%;
+	}
+	.other {
+		padding: 10px 0px;
+		width: 25%;
+	}
+}
+
+@media ( max-width :420px) {
+	.name {
+		width: 25%;
+	}
+	.orderL {
+		padding: 10px 0px;
+		width: 30%;
+	}
+	.runa {
+		width: 20%;
+	}
+	.state a {
+		font-size: 14px;
+	}
 }

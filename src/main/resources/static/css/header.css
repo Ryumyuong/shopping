@@ -1,17 +1,23 @@
+.runamall {
+	text-align: center;
+	font-size: 50px;
+	background: #ffc723;
+	padding: 20px;
+}
 
 .nav1 {
 	flex-wrap: nowrap;
-    justify-content: flex-start;
-    background-color:#ffc723;
+	justify-content: flex-start;
+	background-color: #ffc723;
 }
 
 .navbar {
 	display: flex;
-    flex-wrap: inherit;
-    align-items: center;
-    justify-content: space-between;
-    width:1284px;
-    margin:auto;
+	flex-wrap: inherit;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	margin: auto;
 }
 
 .nav {
@@ -23,11 +29,37 @@
 }
 
 li {
-	margin-right:20px;
+	margin-right: 20px;
 }
 
 .nav-a:hover {
-	background:blue;
-	padding:5px;
-	border-radius:5px;
+	background: blue;
+	padding: 5px;
+	border-radius: 5px;
+}
+
+@media ( max-width :550px) {
+	.nav-ul {
+		margin: 0px;
+		justify-content: end;
+		padding: 10px;
+	}
+	.navbar {
+		justify-content: end;
+	}
+	.navbar2 {
+		justify-content: normal;
+	}
+	li {
+		margin-right: 10px;
+	}
+	.nav-a {
+		font-size: 14px;
+	}
+}
+
+@media(max-width:420px) {
+	.nav-a {
+		font-size: 12px;
+	}
 }

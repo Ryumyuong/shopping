@@ -1,37 +1,72 @@
 #select {
-	width:150px;
-	margin-left:10px;
+	width: 150px;
+	margin-left: 10px;
 }
 
 .left {
-	width:50%;
-	margin:auto;
+	width: 50%;
+	margin: auto;
+	padding: 50px;
+	border: 1px solid black;
 }
 
 #select {
-	padding :5px;
-	font-size:16px;
-	margin:0px;
+	padding: 5px;
+	font-size: 16px;
+	margin: 0px;
 }
 
 label {
-	display:inline-block;
-	font-size:18px;
-	width:80px;
+	display: inline-block;
+	font-size: 18px;
+	width: 30%;
 }
 
 option {
-	width:300px;
+	width: 100%;
 }
 
 input {
-	width:300px;
+	width: 55%;
 }
 
 button {
-	padding:10px 20px;
+	padding: 10px 20px;
 }
 
-.right {
-	margin-right:42px;
+form {
+	width: 100%;
+}
+
+@media ( max-width :992px) {
+	label {
+		margin-bottom: 5px;
+	}
+	#select {
+		width: 50%;
+	}
+	input {
+		width: 100%;
+	}
+	.left {
+		width: 80%;
+	}
+	.right {
+		width: 100%;
+	}
+}
+
+@media ( max-width : 550px) {
+	#select {
+		width: 100%;
+	}
+	label {
+		width: 100%;
+	}
+}
+
+@media ( max-width : 414px) {
+	input {
+		width: 100%;
+	}
 }
