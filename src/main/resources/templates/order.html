@@ -31,6 +31,11 @@
 								class="form-control" name="address" id="address"
 								th:value="${user.address}">
 						</div>
+						<div class="form-group">
+							<label for="password">문의내용:</label> <textarea
+								name="inquire" id="inquire"
+								th:value="${user.inquire}" cols="74"></textarea>
+						</div>
 						<input type="hidden" name="total" th:value="${total?.total}" /> <br>
 						<br> <br>
 						<table>
@@ -89,6 +94,11 @@
 								class="form-control" name="address" id="address"
 								th:value="${user.address}">
 						</div>
+						<div class="form-group">
+							<label for="password">문의내용:</label> <textarea
+								name="inquire" id="inquire"
+								th:value="${user.inquire}" cols="74"></textarea>
+						</div>
 						<input type="hidden" name="total" th:value="${total?.total}" /> <br>
 						<br> <br>
 						<table>
@@ -146,6 +156,11 @@
 							<label for="password" class="address">주소:</label> <input type="text"
 								class="form-control" name="address" id="address"
 								th:value="${user.address}">
+						</div>
+						<div class="form-group">
+							<label for="password">문의내용:</label> <textarea
+								name="inquire" id="inquire"
+								th:value="${user.inquire}" cols="74"></textarea>
 						</div>
 						<input type="hidden" name="total" th:value="${total?.total}" /> <br>
 						<br> <br>

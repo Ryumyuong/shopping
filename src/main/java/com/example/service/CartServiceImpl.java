@@ -30,8 +30,8 @@ public class CartServiceImpl implements CartService{
 	}
 	
 	@Override
-	public void order(String username, String userId, String phone, String address, String order_menu, int total) {
-		cartMapper.order(username, userId, phone, address, order_menu, total);
+	public void order(String username, String userId, String phone, String address, String inquire, String order_menu, int total) {
+		cartMapper.order(username, userId, phone, address, inquire, order_menu, total);
 	}
 	
 	@Override

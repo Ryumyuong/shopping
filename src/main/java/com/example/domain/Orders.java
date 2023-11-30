@@ -15,6 +15,7 @@ public class Orders {
 	private String userId;
 	private String phone;
 	private String address;
+	private String inquire;
 	private String order_menu;
 	private int order_price;
 	private int total;

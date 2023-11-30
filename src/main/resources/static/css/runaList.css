@@ -59,6 +59,10 @@
 	margin-bottom: 0px;
 }
 
+table {
+	width:100%;
+}
+
 @media ( max-width :992px) {
 	.orderD {
 		width: 20%;

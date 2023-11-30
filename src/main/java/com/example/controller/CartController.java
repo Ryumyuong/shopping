@@ -78,7 +78,8 @@ public class CartController {
 	}
 
 	@PostMapping("order")
-	public String orderCom(Model model, Principal principal, String username, String phone, String address, int total) {
+	public String orderCom(Model model, Principal principal, String username, String phone, String address, String inquire, int total) {
+		System.out.println("--" + inquire +  "--");
 		Cart totals = cartService.total(principal.getName());
 		model.addAttribute("total", totals);
 		List<Cart> cartList = cartService.product(principal.getName());
@@ -113,7 +114,7 @@ public class CartController {
 					order_menu += s_name + " " + count + "개\n";
 				}
 				System.out.println("order_menu " + order_menu);
-				cartService.order(username, userId, phone, address, order_menu, total);
+				cartService.order(username, userId, phone, address, inquire, order_menu, total);
 				cartService.orderCom(userId);
 				return "orderComplete";
 			}
@@ -125,6 +126,7 @@ public class CartController {
 			@RequestParam(defaultValue = "10") int pageSize) {
 		if (userId.equals("admin")) {
 			List<Orders> orderList = cartService.orderListAll(pageNumber, pageSize);
+			System.out.println(orderList);
 			for (Orders order : orderList) {
 				String modifiedOrderMenu = order.getOrder_menu().replace("\n", "<br>");
 				order.setOrder_menu(modifiedOrderMenu);
