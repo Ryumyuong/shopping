@@ -79,7 +79,6 @@ public class CartController {
 
 	@PostMapping("order")
 	public String orderCom(Model model, Principal principal, String username, String phone, String address, String inquire, int total) {
-		System.out.println("--" + inquire +  "--");
 		Cart totals = cartService.total(principal.getName());
 		model.addAttribute("total", totals);
 		List<Cart> cartList = cartService.product(principal.getName());
@@ -114,7 +113,7 @@ public class CartController {
 					order_menu += s_name + " " + count + "개\n";
 				}
 				System.out.println("order_menu " + order_menu);
-				cartService.order(username, userId, phone, address, inquire, order_menu, total);
+				cartService.order(username, userId, phone, address, inquire, order_menu, -total);
 				cartService.orderCom(userId);
 				return "orderComplete";
 			}
@@ -132,7 +131,7 @@ public class CartController {
 				order.setOrder_menu(modifiedOrderMenu);
 			}
 			int total = cartService.runaTotalAll();
-			model.addAttribute("total", total);
+			model.addAttribute("total", -total);
 			model.addAttribute("orderList", orderList);
 			model.addAttribute("currentPage", pageNumber);
 			for (int i = 1;; i++) {
@@ -184,8 +183,8 @@ public class CartController {
 		cartService.orderUnDeliver2(id);
 		User user = loginMapper.loginSearch(userId);
 		System.out.println(money + " " + user.getMoney());
-		money += user.getMoney();
-		loginService.addRuna(userId, money);
+		money -= user.getMoney();
+		loginService.addRuna(userId, -money);
 		return "redirect:runaList?userId=admin&pageNumber=" + pageNumber;
 	}
 

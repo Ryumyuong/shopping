@@ -30,7 +30,7 @@
 							<th class="tel">전화번호</th>
 							<th class="add">주소</th>
 							<th class="orderL">주문목록</th>
-							<th class="inquire">문의내용</th>
+							<th class="inquire">문의</th>
 							<th class="runa">금액</th>
 							<th class="other">비고</th>
 						</tr>
@@ -43,7 +43,7 @@
 							<td><span th:text="${runa['address']}"></span></td>
 							<td><span th:text="${runa['order_menu']}"></span></td>
 							<td><span th:text="${runa['inquire']}"></span></td>
-							<td><span>-</span><span th:text="${runa['order_price']}"></span><span>
+							<td><span th:text="${runa['order_price']}"></span><span>
 									루나</span></td>
 							<td class="ltd">
 								<div class="state"
@@ -60,15 +60,6 @@
 								</div>
 								<p th:text="${runa['deliver']}" class="deliver"></p>
 							</td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td>총액</td>
-							<td><span th:text="${total}"></span> <span> 루나</span></td>
-							<td></td>
 						</tr>
 					</table>
 					<hr>
@@ -104,7 +95,7 @@
 							<th class="orderD">날짜</th>
 							<th class="name">이름</th>
 							<th class="orderL">주문목록</th>
-							<th class="inquire">문의내용</th>
+							<th class="inquire">문의</th>
 							<th class="runa">금액</th>
 							<th class="other">비고</th>
 						</tr>
@@ -116,7 +107,7 @@
 							<td><span th:text="${runa['username']}"></span></td>
 							<td><span th:utext="${runa['order_menu']}"></span></td>
 							<td><span th:text="${runa['inquire']}"></span></td>
-							<td><span>-</span><span th:text="${runa['order_price']}"></span><span>
+							<td><span th:text="${runa['order_price']}"></span><span>
 									루나</span></td>
 							<td class="ltd">
 								<div class="state"
@@ -133,13 +124,6 @@
 								</div>
 								<p th:text="${runa['deliver']}" class="deliver"></p>
 							</td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td>총액</td>
-							<td><span th:text="${total}"></span> <span> 루나</span></td>
-							<td></td>
 						</tr>
 					</table>
 					<hr>
@@ -174,7 +158,7 @@
 						<tr>
 							<th class="name">이름</th>
 							<th class="orderL">주문목록</th>
-							<th class="inquire">문의내용</th>
+							<th class="inquire">문의</th>
 							<th class="runa">금액</th>
 							<th class="other">비고</th>
 						</tr>
@@ -182,7 +166,7 @@
 							<td><span th:text="${runa['username']}"></span></td>
 							<td><span th:utext="${runa['order_menu']}"></span></td>
 							<td><span th:text="${runa['inquire']}"></span></td>
-							<td><span>-</span><span th:text="${runa['order_price']}"></span><br><span>
+							<td><span th:text="${runa['order_price']}"></span><br><span>
 									루나</span></td>
 							<td class="ltd">
 								<div class="state"
@@ -199,12 +183,6 @@
 								</div>
 								<p th:text="${runa['deliver']}" class="deliver"></p>
 							</td>
-						</tr>
-						<tr>
-							<td></td>
-							<td>총액</td>
-							<td><span th:text="${total}"></span><br><span> 루나</span></td>
-							<td></td>
 						</tr>
 					</table>
 					<hr>

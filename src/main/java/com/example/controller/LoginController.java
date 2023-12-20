@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.domain.User;
 import com.example.mapper.LoginMapper;
+import com.example.service.CartService;
 import com.example.service.LoginService;
 
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class LoginController {
 	private final LoginService loginService;
-
+	private final CartService cartService;
 	private final BCryptPasswordEncoder passwordEncoder;
 	
 	private final LoginMapper loginMapper;
@@ -132,8 +133,9 @@ public class LoginController {
 	}
 	
 	@PostMapping("/addRuna")
-	public String addRuna(Model model, String userId, int money, @RequestParam int pageNumber) {
+	public String addRuna(Model model, String userId, String phone, String address, int money, @RequestParam int pageNumber) {
 		User user = loginMapper.loginSearch(userId);
+		cartService.order(userId, userId, phone, address,"", "루나 추가", money);
 		money += user.getMoney();
 		System.out.println("더해진 루나 " + money);
 		loginService.addRuna(userId, money);
@@ -141,8 +143,9 @@ public class LoginController {
 	}
 	
 	@PostMapping("/minRuna")
-	public String minRuna(Model model, String userId, int money, @RequestParam int pageNumber) {
+	public String minRuna(Model model, String userId, String phone, String address, int money, @RequestParam int pageNumber) {
 		User user = loginMapper.loginSearch(userId);
+		cartService.order(userId, userId, phone, address,"", "루나 제거", -money);
 		money = user.getMoney() - money;
 		if(money < 0) {
 			model.addAttribute("ErrorMsg","루나가 부족합니다.");

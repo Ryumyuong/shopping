@@ -3,11 +3,11 @@
 }
 
 .name {
-	width: 10%;
+	width: 8%;
 }
 
 .tel {
-	width: 10%;
+	width: 8%;
 }
 
 .add {
@@ -18,8 +18,12 @@
 	width: 25%;
 }
 
+.inquire {
+	width: 6%;
+}
+
 .runa {
-	width: 10%;
+	width: 8%;
 }
 
 .other {
@@ -68,13 +72,16 @@ table {
 		width: 20%;
 	}
 	.name {
-		width: 15%;
+		width: 10%;
 	}
 	.orderL {
 		width: 25%;
 	}
+	.inquire {
+		width: 10%;
+	}
 	.runa {
-		width: 20%;
+		width: 15%;
 	}
 	.other {
 		width: 20%;
@@ -83,10 +90,13 @@ table {
 
 @media ( max-width :630px) {
 	.orderL {
-		width: 20%;
+		width: 15%;
+	}
+	.inquire {
+		width: 15%;
 	}
 	.runa {
-		width: 25%;
+		width: 20%;
 	}
 }
 
@@ -97,7 +107,7 @@ table {
 	}
 	.orderL {
 		padding: 10px 0px;
-		width: 35%;
+		width: 20%;
 	}
 	.runa {
 		padding: 10px 0px;
@@ -111,11 +121,11 @@ table {
 
 @media ( max-width :420px) {
 	.name {
-		width: 25%;
+		width: 20%;
 	}
 	.orderL {
 		padding: 10px 0px;
-		width: 30%;
+		width: 20%;
 	}
 	.runa {
 		width: 20%;
