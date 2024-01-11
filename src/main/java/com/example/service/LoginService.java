@@ -16,4 +16,6 @@ public interface LoginService {
 	public void deleteUser(String userId);
 	
 	public void addRuna(String userId, int money);
+	
+	public List<User> getUser(String userId);
 }

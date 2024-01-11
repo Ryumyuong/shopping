@@ -47,4 +47,9 @@ public class LoginServiceImpl implements LoginService{
 		loginMapper.addRuna(userId, money);
 		
 	}
+
+	@Override
+	public List<User> getUser(String userId) {
+		return loginMapper.getUser(userId);
+	}
 }

@@ -55,7 +55,7 @@
 								<div class="state" th:if="${user.userId}=='admin'">
 									<a
 										th:href="@{/cart/runaUnDeliver(id=${runa['id']}, pageNumber=1, userId=${runa['userId']}
-							, money=${runa['order_price']})}"
+							, money=${runa['order_price']}, menu=${runa['order_menu']})}"
 										class="click" th:text="환불하기"></a>
 								</div>
 								<p th:text="${runa['deliver']}" class="deliver"></p>
@@ -119,7 +119,7 @@
 								<div class="state" th:if="${user.userId}=='admin'">
 									<a
 										th:href="@{/cart/runaUnDeliver(id=${runa['id']}, pageNumber=1, userId=${runa['userId']}
-							, money=${runa['order_price']})}"
+							, money=${runa['order_price']}, menu=${runa['order_menu']})}"
 										class="click" th:text="환불하기"></a>
 								</div>
 								<p th:text="${runa['deliver']}" class="deliver"></p>
@@ -178,7 +178,7 @@
 								<div class="state" th:if="${user.userId}=='admin'">
 									<a
 										th:href="@{/cart/runaUnDeliver(id=${runa['id']}, pageNumber=1, userId=${runa['userId']}
-							, money=${runa['order_price']})}"
+							, money=${runa['order_price']}, menu=${runa['order_menu']})}"
 										class="click" th:text="환불하기"></a>
 								</div>
 								<p th:text="${runa['deliver']}" class="deliver"></p>

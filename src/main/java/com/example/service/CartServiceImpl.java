@@ -81,10 +81,11 @@ public class CartServiceImpl implements CartService{
 	public void orderUnDeliver(String id) {
 		cartMapper.orderUnDeliver(id);
 	}
-	
+
 	@Override
-	public void orderUnDeliver2(String id) {
-		cartMapper.orderUnDeliver2(id);
+	public void insertCart(String userId, String name, int price, String description, String fileName) {
+		cartMapper.insertCart(userId, name, price, description, fileName);
+		
 	}
 
 }

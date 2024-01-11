@@ -22,7 +22,7 @@ repositories {
 }
 
 dependencies {
-	 implementation 'org.springframework.boot:spring-boot-starter-security:2.6.2'
+	implementation 'org.springframework.boot:spring-boot-starter-security:2.6.2'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
 	implementation 'org.springframework.boot:spring-boot-starter-web'

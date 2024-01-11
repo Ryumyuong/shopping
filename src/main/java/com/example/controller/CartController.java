@@ -44,12 +44,18 @@ public class CartController {
 			int price, String fileName, int count) throws IOException {
 		for (int i = 0; i < count; i++) {
 			cartService.inCart(userId, name, description, price, fileName);
+			if(name.equals("루나몰 웰컴키트")) {
+				loginMapper.oneKit(userId);
+			}
 		}
 		return "redirect:/runa/main?category=" + URLEncoder.encode(category, StandardCharsets.UTF_8);
 	}
 
 	@GetMapping("delete")
 	public String cartDelete(Model model, @RequestParam("userId") String userId, @RequestParam("name") String name) {
+		if(name.equals("루나몰 웰컴키트")) {
+			loginMapper.noKit(userId);
+		}
 		cartService.deleteCart(userId, name);
 		System.out.println("장바구니 삭제 " + userId + " " + name);
 		return "redirect:main?userId=" + URLEncoder.encode(userId, StandardCharsets.UTF_8);
@@ -57,6 +63,12 @@ public class CartController {
 
 	@GetMapping("deleteAll")
 	public String cartDeleteAll(Model model, @RequestParam("userId") String userId) {
+		List<Cart> cartList = cartService.product(userId);
+		for(int i=0;i<cartList.size();i++) {
+			if(cartList.get(i).getS_name().equals("루나몰 웰컴키트")) {
+				loginMapper.noKit(userId);
+			}
+		}
 		cartService.deleteCartAll(userId);
 		System.out.println("장바구니 전체삭제 " + userId);
 		return "redirect:/runa/main?category=";
@@ -178,9 +190,12 @@ public class CartController {
 
 	@GetMapping("runaUnDeliver")
 	public String runaUnDeliver(@RequestParam String id, @RequestParam int pageNumber, @RequestParam String userId,
-			@RequestParam int money) {
+			@RequestParam int money, @RequestParam String menu) {
+		if(menu.contains("루나몰 웰컴키트")) {
+			loginMapper.noKit(userId);
+		}
+		
 		cartService.orderUnDeliver(id);
-		cartService.orderUnDeliver2(id);
 		User user = loginMapper.loginSearch(userId);
 		System.out.println(money + " " + user.getMoney());
 		money -= user.getMoney();

@@ -10,6 +10,8 @@ import com.example.domain.Orders;
 public interface CartService {
 	public void inCart(String userId, String name, String description, int price, String fileName);
 	
+	public void insertCart(String userId, String name, int price, String description, String fileName);
+	
 	public List<Cart> product(String userId);
 	
 	public Cart total(String userId);
@@ -33,6 +35,5 @@ public interface CartService {
 	public void orderDeliver(String id);
 	
 	public void orderUnDeliver(String id);
-	
-	public void orderUnDeliver2(String id);
+
 }

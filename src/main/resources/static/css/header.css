@@ -38,6 +38,28 @@ li {
 	border-radius: 5px;
 }
 
+.vip {
+	margin:0px;
+	background:#198754;
+	color: white;
+	border-radius:5px;
+	padding: 5px;
+	padding-right:10px;
+	padding-left:10px;
+	font-size:12px;
+}
+
+.VIP {
+	margin:0px;
+	background:#DC3545;
+	color: white;
+	border-radius:5px;
+	padding: 5px;
+	padding-right:10px;
+	padding-left:10px;
+	font-size:12px;
+}
+
 @media ( max-width :550px) {
 	.nav-ul {
 		margin: 0px;

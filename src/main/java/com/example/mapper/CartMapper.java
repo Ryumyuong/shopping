@@ -14,6 +14,8 @@ import com.example.domain.Orders;
 public interface CartMapper {
 	public void inCart(@Param("userId")String userId, @Param("name")String name, @Param("description")String description, @Param("price")int price, @Param("fileName")String fileName);
 	
+	public void insertCart(@Param("userId")String userId, @Param("name")String name, @Param("price")int price, @Param("description")String description, @Param("fileName")String fileName);
+	
 	public List<Cart> product(String userId);
 	
 	public Cart total(String userId);
@@ -37,6 +39,4 @@ public interface CartMapper {
 	public void orderDeliver(@Param("id") String id);
 	
 	public void orderUnDeliver(@Param("id") String id);
-	
-	public void orderUnDeliver2(@Param("id") String id);
 }

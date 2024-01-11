@@ -7,6 +7,10 @@
     	insert into cart(userId ,s_name, s_description, s_price, fileName) values(#{userId}, #{name}, #{description}, #{price}, #{fileName})
     </insert>
     
+    <insert id="insertCart">
+    	insert into cart(userId ,s_name, s_price, s_description, fileName) values(#{userId}, #{name}, #{price}, #{description}, #{fileName})
+    </insert>
+    
     <select id="product" resultType="com.example.domain.Cart">
     	select userId, s_name, s_description, s_price, fileName, c_condition, count(s_name) as count, count(s_name) * s_price as cost from cart where userId = #{userId} and c_condition = "X" group by userId, s_name, s_description, s_price, fileName, c_condition
     </select>
@@ -54,10 +58,6 @@
     
     <update id="orderDeliver">
     	update orders set deliver = "배송완료" where id = #{id}
-    </update>
-    
-    <update id="orderUnDeliver2">
-    	update orders set deliver = "환불처리" where id = #{id}
     </update>
     
     <delete id="orderUnDeliver">

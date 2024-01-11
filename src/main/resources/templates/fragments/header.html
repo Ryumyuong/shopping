@@ -10,6 +10,8 @@
 				<div class="navbar">
 					<div class="blank"></div>
 					<ul class="nav-ul">
+						<li class="nav" th:if="${user.vip} == '일반회원'"><p class="vip" th:text="${user.vip}"></li>
+						<li class="nav" th:if="${user.vip} == 'VIP'"><p class="VIP" th:text="${user.vip}"></li>
 						<li class="nav"><a
 							th:href="@{/updateUser(userId=${user.userId})}"
 							th:text="${user.userId}"></a><span>님</span></li>
@@ -53,6 +55,8 @@
 				<div class="navbar">
 					<div class="blank"></div>
 					<ul class="nav-ul">
+						<li class="nav" th:if="${user.vip} == '일반회원'"><p class="vip" th:text="${user.vip}"></li>
+						<li class="nav" th:if="${user.vip} == 'VIP'"><p class="VIP" th:text="${user.vip}"></li>
 						<li class="nav"><a
 							th:href="@{/updateUser(userId=${user.userId})}"
 							th:text="${user.userId}"></a><span>님</span></li>
@@ -96,6 +100,8 @@
 				<div class="navbar">
 					<div>
 						<ul class="nav-ul">
+							<li class="nav" th:if="${user.vip} == '일반회원'"><p class="vip" th:text="${user.vip}"></li>
+						<li class="nav" th:if="${user.vip} == 'VIP'"><p class="VIP" th:text="${user.vip}"></li>
 							<li class="nav"><a
 								th:href="@{/updateUser(userId=${user.userId})}"
 								th:text="${user.userId}"></a><span>님</span></li>

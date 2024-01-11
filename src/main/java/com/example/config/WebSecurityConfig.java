@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 
 @Configuration
@@ -21,9 +22,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		http.authorizeRequests()
+		http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+			.ignoringAntMatchers("/luna/main/csrf", "/luna/main/insert", "/luna/main/user", "/luna/main/notification", "/luna/main/notificationToken")
+			.and()
+			.authorizeRequests()
 	        .mvcMatchers("/runa/main", "/cart/**").hasAnyRole("USER", "ADMIN") 
 	        .mvcMatchers("/runa/**", "/newLogin", "/addRuna", "/userList").hasRole("ADMIN")
+	        .antMatchers("/luna/main/csrf").permitAll()
 	        .anyRequest().permitAll()
 	        .and()
 	        .formLogin()
@@ -38,6 +43,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	        .logoutSuccessUrl("/logout")
 	        .invalidateHttpSession(true)
 	        .deleteCookies("JSESSIONID");
+				
 	}
 
 }

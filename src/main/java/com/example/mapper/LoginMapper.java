@@ -24,4 +24,10 @@ public interface LoginMapper {
 	public void deleteUser(@Param("userId")String userId);
 	
 	public void addRuna(@Param("userId")String userId, @Param("money")int money);
+	
+	public List<User> getUser(@Param("userId")String userId);
+	
+	public void oneKit(@Param("userId")String userId);
+	
+	public void noKit(@Param("userId")String userId);
 }

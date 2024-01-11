@@ -20,6 +20,7 @@ public class ProductServiceImpl implements ProductService{
 		return productMapper.productAll();
 	}
 	
+	@Override
 	public List<Product> productCategory(String category) {
 		return productMapper.productCategory(category);
 	}

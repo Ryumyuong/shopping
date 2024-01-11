@@ -19,11 +19,20 @@ public class GlobalController {
 
     @ModelAttribute
     public void addSessionAttributes(Model model, Principal principal, HttpSession session) {
-    	User user = loginMapper.loginSearch(principal.getName());
-
-        if (user != null) {
+    	
+    	if (principal != null) {
+    		User user = loginMapper.loginSearch(principal.getName());
+        	if (user != null) {
+    			session.setAttribute("user", user);
+    		    model.addAttribute("user", user);
+    		}
+        } else {
+        	User user = loginMapper.loginSearch("admin");
         	session.setAttribute("user", user);
-            model.addAttribute("user", user);
+		    model.addAttribute("user", user);
         }
+
+    	
+
     }
 }

@@ -7,11 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Product {
-	private Integer s_id;
-	private String s_category;
+public class InCart {
+	private String userId;
 	private String s_name;
-	private Integer s_price;
+	private int s_price;
 	private String s_description;
-	private String s_fileName;
+	private String fileName;
 }

@@ -30,5 +30,17 @@
 	<update id="addRuna">
 		update user set money = #{money} where userId = #{userId}
 	</update>
+	
+	<select id="getUser" resultType="com.example.domain.User">
+		select * from user where userId = #{userId}
+	</select>
+	
+	<update id="oneKit">
+		update user set kit = 'O' where userId = #{userId}
+	</update>
+	
+	<update id="noKit">
+		update user set kit = 'X' where userId = #{userId}
+	</update>
 
 </mapper>

@@ -3,13 +3,18 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layout/default_layout}">
 <head>
-<script type="text/javascript">
-	function addToCart() {
+<script th:inline="javascript">
+	function addToCart(event) {
 		if (confirm("물품을 장바구니에 추가하시겠습니까?")) {
 			document.addForm.submit();
 		} else {
-			document.addForm.reset();
+			event.preventDefault();
 		}
+	}
+	
+	function oneKit(event) {
+		alert("웰컴키트는 1회만 구매가능합니다.")
+		event.preventDefault();
 	}
 </script>
 <script th:inline="javascript">
@@ -75,7 +80,11 @@
 						th:text="여행"></span></a> <a class="tab"
 					th:href="@{/runa/main(category=업무)}"><span th:text="업무"></span></a>
 					<a class="tab" th:href="@{/runa/main(category=VVIP)}"><span
-						th:text="VVIP"></span></a></li>
+						th:text="VVIP"></span></a>
+						<a class="tab" th:href="@{/runa/main(category=웰컴키트)}"><span
+						th:text="웰컴키트"></span></a>
+						</li>
+						
 			</ul>
 			<hr>
 			<div>
@@ -94,7 +103,7 @@
 						th:if="${row['s_price']} == 0">가격문의</span> <span class="price"
 						th:unless="${row['s_price']} == 0" th:text="${row['s_price']}"></span><span
 						th:unless="${row['s_price']} == 0"> 루나</span> <br> <br>
-					<div>
+					<div th:unless="${row['s_category']} == '웰컴키트'">
 						<button
 							th:onclick="'decreaseQuantity(\'' + ${iterStat.index} + '\')'"
 							class="btn-pm">-</button>
@@ -116,7 +125,8 @@
 							type="hidden" th:id="${iterStat.index} + '인'" value="1"
 							name="count" />
 						<textarea name="fileName" th:text="${row['s_fileName']}"></textarea>
-						<button onclick="addToCart()" class="btn-cart">장바구니에 넣기</button>
+						<button th:if="${row['s_category']} == '웰컴키트' and ${user.kit} == 'O'" onclick="oneKit(event)" class="btn-cart">장바구니에 넣기</button>
+						<button th:unless="${row['s_category']} == '웰컴키트' and ${user.kit} == 'O'" onclick="addToCart(event)" class="btn-cart">장바구니에 넣기</button>
 					</form>
 					<br>
 				</div>

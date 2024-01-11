@@ -17,4 +17,6 @@ public class User{
     private String inquire;
     private int money;
     private String roles;
+    private String vip;
+    private String kit;
 }
