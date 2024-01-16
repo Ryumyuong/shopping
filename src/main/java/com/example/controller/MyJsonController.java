@@ -186,8 +186,6 @@ public class MyJsonController {
 			User user = loginMapper.loginSearch(userId);
 			int money = user.getMoney();
 			money -= total;
-			if (money < 0) {
-			} else {
 				loginService.addRuna(userId, money);
 				cartList = cartService.product(userId);
 				String order_menu = "";
@@ -200,7 +198,6 @@ public class MyJsonController {
 				System.out.println("order_menu " + order_menu);
 				cartService.order(userId, userId, phone, address, inquire, order_menu, -total);
 				cartService.orderCom(userId);
-			}
 	}
 
 }
