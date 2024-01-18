@@ -5,11 +5,14 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -46,12 +49,6 @@ public class MyJsonController {
 	
 	@Autowired
 	LoginMapper loginMapper;
-
-//	@GetMapping("/getAll")
-//	public List<Product> getAll() {
-//		System.out.println("getAll : " + productService.MproductAll());
-//			return productService.MproductAll();
-//	}
 	
 	@GetMapping("getCategory")
 	public Map<String,List<Product>> productCategory(String category) {
@@ -62,7 +59,8 @@ public class MyJsonController {
 	}
 	
 	@PostMapping("insert")
-	public void insertCart(@RequestBody InCart inCart) {
+	public ResponseEntity<InCart> insertCart(@RequestHeader("X-CSRF-TOKEN") String csrfToken, @RequestBody InCart inCart) {
+		try {
 		String userId = inCart.getUserId();
 	    String name = inCart.getS_name();
 	    Integer price = inCart.getS_price();
@@ -74,6 +72,10 @@ public class MyJsonController {
 		cartService.insertCart(userId, name, price, description, fileName);
 		if(name.equals("루나몰 웰컴키트")) {
 			loginMapper.oneKit(userId);
+		}
+		return new ResponseEntity<>(inCart, HttpStatus.OK);
+		} catch(Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
@@ -177,7 +179,8 @@ public class MyJsonController {
 	}
 	
 	@PostMapping("order")
-	public void order(@RequestBody InOrder inorder) {
+	public ResponseEntity<InOrder> order(@RequestHeader("X-CSRF-TOKEN") String csrfToken, @RequestBody InOrder inorder) {
+		try {
 		String userId = inorder.getUserId();
 	    String phone = inorder.getPhone();
 	    String address = inorder.getAddress();
@@ -200,7 +203,10 @@ public class MyJsonController {
 				System.out.println("order_menu " + order_menu);
 				cartService.order(userId, userId, phone, address, inquire, order_menu, -total);
 				cartService.orderCom(userId);
+				return new ResponseEntity<>(inorder, HttpStatus.OK);
+		} catch(Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
-
 }
 
