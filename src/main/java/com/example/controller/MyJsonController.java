@@ -100,8 +100,10 @@ public class MyJsonController {
 	}
 	
 	@GetMapping("/total")
-	public void total(@RequestParam("userId") String userId) {
-		cartService.total(userId);
+	public Cart total(@RequestParam("userId") String userId) {
+		Cart cart = cartService.total(userId);
+		System.out.println("total in");
+		return cart;
 	}
 	
 	@GetMapping("orderList")

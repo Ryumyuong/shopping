@@ -93,11 +93,17 @@
 								<form th:action="@{/addRuna(pageNumber=1)}" method="post">
 									<input class="price" type="text" name="money" size="5" value=0>
 									<input type="hidden" name="userId" th:value="${user['userId']}">
+									<input type="hidden" name="phone" th:value="${user['phone']}">
+									<input type="hidden" name="address" th:value="${user['address']}">
+									<span>루나</span>
 									<button class="btnadd">추가</button>
 								</form>
 								<form th:action="@{/minRuna(pageNumber=1)}" method="post">
 									<input class="price" type="text" name="money" size="5" value=0>
 									<input type="hidden" name="userId" th:value="${user['userId']}">
+									<input type="hidden" name="phone" th:value="${user['phone']}">
+									<input type="hidden" name="address" th:value="${user['address']}">
+									<span>루나</span>
 									<button class="btndel">삭제</button>
 								</form>
 							</td>
@@ -142,11 +148,17 @@
 								<form th:action="@{/addRuna(pageNumber=1)}" method="post">
 									<input class="price" type="text" name="money" size="5" value=0>
 									<input type="hidden" name="userId" th:value="${user['userId']}">
+									<input type="hidden" name="phone" th:value="${user['phone']}">
+									<input type="hidden" name="address" th:value="${user['address']}">
+									<span>루나</span>
 									<button class="btnadd">추가</button>
 								</form>
 								<form th:action="@{/minRuna(pageNumber=1)}" method="post">
 									<input class="price" type="text" name="money" size="5" value=0>
 									<input type="hidden" name="userId" th:value="${user['userId']}">
+									<input type="hidden" name="phone" th:value="${user['phone']}">
+									<input type="hidden" name="address" th:value="${user['address']}">
+									<span>루나</span>
 									<button class="btndel">삭제</button>
 								</form>
 							</td>
