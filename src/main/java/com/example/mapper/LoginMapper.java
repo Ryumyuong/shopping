@@ -15,11 +15,11 @@ public interface LoginMapper {
 	
 	public User loginSearch(@Param("userId")String userId);
 	
-	public void newLogin(@Param("userId")String userId, @Param("password")String encodePwd, @Param("username")String username, @Param("phone")String phone ,@Param("address")String address);
+	public void newLogin(@Param("userId")String userId, @Param("password")String encodePwd, @Param("username")String username, @Param("phone")String phone ,@Param("address")String address, @Param("vip")String vip);
 	
 	public List<User> userList(@Param("offset")int offset, @Param("limit")int pageSize);
 	
-	public void updateUser(@Param("userId")String userId, @Param("password")String encodePwd, @Param("username")String username, @Param("phone")String phone ,@Param("address")String address);
+	public void updateUser(@Param("userId")String userId, @Param("password")String encodePwd, @Param("username")String username, @Param("phone")String phone ,@Param("address")String address, @Param("vip")String vip);
 	
 	public void deleteUser(@Param("userId")String userId);
 	

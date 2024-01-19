@@ -32,7 +32,7 @@ public class LoginController {
 	}
 
 	@PostMapping("/newLogin")
-	public String newLogin(Model model, String userId, String password, String username, String phone, String address) {
+	public String newLogin(Model model, String userId, String password, String username, String phone, String address, String vip) {
 		if(userId == "") {
 			model.addAttribute("loginErrorMsg", "아이디를 입력하세요");
 			return "newLogin";
@@ -49,7 +49,7 @@ public class LoginController {
 			User user = loginMapper.loginSearch(userId);
 			if(user == null) {
 				String encodePwd = passwordEncoder.encode(password);
-				loginService.newLogin(userId, encodePwd, username, phone, address);
+				loginService.newLogin(userId, encodePwd, username, phone, address, vip);
 				
 				return "redirect:/runa/main?category=";
 			} else {
@@ -82,7 +82,7 @@ public class LoginController {
 	}
 
 	@PostMapping("/updateUser")
-	public String updateUser(Model model, Principal principal, @RequestParam String updateUser, String userId, String password, String username, String phone, String address) {
+	public String updateUser(Model model, Principal principal, @RequestParam String updateUser, String userId, String password, String username, String phone, String address, String vip) {
 		User user = loginMapper.loginSearch(updateUser);
 		model.addAttribute("update", user);
 		if(userId == "") {
@@ -101,7 +101,7 @@ public class LoginController {
 			user = loginMapper.loginSearch(userId);
 			if(user == null || updateUser.equals(userId)) {
 				String encodePwd = passwordEncoder.encode(password);
-				loginService.updateUser(userId, encodePwd, username, phone, address);
+				loginService.updateUser(userId, encodePwd, username, phone, address, vip);
 				
 				return "redirect:/runa/main?category=";
 			} else {

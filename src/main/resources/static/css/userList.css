@@ -1,5 +1,5 @@
 .name {
-	width: 15%;
+	width: 10%;
 }
 
 .tel {
@@ -7,7 +7,11 @@
 }
 
 .add {
-	width: 50%;
+	width: 45%;
+}
+
+.Vip {
+	width: 10%;
 }
 
 .other {
@@ -55,6 +59,10 @@
 	}
 	.tel {
 		width: 25%;
+	}
+	
+	.add {
+		width: 40%;
 	}
 	.other {
 		width: 10%;

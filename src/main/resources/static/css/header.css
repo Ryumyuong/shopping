@@ -47,6 +47,7 @@ li {
 	padding-right:10px;
 	padding-left:10px;
 	font-size:12px;
+	width:50px;
 }
 
 .VIP {
@@ -58,6 +59,19 @@ li {
 	padding-right:10px;
 	padding-left:10px;
 	font-size:12px;
+	width:50px;
+}
+
+.VVIP {
+	margin:0px;
+	background:#0000ff;
+	color: white;
+	border-radius:5px;
+	padding: 5px;
+	padding-right:10px;
+	padding-left:10px;
+	font-size:12px;
+	width:50px;
 }
 
 @media ( max-width :550px) {

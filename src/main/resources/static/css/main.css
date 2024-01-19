@@ -17,6 +17,7 @@
 	background: blue;
 	padding: 5px;
 	border-radius: 5px;
+	cursor: pointer;
 }
 
 hr {

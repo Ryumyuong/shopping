@@ -29,6 +29,12 @@ button {
 	margin-bottom: 50px;
 }
 
+#vip {
+	width:50%;
+	font-size:20px;
+	padding:3px;
+}
+
 @media ( max-width :992px) {
 	.block {
 		width: 80%;

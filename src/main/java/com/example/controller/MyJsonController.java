@@ -173,9 +173,15 @@ public class MyJsonController {
 	}
 	
 	@PostMapping("notificationToken")
-	public void notiToken(@RequestParam("notiToken")String notiToken) {
-		fcmsender.sendPushNotification(notiToken,"루나몰", "주문이 접수되었습니다.");
-		System.out.println("===notiToken===" + notiToken);
+	public ResponseEntity<String> notiToken(@RequestHeader("X-CSRF-TOKEN") String csrfToken, @RequestParam("notiToken")String notiToken) {
+		try {
+			fcmsender.sendPushNotification(notiToken,"루나몰", "주문이 접수되었습니다.");
+			System.out.println("===notiToken===" + notiToken);
+			return new ResponseEntity<>(notiToken, HttpStatus.OK);
+		} catch(Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
 	}
 	
 	@PostMapping("order")

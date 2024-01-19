@@ -19,6 +19,7 @@
 							<th class="name">이름</th>
 							<th class="tel">전화번호</th>
 							<th class="add">주소</th>
+							<th class="Vip">등급</th>
 							<th class="other">비고</th>
 						</tr>
 						<tr th:each="user : ${userList}">
@@ -27,6 +28,7 @@
 							</td>
 							<td class="tditem"><span th:text="${user['phone']}"></span></td>
 							<td class="tditem"><span th:text="${user['address']}"></span>
+							<td class="tditem"><span th:text="${user['vip']}"></span>
 							<td><a th:href="@{/updateUser(userId=${user.userId})}"
 								class="tdupdate">수정</a> <a
 								th:href="@{/delete(userId=${user.userId}, pageNumber=1)}"
@@ -56,6 +58,7 @@
 							<th class="name">이름</th>
 							<th class="tel">전화번호</th>
 							<th class="add">주소</th>
+							<th class="Vip">등급</th>
 							<th class="other">비고</th>
 						</tr>
 						<tr th:each="user : ${userList}">
@@ -64,6 +67,7 @@
 							</td>
 							<td class="tditem"><span th:text="${user['phone']}"></span></td>
 							<td class="tditem"><span th:text="${user['address']}"></span>
+							<td class="tditem"><span th:text="${user['vip']}"></span>
 							<td><a th:href="@{/updateUser(userId=${user.userId})}"
 								class="tdupdate">수정</a> <a
 								th:href="@{/delete(userId=${user.userId}, pageNumber=1)}"
@@ -99,6 +103,7 @@
 								<p th:text="${user['username']}"></p>
 							</td>
 							<td class="tditem"><span th:text="${user['phone']}"></span></td>
+							<td class="tditem"><span th:text="${user['vip']}"></span>
 							<td><a th:href="@{/updateUser(userId=${user.userId})}"
 								class="tdupdate">수정</a> <a
 								th:href="@{/delete(userId=${user.userId}, pageNumber=1)}"

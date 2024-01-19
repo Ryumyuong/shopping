@@ -20,8 +20,8 @@ public class LoginServiceImpl implements LoginService{
 	}
 
 	@Override
-	public void newLogin(String userId, String encodePwd, String username, String phone, String address) {
-		loginMapper.newLogin(userId, encodePwd, username, phone, address);
+	public void newLogin(String userId, String encodePwd, String username, String phone, String address, String vip) {
+		loginMapper.newLogin(userId, encodePwd, username, phone, address, vip);
 		
 	}
 
@@ -32,8 +32,8 @@ public class LoginServiceImpl implements LoginService{
 	}
 
 	@Override
-	public void updateUser(String userId, String encodePwd, String username, String phone, String address) {
-		loginMapper.updateUser(userId, encodePwd, username, phone, address);
+	public void updateUser(String userId, String encodePwd, String username, String phone, String address, String vip) {
+		loginMapper.updateUser(userId, encodePwd, username, phone, address, vip);
 	}
 
 	@Override

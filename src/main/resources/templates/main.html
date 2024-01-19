@@ -16,6 +16,10 @@
 		alert("웰컴키트는 1회만 구매가능합니다.")
 		event.preventDefault();
 	}
+	
+	function VVIP(event) {
+		alert("VVIP등급만 가능합니다.")
+	}
 </script>
 <script th:inline="javascript">
 	function decreaseQuantity(inputId) {
@@ -79,7 +83,9 @@
 					<a class="tab" th:href="@{/runa/main(category=여행)}"><span
 						th:text="여행"></span></a> <a class="tab"
 					th:href="@{/runa/main(category=업무)}"><span th:text="업무"></span></a>
-					<a class="tab" th:href="@{/runa/main(category=VVIP)}"><span
+					<a class="tab" th:if="${user.vip} == 'VVIP' or ${user.vip} == '관리자'" th:href="@{/runa/main(category=VVIP)}"><span
+						th:text="VVIP"></span></a>
+						<a class="tab" th:unless="${user.vip} == 'VVIP' or ${user.vip} == '관리자'" onclick="VVIP(event)"><span
 						th:text="VVIP"></span></a>
 						<a class="tab" th:href="@{/runa/main(category=웰컴키트)}"><span
 						th:text="웰컴키트"></span></a>
