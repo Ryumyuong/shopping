@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.csrf.CsrfToken;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,84 +35,92 @@ import com.example.service.ProductService;
 public class MyJsonController {
 	private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-	
 	@Autowired
 	ProductService productService;
-	
+
 	@Autowired
 	CartService cartService;
-	
+
 	@Autowired
 	LoginService loginService;
-	
+
 	@Autowired
 	FCMNotificationSender fcmsender;
-	
+
 	@Autowired
 	LoginMapper loginMapper;
-	
+
 	@GetMapping("getCategory")
-	public Map<String,List<Product>> productCategory(String category) {
-		Map<String,List<Product>> product = new HashMap<String,List<Product>>();
+	public Map<String, List<Product>> productCategory(String category) {
+		Map<String, List<Product>> product = new HashMap<String, List<Product>>();
 		product.put("items", productService.productCategory(category));
-		System.out.println("Waiting=====getCategory==============="+productService.productCategory(category));
+		System.out.println("Waiting=====getCategory===============" + productService.productCategory(category));
 		return product;
 	}
-	
+
+	@GetMapping("productAll")
+	public Map<String, List<Product>> productAll() {
+		Map<String, List<Product>> product = new HashMap<String, List<Product>>();
+		product.put("items", productService.productAll());
+		System.out.println("Waiting=====getAll===============" + productService.productAll());
+		return product;
+	}
+
 	@PostMapping("insert")
-	public ResponseEntity<InCart> insertCart(@RequestHeader("X-CSRF-TOKEN") String csrfToken, @RequestBody InCart inCart) {
+	public ResponseEntity<InCart> insertCart(@RequestHeader("X-CSRF-TOKEN") String csrfToken,
+			@RequestBody InCart inCart) {
 		try {
-		String userId = inCart.getUserId();
-	    String name = inCart.getS_name();
-	    Integer price = inCart.getS_price();
-	    String description = inCart.getS_description();
-	    String fileName = inCart.getFileName();
-		System.out.println("insert=====Cartuser===============" + userId);
-		System.out.println("insert=====Cartname===============" + name);
-		System.out.println("insert=====Cartprice===============" + price);
-		cartService.insertCart(userId, name, price, description, fileName);
-		if(name.equals("루나몰 웰컴키트")) {
-			loginMapper.oneKit(userId);
-		}
-		return new ResponseEntity<>(inCart, HttpStatus.OK);
-		} catch(Exception e) {
+			String userId = inCart.getUserId();
+			String name = inCart.getS_name();
+			Integer price = inCart.getS_price();
+			String description = inCart.getS_description();
+			String fileName = inCart.getFileName();
+			System.out.println("insert=====Cartuser===============" + userId);
+			System.out.println("insert=====Cartname===============" + name);
+			System.out.println("insert=====Cartprice===============" + price);
+			cartService.insertCart(userId, name, price, description, fileName);
+			if (name.equals("루나몰 웰컴키트")) {
+				loginMapper.oneKit(userId);
+			}
+			return new ResponseEntity<>(inCart, HttpStatus.OK);
+		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
+
 	@GetMapping("/csrf")
-    public CsrfToken getCsrfToken(CsrfToken csrfToken) {
+	public CsrfToken getCsrfToken(CsrfToken csrfToken) {
 		System.out.println("토큰 " + csrfToken);
-        return csrfToken;
-    }
-	
+		return csrfToken;
+	}
+
 	@GetMapping("/user")
-	public Map<String,List<User>> getUser(String userId) {
-		Map<String,List<User>> user = new HashMap<String,List<User>>();
+	public Map<String, List<User>> getUser(String userId) {
+		Map<String, List<User>> user = new HashMap<String, List<User>>();
 		user.put("items", loginService.getUser(userId));
-		System.out.println("User=====getUser==============="+loginService.getUser(userId));
+		System.out.println("User=====getUser===============" + loginService.getUser(userId));
 		return user;
 	}
 
 	@GetMapping("/getCart")
-	public Map<String,List<Cart>> getCart(@RequestParam("userId") String userId) {
-		Map<String,List<Cart>> cart = new HashMap<String,List<Cart>>();
+	public Map<String, List<Cart>> getCart(@RequestParam("userId") String userId) {
+		Map<String, List<Cart>> cart = new HashMap<String, List<Cart>>();
 		cart.put("items", cartService.product(userId));
-		System.out.println("Cart=====getCart==============="+cartService.product(userId));
+		System.out.println("Cart=====getCart===============" + cartService.product(userId));
 		return cart;
 	}
-	
+
 	@GetMapping("/total")
 	public Cart total(@RequestParam("userId") String userId) {
 		Cart cart = cartService.total(userId);
 		System.out.println("total in");
 		return cart;
 	}
-	
+
 	@GetMapping("orderList")
-	public Map<String,List<Orders>> orderList(@RequestParam String userId, @RequestParam int pageNumber,
-		@RequestParam(defaultValue = "10") int pageSize) {
-		Map<String,List<Orders>> orderList= new HashMap<String,List<Orders>>();
+	public Map<String, List<Orders>> orderList(@RequestParam String userId, @RequestParam int pageNumber,
+			@RequestParam(defaultValue = "10") int pageSize) {
+		Map<String, List<Orders>> orderList = new HashMap<String, List<Orders>>();
 		if (userId.equals("admin")) {
 			orderList.put("items", cartService.orderListAll(pageNumber, pageSize));
 			System.out.println(orderList);
@@ -139,11 +148,11 @@ public class MyJsonController {
 			return orderList;
 		}
 	}
-	
+
 	@GetMapping("runaList")
-	public Map<String,List<Orders>> runaList(@RequestParam String userId, @RequestParam int pageNumber,
-		@RequestParam(defaultValue = "10000") int pageSize) {
-		Map<String,List<Orders>> orderList= new HashMap<String,List<Orders>>();
+	public Map<String, List<Orders>> runaList(@RequestParam String userId, @RequestParam int pageNumber,
+			@RequestParam(defaultValue = "10000") int pageSize) {
+		Map<String, List<Orders>> orderList = new HashMap<String, List<Orders>>();
 		if (userId.equals("admin")) {
 			orderList.put("items", cartService.orderListAll(pageNumber, pageSize));
 			System.out.println(orderList);
@@ -171,48 +180,123 @@ public class MyJsonController {
 			return orderList;
 		}
 	}
-	
+
 	@PostMapping("notificationToken")
-	public ResponseEntity<String> notiToken(@RequestHeader("X-CSRF-TOKEN") String csrfToken, @RequestParam("notiToken")String notiToken) {
+	public ResponseEntity<String> notiToken(@RequestHeader("X-CSRF-TOKEN") String csrfToken,
+			@RequestParam("notiToken") String notiToken) {
 		try {
-			fcmsender.sendPushNotification(notiToken,"루나몰", "주문이 접수되었습니다.");
+			fcmsender.sendPushNotification(notiToken, "루나몰", "주문이 접수되었습니다.");
 			System.out.println("===notiToken===" + notiToken);
 			return new ResponseEntity<>(notiToken, HttpStatus.OK);
-		} catch(Exception e) {
+		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		
+
 	}
-	
+
 	@PostMapping("order")
-	public ResponseEntity<InOrder> order(@RequestHeader("X-CSRF-TOKEN") String csrfToken, @RequestBody InOrder inorder) {
+	public ResponseEntity<InOrder> order(@RequestHeader("X-CSRF-TOKEN") String csrfToken,
+			@RequestBody InOrder inorder) {
 		try {
-		String userId = inorder.getUserId();
-	    String phone = inorder.getPhone();
-	    String address = inorder.getAddress();
-	    String inquire = inorder.getInquire();
-	    Integer total = inorder.getTotal();
-		
-		List<Cart> cartList = cartService.product(userId);
+			String userId = inorder.getUserId();
+			String phone = inorder.getPhone();
+			String address = inorder.getAddress();
+			String inquire = inorder.getInquire();
+			Integer total = inorder.getTotal();
+
+			List<Cart> cartList = cartService.product(userId);
 			User user = loginMapper.loginSearch(userId);
 			int money = user.getMoney();
 			money -= total;
-				loginService.addRuna(userId, money);
-				cartList = cartService.product(userId);
-				String order_menu = "";
-				for (Cart item : cartList) {
-					String s_name = item.getS_name();
-					int count = item.getCount();
+			loginService.addRuna(userId, money);
+			cartList = cartService.product(userId);
+			String order_menu = "";
+			for (Cart item : cartList) {
+				String s_name = item.getS_name();
+				int count = item.getCount();
 
-					order_menu += s_name + " " + count + "개\n";
-				}
-				System.out.println("order_menu " + order_menu);
-				cartService.order(userId, userId, phone, address, inquire, order_menu, -total);
-				cartService.orderCom(userId);
-				return new ResponseEntity<>(inorder, HttpStatus.OK);
-		} catch(Exception e) {
+				order_menu += s_name + " " + count + "개\n";
+			}
+			System.out.println("order_menu " + order_menu);
+			cartService.order(userId, userId, phone, address, inquire, order_menu, -total);
+			cartService.orderCom(userId);
+			return new ResponseEntity<>(inorder, HttpStatus.OK);
+		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-}
 
+	@PostMapping("/addLuna")
+	public ResponseEntity<User> addRuna(@RequestHeader("X-CSRF-TOKEN") String csrfToken,
+			@RequestParam("username") String userId, @RequestBody User user) {
+		try {
+			User user2 = loginMapper.loginSearch(userId);
+			cartService.order(userId, userId, user.getPhone(), user.getAddress(), "", "루나 추가", user.getMoney());
+			int money = user.getMoney();
+			money += user2.getMoney();
+			System.out.println("더해진 루나 " + money);
+			loginService.addRuna(userId, money);
+			return new ResponseEntity<>(user, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	@PostMapping("/minLuna")
+	public ResponseEntity<User> minRuna(@RequestHeader("X-CSRF-TOKEN") String csrfToken,
+			@RequestParam("username") String userId, @RequestBody User user) {
+		try {
+			User user2 = loginMapper.loginSearch(userId);
+			cartService.order(userId, userId, user.getPhone(), user.getAddress(), "", "루나 제거", -user.getMoney());
+			int money = user.getMoney();
+			money = user2.getMoney() - money;
+			System.out.println("줄어든 루나 " + money);
+			loginService.addRuna(userId, money);
+			return new ResponseEntity<>(user, HttpStatus.OK);
+
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	@GetMapping("/userList")
+	public Map<String, List<User>> userList(@RequestParam int pageNumber,
+			@RequestParam(defaultValue = "10000") int pageSize) {
+		Map<String, List<User>> userList = new HashMap<String, List<User>>();
+		userList.put("items", loginService.userList(pageNumber, pageSize));
+		for (int i = 1;; i++) {
+			List<User> userListAll = loginService.userList(i, 10000);
+			if (userListAll.size() < 10000) {
+				break;
+			}
+		}
+		System.out.println("userList : " + userList);
+		return userList;
+	}
+
+	@PostMapping("/newLogin")
+	public ResponseEntity<User> newLogin(@RequestHeader("X-CSRF-TOKEN") String csrfToken, @RequestBody User user) {
+		try {
+			String userId = user.getUserId();
+			String password = user.getPassword();
+			String username = user.getUsername();
+			String phone = user.getPhone();
+			String address = user.getAddress();
+			String vip = user.getVip();
+			User myuser = loginMapper.loginSearch(userId);
+			if (myuser == null) {
+				String encodePwd = passwordEncoder.encode(password);
+				loginService.newLogin(userId, encodePwd, username, phone, address, vip);
+
+				return new ResponseEntity<>(user, HttpStatus.OK);
+			} else {
+
+				return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+	}
+}

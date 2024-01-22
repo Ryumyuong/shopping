@@ -14,7 +14,6 @@ public class User{
     private String username;
     private String phone;
     private String address;
-    private String inquire;
     private int money;
     private String roles;
     private String vip;

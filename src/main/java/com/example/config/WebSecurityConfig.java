@@ -23,7 +23,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 
 		http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-			.ignoringAntMatchers("/luna/main/csrf", "/luna/main/insert", "/luna/main/user", "/luna/main/notification", "/luna/main/notificationToken", "/luna/main/order")
+			.ignoringAntMatchers("/luna/main/csrf", "/luna/main/insert", "/luna/main/user",
+					"/luna/main/notification", "/luna/main/notificationToken", "/luna/main/order",
+					"/luna/main/addLuna", "/luna/main/minLuna", "/luna/main/newLogin")
 			.and()
 			.authorizeRequests()
 	        .mvcMatchers("/runa/main", "/cart/**").hasAnyRole("USER", "ADMIN") 
