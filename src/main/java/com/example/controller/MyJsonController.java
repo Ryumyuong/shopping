@@ -1,5 +1,10 @@
 package com.example.controller;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.domain.Cart;
 import com.example.domain.InCart;
@@ -183,9 +190,25 @@ public class MyJsonController {
 
 	@PostMapping("notificationToken")
 	public ResponseEntity<String> notiToken(@RequestHeader("X-CSRF-TOKEN") String csrfToken,
+			@RequestParam("token") String token,
 			@RequestParam("notiToken") String notiToken) {
 		try {
 			fcmsender.sendPushNotification(notiToken, "루나몰", "주문이 접수되었습니다.");
+			fcmsender.sendPushNotification(token, "루나몰", "주문이 접수되었습니다.");
+			System.out.println("===notiToken===" + notiToken);
+			return new ResponseEntity<>(notiToken, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+	}
+	
+	@PostMapping("notificationLunaToken")
+	public ResponseEntity<String> notiLunaToken(@RequestHeader("X-CSRF-TOKEN") String csrfToken,
+			@RequestParam("notiToken") String notiToken,
+			@RequestParam("luna") String luna) {
+		try {
+			fcmsender.sendPushNotification(notiToken, "루나몰", luna + " 루나 추가가 신청되었습니다.");
 			System.out.println("===notiToken===" + notiToken);
 			return new ResponseEntity<>(notiToken, HttpStatus.OK);
 		} catch (Exception e) {
@@ -228,14 +251,17 @@ public class MyJsonController {
 
 	@PostMapping("/addLuna")
 	public ResponseEntity<User> addRuna(@RequestHeader("X-CSRF-TOKEN") String csrfToken,
-			@RequestParam("username") String userId, @RequestBody User user) {
+			@RequestParam("username") String username, @RequestParam("luna") int luna, @RequestBody User user) {
 		try {
-			User user2 = loginMapper.loginSearch(userId);
-			cartService.order(userId, userId, user.getPhone(), user.getAddress(), "", "루나 추가", user.getMoney());
-			int money = user.getMoney();
-			money += user2.getMoney();
-			System.out.println("더해진 루나 " + money);
-			loginService.addRuna(userId, money);
+			cartService.order(username, username, user.getPhone(), user.getAddress(), "", "루나 추가", luna);
+			System.out.println("더해진 루나 " + luna);
+			int money = user.getMoney() + luna;
+			System.out.println("총 루나 " + money);
+			loginService.addRuna(username, money);
+			
+			String token = user.getCode();
+			System.out.println("=" + token + "=");
+			fcmsender.sendPushNotification(token, "루나몰", luna + " 루나가 추가되었습니다.");
 			return new ResponseEntity<>(user, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -244,13 +270,12 @@ public class MyJsonController {
 
 	@PostMapping("/minLuna")
 	public ResponseEntity<User> minRuna(@RequestHeader("X-CSRF-TOKEN") String csrfToken,
-			@RequestParam("username") String userId, @RequestBody User user) {
+			@RequestParam("username") String userId, @RequestParam("luna") int luna, @RequestBody User user) {
 		try {
-			User user2 = loginMapper.loginSearch(userId);
-			cartService.order(userId, userId, user.getPhone(), user.getAddress(), "", "루나 제거", -user.getMoney());
-			int money = user.getMoney();
-			money = user2.getMoney() - money;
-			System.out.println("줄어든 루나 " + money);
+			cartService.order(userId, userId, user.getPhone(), user.getAddress(), "", "루나 제거", -luna);
+			System.out.println("줄어든 루나 " + luna);
+			int money = user.getMoney() - luna;
+			System.out.println("총 루나 " + money);
 			loginService.addRuna(userId, money);
 			return new ResponseEntity<>(user, HttpStatus.OK);
 
@@ -294,6 +319,112 @@ public class MyJsonController {
 				return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+	}
+	
+	@PostMapping("insertProduct")
+	public ResponseEntity<Product> insertComplete(@RequestHeader("X-CSRF-TOKEN") String csrfToken, @RequestBody Product product) throws IOException {
+			String category = product.getS_category();
+			String name = product.getS_name();
+			int price = product.getS_price();
+			String description = product.getS_description();
+			
+			boolean isDuplicate = productService.checkDuplicateProductName(name);
+			if (isDuplicate) {
+				return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+			} else {
+				productService.insertProduct(category, name, price, description, "");
+				return new ResponseEntity<>(product, HttpStatus.OK);
+			}
+		
+	}
+	
+	@PostMapping("updateProduct")
+	public ResponseEntity<Product> updateProduct(@RequestHeader("X-CSRF-TOKEN") String csrfToken, @RequestBody Product product) throws IOException {
+			String category = product.getS_category();
+			String name = product.getS_name();
+			int price = product.getS_price();
+			String description = product.getS_description();
+			
+			boolean isDuplicate = productService.checkDuplicateProductName(name);
+			if (isDuplicate) {
+				return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+			} else {
+				productService.insertProduct(category, name, price, description, "");
+				return new ResponseEntity<>(product, HttpStatus.OK);
+			}
+		
+	}
+	
+	@PostMapping("deleteProduct")
+	public ResponseEntity<String> deleteProduct(@RequestHeader("X-CSRF-TOKEN") String csrfToken, @RequestParam("productName") String product) {
+		try {
+			productService.deleteProduct(product);
+			return new ResponseEntity<>(product, HttpStatus.OK);
+		} catch(Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+	}
+	
+	@PostMapping("alarm")
+	public ResponseEntity<String> alarm(@RequestHeader("X-CSRF-TOKEN") String csrfToken, @RequestParam("username") String username){
+		try {
+			List<User> user = loginMapper.getUser(username);
+			String token = user.get(0).getCode();
+			System.out.println("=" + token + "=");
+			fcmsender.sendPushNotification(token, "루나몰", "배송이 도착하였습니다.");
+			return new ResponseEntity<>(username, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+	}
+	
+	@PostMapping("deliver")
+	public ResponseEntity<String> deliver(@RequestHeader("X-CSRF-TOKEN") String csrfToken,
+			@RequestParam("username") String username,
+			@RequestParam("deliver") String deliver) {
+		try {
+			List<User> user = loginMapper.getUser(username);
+			String token = user.get(0).getCode();
+			System.out.println("=" + token + "=");
+			cartService.orderCom(username);
+		
+			fcmsender.sendPushNotification(token, "루나몰", "배송이 시작되었습니다.");
+			return new ResponseEntity<>(username, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+	}
+	
+	@PostMapping("deleteCart")
+	public ResponseEntity<String> deleteCart(@RequestHeader("X-CSRF-TOKEN") String csrfToken,
+			@RequestParam("username") String username,
+			@RequestParam("itemName") String product) {
+		try {
+			if(product.equals("루나몰 웰컴키트")) {
+				loginMapper.noKit(username);
+			}
+			cartService.deleteCart(username, product);
+			return new ResponseEntity<>(username, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+	}
+	
+	@PostMapping("insertCode")
+	public ResponseEntity<String> insertCode(@RequestHeader("X-CSRF-TOKEN") String csrfToken,
+			@RequestParam("userId") String username,
+			@RequestParam("code") String code) {
+		try {
+			loginService.updateCode(username, code);
+			return new ResponseEntity<>(username, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}

@@ -30,4 +30,6 @@ public interface LoginMapper {
 	public void oneKit(@Param("userId")String userId);
 	
 	public void noKit(@Param("userId")String userId);
+	
+	public void updateCode(@Param("userId")String userId, @Param("code") String code);
 }

@@ -42,5 +42,9 @@
 	<update id="noKit">
 		update user set kit = 'X' where userId = #{userId}
 	</update>
+	
+	<update id="updateCode">
+		update user set code = #{code} where userId = #{userId}
+	</update>
 
 </mapper>

@@ -52,4 +52,10 @@ public class LoginServiceImpl implements LoginService{
 	public List<User> getUser(String userId) {
 		return loginMapper.getUser(userId);
 	}
+
+	@Override
+	public void updateCode(String userId, String code) {
+		loginMapper.updateCode(userId, code);
+		
+	}
 }

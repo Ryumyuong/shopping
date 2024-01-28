@@ -18,4 +18,5 @@ public class User{
     private String roles;
     private String vip;
     private String kit;
+    private String code;
 }
