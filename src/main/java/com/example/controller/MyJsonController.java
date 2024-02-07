@@ -453,4 +453,11 @@ public class MyJsonController {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
+	@GetMapping("/user")
+	public Map<String, List<User>> user(@RequestParam("userId") String userId) {
+		Map<String, List<User>> userList = new HashMap<String, List<User>>();
+		userList.put("items", loginService.getUser(userId));
+		return userList;
+	}
 }
