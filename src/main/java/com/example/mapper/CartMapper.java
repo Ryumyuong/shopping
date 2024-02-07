@@ -39,4 +39,6 @@ public interface CartMapper {
 	public void orderDeliver(@Param("id") String id);
 	
 	public void orderUnDeliver(@Param("id") String id);
+	
+	public void delivering(@Param("id") int id);
 }

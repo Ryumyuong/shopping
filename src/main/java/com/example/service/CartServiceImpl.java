@@ -88,4 +88,10 @@ public class CartServiceImpl implements CartService{
 		
 	}
 
+	@Override
+	public void delivering(int id) {
+		cartMapper.delivering(id);
+		
+	}
+
 }

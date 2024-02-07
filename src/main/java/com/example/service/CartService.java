@@ -35,5 +35,7 @@ public interface CartService {
 	public void orderDeliver(String id);
 	
 	public void orderUnDeliver(String id);
+	
+	public void delivering(int id);
 
 }

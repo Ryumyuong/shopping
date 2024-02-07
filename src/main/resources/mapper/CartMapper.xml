@@ -63,4 +63,8 @@
     <delete id="orderUnDeliver">
     	delete from orders where id = #{id}
     </delete>
+    
+    <update id="delivering">
+    	update orders set deliver = "배송중" where id = #{id}
+    </update>
 </mapper>

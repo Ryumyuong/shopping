@@ -367,28 +367,12 @@ public class MyJsonController {
 
 	}
 
-	@PostMapping("alarm")
-	public ResponseEntity<String> alarm(@RequestHeader("X-CSRF-TOKEN") String csrfToken,
-			@RequestParam("username") String username) {
-		try {
-			List<User> user = loginMapper.getUser(username);
-			String token = user.get(0).getCode();
-			System.out.println("=" + token + "=");
-			fcmsender.sendPushNotification(token, "루나몰", "배송이 도착하였습니다.");
-			return new ResponseEntity<>(username, HttpStatus.OK);
-		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-
-	}
-
 	@PostMapping("deliver")
 	public ResponseEntity<String> deliver(@RequestHeader("X-CSRF-TOKEN") String csrfToken,
 			@RequestParam("username") String username, @RequestParam("deliver") String deliver) {
 		try {
 			List<User> user = loginMapper.getUser(username);
 			String token = user.get(0).getCode();
-			System.out.println("=" + token + "=");
 			cartService.orderCom(username);
 
 			fcmsender.sendPushNotification(token, "루나몰", "배송이 시작되었습니다.");
@@ -449,6 +433,29 @@ public class MyJsonController {
 		try {
 			loginService.deleteUser(userId);
 			return new ResponseEntity<>(userId, HttpStatus.OK);
+		} catch(Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@PostMapping("delivering")
+	public ResponseEntity<String> delivering(@RequestHeader("X-CSRF-TOKEN") String csrfToken, @RequestParam("id") int id, @RequestParam("username") String username) {
+		try {
+			cartService.delivering(id);
+			return new ResponseEntity<>(csrfToken, HttpStatus.OK);
+		} catch(Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@PostMapping("deliverCom")
+	public ResponseEntity<String> deliverCom(@RequestHeader("X-CSRF-TOKEN") String csrfToken, @RequestParam("id") String id, @RequestParam("username") String username) {
+		try {
+			List<User> user = loginMapper.getUser(username);
+			String token = user.get(0).getCode();
+			cartService.orderDeliver(id);
+			fcmsender.sendPushNotification(token, "루나몰", "배송이 도착하였습니다.");
+			return new ResponseEntity<>(csrfToken, HttpStatus.OK);
 		} catch(Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
