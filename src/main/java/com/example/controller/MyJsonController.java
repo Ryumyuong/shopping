@@ -187,10 +187,15 @@ public class MyJsonController {
 			User user = loginMapper.loginSearch(username);
 			String code = user.getCode();
 			fcmsender.sendPushNotification(code, "루나몰", "주문이 접수되었습니다.");
-			String admin = "admin";
-			User user2 = loginMapper.loginSearch(admin);
+			User user2 = loginMapper.loginSearch("류지희");
+			User user3 = loginMapper.loginSearch("고혜영");
+			User user4 = loginMapper.loginSearch("정진경");
 			String code2 = user2.getCode();
+			String code3 = user3.getCode();
+			String code4 = user4.getCode();
 			fcmsender.sendPushNotification(code2, "루나몰", username + "님이 물품을 주문하였습니다.");
+			fcmsender.sendPushNotification(code3, "루나몰", username + "님이 물품을 주문하였습니다.");
+			fcmsender.sendPushNotification(code4, "루나몰", username + "님이 물품을 주문하였습니다.");
 			return new ResponseEntity<>(username, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -205,10 +210,15 @@ public class MyJsonController {
 			User user = loginMapper.loginSearch(username);
 			String code = user.getCode();
 			fcmsender.sendPushNotification(code, "루나몰", luna + " 루나 추가가 신청되었습니다.");
-			String admin = "admin";
-			User user2 = loginMapper.loginSearch(admin);
+			User user2 = loginMapper.loginSearch("류지희");
+			User user3 = loginMapper.loginSearch("고혜영");
+			User user4 = loginMapper.loginSearch("정진경");
 			String code2 = user2.getCode();
+			String code3 = user3.getCode();
+			String code4 = user4.getCode();
 			fcmsender.sendPushNotification(code2, "루나몰", username + "님이 " + luna + " 루나 추가를 신청하였습니다.");
+			fcmsender.sendPushNotification(code3, "루나몰", username + "님이 " + luna + " 루나 추가를 신청하였습니다.");
+			fcmsender.sendPushNotification(code4, "루나몰", username + "님이 " + luna + " 루나 추가를 신청하였습니다.");
 			return new ResponseEntity<>(username, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
