@@ -44,6 +44,7 @@ public class LoginServiceImpl implements LoginService{
 
 	@Override
 	public void addRuna(String userId, int money) {
+		System.out.println("service : " + money);
 		loginMapper.addRuna(userId, money);
 		
 	}

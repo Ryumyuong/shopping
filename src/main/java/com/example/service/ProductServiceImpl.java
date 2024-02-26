@@ -57,5 +57,10 @@ public class ProductServiceImpl implements ProductService{
 		return count > 0;
 		
 	}
+
+	@Override
+	public List<Product> productname(String name) {
+		return productMapper.productname(name);
+	}
 	
 }

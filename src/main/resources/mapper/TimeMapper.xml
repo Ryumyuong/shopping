@@ -8,7 +8,7 @@
 	</select>
 	
 	<insert id="insertCard">
-		insert into card(name, days, luna) values(#{name}, #{days}, #{luna})
+		insert into card(name, order_menu, days, luna) values(#{name}, #{order_menu}, #{days}, #{luna})
 	</insert>
 	
 	<delete id="deleteCard">

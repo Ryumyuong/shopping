@@ -12,6 +12,10 @@
     	select * from products where s_name = #{name} order by s_id desc
     </select>
     
+    <select id="productname" resultType="com.example.domain.Product">
+    	select * from products where s_name = #{name} order by s_id desc
+    </select>
+    
     <select id="productCategory" resultType="com.example.domain.Product">
     	select * from products where s_category = #{category} order by s_id desc
     </select>

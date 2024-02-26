@@ -19,8 +19,8 @@ public class TimeServiceImpl implements TimeService {
 	}
 
 	@Override
-	public void insertCard(String name, String days, int luna) {
-		timeMapper.insertCard(name, days, luna);		
+	public void insertCard(String name, String order_menu, String days, int luna) {
+		timeMapper.insertCard(name, order_menu, days, luna);
 	}
 
 	@Override

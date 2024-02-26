@@ -11,6 +11,8 @@ public interface ProductService {
 	
 	public Product productName(String name);
 	
+	public List<Product> productname(String name);
+	
 	public List<Product> productCategory(String category);
 	
 	public void insertProduct(String category, String name, int price, String description, String fileName); 

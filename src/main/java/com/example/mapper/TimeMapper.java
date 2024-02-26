@@ -13,7 +13,7 @@ import com.example.domain.Card;
 public interface TimeMapper {
 	public List<Card> getList();
 	
-	public void insertCard(@Param("name")String name, @Param("days")String days, @Param("luna")int luna);
+	public void insertCard(@Param("name")String name, @Param("order_menu") String order_menu, @Param("days")String days, @Param("luna")int luna);
 	
 	public void deleteCard(@Param("time")String time);
 	

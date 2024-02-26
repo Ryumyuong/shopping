@@ -85,8 +85,9 @@ public class MyJsonController {
 			String name = inCard.getName();
 			String days = inCard.getDays();
 			int luna = inCard.getLuna();
+			String order_menu = inCard.getOrder_menu();
 			
-			timeService.insertCard(name, days, luna);
+			timeService.insertCard(name, order_menu, days, luna);
 			
 			return new ResponseEntity<>(inCard, HttpStatus.OK);
 		} catch(Exception e) {
@@ -285,18 +286,21 @@ public class MyJsonController {
 				order_menu += s_name + " " + count + "개\n";
 			}
 			
-			if(days == "일시불") {
+			System.out.println(days);
+			
+			if(days.equals("일시불")) {
 				User user = loginMapper.loginSearch(userId);
 				int money = user.getMoney();
 				money -= total;
-				loginService.addRuna(userId, money);				
+				
+				loginService.addRuna(userId, money);
+				cartService.order(userId, userId, phone, address, inquire, order_menu, days, -total);
+				cartService.orderCom(userId);
 			} else {
-				timeService.insertCard(userId, days, luna);
+				timeService.insertCard(userId, order_menu, time, luna);
+				cartService.order(userId, userId, phone, address, inquire, order_menu, days, 0);
+				cartService.orderCom(userId);
 			}
-			cartService.order(userId, userId, phone, address, inquire, order_menu, time, -total);
-			cartService.orderCom(userId);
-			
-			
 			
 			return new ResponseEntity<>(inorder, HttpStatus.OK);
 		} catch (Exception e) {
@@ -528,5 +532,14 @@ public class MyJsonController {
 		version.put("version", ver.getVersion());
 		
 		return version;
+	}
+	
+	@GetMapping("getProduct")
+	public Map<String, List<Product>> getProduct(@RequestParam("productName") String name) {
+		Map<String, List<Product>> product = new HashMap<String, List<Product>>();
+		
+		product.put("items", productService.productname(name));
+		
+		return product;
 	}
 }

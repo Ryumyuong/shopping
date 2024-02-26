@@ -28,4 +28,6 @@ public interface ProductMapper {
 	public void deleteProduct(@Param("name")String name);
 	
 	public int checkDuplicateProductName(@Param("name")String name);
+	
+	public List<Product> productname(@Param("name")String name);
 }

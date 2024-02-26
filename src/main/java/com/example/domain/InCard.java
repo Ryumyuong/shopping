@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class InCard {
 	private String name;
+	private String order_menu;
 	private String days;
 	private int luna;
 }

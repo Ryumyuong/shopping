@@ -7,7 +7,7 @@ import com.example.domain.Card;
 public interface TimeService {
 	public List<Card> getList();
 	
-	public void insertCard(String name, String days, int luna);
+	public void insertCard(String name, String order_menu, String days, int luna);
 	
 	public void deleteCard(String time);
 	
