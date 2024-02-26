@@ -46,5 +46,9 @@
 	<update id="updateCode">
 		update user set code = #{code} where userId = #{userId}
 	</update>
+	
+	<select id="version" resultType="com.example.domain.Version">
+		select version from version
+	</select>
 
 </mapper>

@@ -135,7 +135,7 @@ public class LoginController {
 	@PostMapping("/addRuna")
 	public String addRuna(Model model, String userId, String phone, String address, int money, @RequestParam int pageNumber) {
 		User user = loginMapper.loginSearch(userId);
-		cartService.order(userId, userId, phone, address,"", "루나 추가", money);
+		cartService.order(userId, userId, phone, address,"", "루나 추가","", money);
 		money += user.getMoney();
 		System.out.println("더해진 루나 " + money);
 		loginService.addRuna(userId, money);
@@ -145,7 +145,7 @@ public class LoginController {
 	@PostMapping("/minRuna")
 	public String minRuna(Model model, String userId, String phone, String address, int money, @RequestParam int pageNumber) {
 		User user = loginMapper.loginSearch(userId);
-		cartService.order(userId, userId, phone, address,"", "루나 제거", -money);
+		cartService.order(userId, userId, phone, address,"", "루나 제거","", -money);
 		money = user.getMoney() - money;
 		if(money < 0) {
 			model.addAttribute("ErrorMsg","루나가 부족합니다.");

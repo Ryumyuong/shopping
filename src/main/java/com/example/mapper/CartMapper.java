@@ -20,7 +20,7 @@ public interface CartMapper {
 	
 	public Cart total(String userId);
 	
-	public void order(@Param("username")String username, @Param("userId")String userId, @Param("phone")String phone, @Param("address")String address, @Param("inquire")String inquire, @Param("order_menu")String order_menu, @Param("total")int total);
+	public void order(@Param("username")String username, @Param("userId")String userId, @Param("phone")String phone, @Param("address")String address, @Param("inquire")String inquire, @Param("order_menu")String order_menu, @Param("time")String time, @Param("total")int total);
 	
 	public void orderCom(@Param("userId")String userId);
 	

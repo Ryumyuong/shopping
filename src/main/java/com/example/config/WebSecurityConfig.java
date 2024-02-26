@@ -25,9 +25,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.ignoringAntMatchers("/luna/main/csrf", "/luna/main/insert", "/luna/main/user",
 						"/luna/main/notification", "/luna/main/notificationToken", "/luna/main/order",
 						"/luna/main/addLuna", "/luna/main/minLuna", "/luna/main/newLogin", "/luna/main/insertProduct",
-						"/luna/main/notificationLunaToken", "/luna/main/updateProduce", "/luna/main/deleteProduct",
+						"/luna/main/notificationLunaToken", "/luna/main/updateProduct", "/luna/main/deleteProduct",
 						"/luna/main/deliver", "/luna/main/deleteCart", "/luna/main/insertCode",
-						"/luna/main/updateUser", "/luna/main/deleteUser", "/luna/main/delivering", "/luna/main/deliverCom")
+						"/luna/main/updateUser", "/luna/main/deleteUser", "/luna/main/delivering", "/luna/main/deliverCom",
+						"/luna/main/inserCard")
 				.and().authorizeRequests().mvcMatchers("/runa/main", "/cart/**").hasAnyRole("USER", "ADMIN")
 				.mvcMatchers("/runa/**", "/newLogin", "/addRuna", "/userList").hasRole("ADMIN")
 				.antMatchers("/luna/main/csrf").permitAll().anyRequest().permitAll().and().formLogin().loginPage("/")

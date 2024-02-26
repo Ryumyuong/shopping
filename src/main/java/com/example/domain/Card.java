@@ -7,11 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class InOrder {
-	private String userId;
-	private String phone;
-	private String address;
-	private String inquire;
-	private String time;
-	private int total;
+public class Card {
+	private String order_time;
+	private String name;
+	private String days;
+	private int luna;
 }

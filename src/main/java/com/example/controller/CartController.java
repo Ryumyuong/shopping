@@ -125,7 +125,7 @@ public class CartController {
 					order_menu += s_name + " " + count + "개\n";
 				}
 				System.out.println("order_menu " + order_menu);
-				cartService.order(username, userId, phone, address, inquire, order_menu, -total);
+				cartService.order(username, userId, phone, address, inquire, order_menu,"", -total);
 				cartService.orderCom(userId);
 				return "orderComplete";
 			}

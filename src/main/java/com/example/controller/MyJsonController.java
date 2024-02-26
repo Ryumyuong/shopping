@@ -1,10 +1,9 @@
 package com.example.controller;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
-import java.util.Base64;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,8 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.csrf.CsrfToken;
-import org.springframework.ui.Model;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,19 +20,22 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
+import com.example.domain.Card;
 import com.example.domain.Cart;
+import com.example.domain.InCard;
 import com.example.domain.InCart;
 import com.example.domain.InOrder;
 import com.example.domain.Orders;
 import com.example.domain.Product;
 import com.example.domain.User;
+import com.example.domain.Version;
 import com.example.mapper.LoginMapper;
 import com.example.service.CartService;
 import com.example.service.FCMNotificationSender;
 import com.example.service.LoginService;
 import com.example.service.ProductService;
+import com.example.service.TimeService;
 
 @RestController
 @RequestMapping("/luna/main/")
@@ -56,6 +56,43 @@ public class MyJsonController {
 
 	@Autowired
 	LoginMapper loginMapper;
+	
+	@Autowired
+	TimeService timeService;
+	
+	
+	@GetMapping("api/time")
+    public Map<String, String> getCurrentTime() {
+		Map<String, String> time = new HashMap<String, String>();
+		Instant now = Instant.now();
+		ZonedDateTime koreaTime = ZonedDateTime.ofInstant(now, ZoneId.of("Asia/Seoul"));
+		time.put("time", koreaTime.toString());
+		ZonedDateTime plustime = koreaTime.plusMinutes(1);
+		
+        return time;
+    }
+	
+	@GetMapping("getCardList")
+	public Map<String, List<Card>> getCardList() {
+		Map<String, List<Card>> card = new HashMap<String, List<Card>>();
+		card.put("card", timeService.getList());
+		return card;
+	}
+	
+	@PostMapping("insertCard")
+	public ResponseEntity<InCard> insertCard(@RequestHeader("X-CSRF-TOKEN") String csrfToken, @RequestBody InCard inCard) {
+		try {
+			String name = inCard.getName();
+			String days = inCard.getDays();
+			int luna = inCard.getLuna();
+			
+			timeService.insertCard(name, days, luna);
+			
+			return new ResponseEntity<>(inCard, HttpStatus.OK);
+		} catch(Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 
 	@GetMapping("getCategory")
 	public Map<String, List<Product>> productCategory(String category) {
@@ -228,30 +265,39 @@ public class MyJsonController {
 
 	@PostMapping("order")
 	public ResponseEntity<InOrder> order(@RequestHeader("X-CSRF-TOKEN") String csrfToken,
-			@RequestBody InOrder inorder) {
+			@RequestBody InOrder inorder, @RequestParam("days") String days, @RequestParam("luna") int luna) {
 		try {
 			String userId = inorder.getUserId();
 			String phone = inorder.getPhone();
 			String address = inorder.getAddress();
 			String inquire = inorder.getInquire();
+			String time = inorder.getTime();
 			Integer total = inorder.getTotal();
-
+			
 			List<Cart> cartList = cartService.product(userId);
-			User user = loginMapper.loginSearch(userId);
-			int money = user.getMoney();
-			money -= total;
-			loginService.addRuna(userId, money);
-			cartList = cartService.product(userId);
+			
 			String order_menu = "";
+			
 			for (Cart item : cartList) {
 				String s_name = item.getS_name();
 				int count = item.getCount();
 
 				order_menu += s_name + " " + count + "개\n";
 			}
-			System.out.println("order_menu " + order_menu);
-			cartService.order(userId, userId, phone, address, inquire, order_menu, -total);
+			
+			if(days == "일시불") {
+				User user = loginMapper.loginSearch(userId);
+				int money = user.getMoney();
+				money -= total;
+				loginService.addRuna(userId, money);				
+			} else {
+				timeService.insertCard(userId, days, luna);
+			}
+			cartService.order(userId, userId, phone, address, inquire, order_menu, time, -total);
 			cartService.orderCom(userId);
+			
+			
+			
 			return new ResponseEntity<>(inorder, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -262,7 +308,7 @@ public class MyJsonController {
 	public ResponseEntity<User> addRuna(@RequestHeader("X-CSRF-TOKEN") String csrfToken,
 			@RequestParam("username") String username, @RequestParam("luna") int luna, @RequestBody User user) {
 		try {
-			cartService.order(username, username, user.getPhone(), user.getAddress(), "", "루나 추가", luna);
+			cartService.order(username, username, user.getPhone(), user.getAddress(), "", "루나 추가", "", luna);
 			System.out.println("더해진 루나 " + luna);
 			int money = user.getMoney() + luna;
 			System.out.println("총 루나 " + money);
@@ -281,7 +327,7 @@ public class MyJsonController {
 	public ResponseEntity<User> minRuna(@RequestHeader("X-CSRF-TOKEN") String csrfToken,
 			@RequestParam("username") String userId, @RequestParam("luna") int luna, @RequestBody User user) {
 		try {
-			cartService.order(userId, userId, user.getPhone(), user.getAddress(), "", "루나 제거", -luna);
+			cartService.order(userId, userId, user.getPhone(), user.getAddress(), "", "루나 제거","", -luna);
 			System.out.println("줄어든 루나 " + luna);
 			int money = user.getMoney() - luna;
 			System.out.println("총 루나 " + money);
@@ -353,13 +399,17 @@ public class MyJsonController {
 	}
 
 	@PostMapping("updateProduct")
-	public ResponseEntity<String> updateProduct(@RequestHeader("X-CSRF-TOKEN") String csrfToken,
-			@RequestParam("category") String category, @RequestParam("name") String name,
-			@RequestParam("sname") String sname, @RequestParam("description") String description,
-			@RequestParam("price") int price, @RequestParam("fileName") String fileName) throws IOException {
+	public ResponseEntity<Product> updateProduct(@RequestHeader("X-CSRF-TOKEN") String csrfToken, @RequestParam("sname") String name,
+			@RequestBody Product product) throws IOException {
 		try {
+			String category = product.getS_category();
+			String sname = product.getS_name();
+			int price = product.getS_price();
+			String description = product.getS_description();
+			String fileName = product.getS_fileName();
+			
 			productService.updateProduct(category, name, sname, description, price, fileName);
-			return new ResponseEntity<>(csrfToken, HttpStatus.OK);
+			return new ResponseEntity<>(product, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
@@ -469,5 +519,14 @@ public class MyJsonController {
 		} catch(Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+	}
+	
+	@GetMapping("version")
+	public Map<String, String> version() {
+		Map<String, String> version = new HashMap<String, String>();
+		Version ver = loginMapper.version();
+		version.put("version", ver.getVersion());
+		
+		return version;
 	}
 }

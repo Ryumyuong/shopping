@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.example.domain.User;
+import com.example.domain.Version;
 
 @Repository
 @Mapper
@@ -32,4 +33,6 @@ public interface LoginMapper {
 	public void noKit(@Param("userId")String userId);
 	
 	public void updateCode(@Param("userId")String userId, @Param("code") String code);
+	
+	public Version version();
 }

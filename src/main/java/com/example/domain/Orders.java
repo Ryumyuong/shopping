@@ -18,6 +18,7 @@ public class Orders {
 	private String inquire;
 	private String order_menu;
 	private int order_price;
+	private String time;
 	private int total;
 	private String deliver;
 }

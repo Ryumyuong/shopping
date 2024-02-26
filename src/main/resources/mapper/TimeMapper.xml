@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.TimeMapper">
+	<select id="getList" resultType="com.example.domain.Card">
+		select * from card order by order_time
+	</select>
+	
+	<insert id="insertCard">
+		insert into card(name, days, luna) values(#{name}, #{days}, #{luna})
+	</insert>
+	
+	<delete id="deleteCard">
+		delete from card where order_time = #{time}
+	</delete>
+	
+	<update id="updateCard">
+		update card set days = #{days}, luna = #{luna} where order_time = #{time}
+	</update>
+	
+</mapper>
