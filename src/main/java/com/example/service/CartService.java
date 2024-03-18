@@ -28,6 +28,8 @@ public interface CartService {
 	
 	public void deleteCart(String userId, String name);
 	
+	public void delete(int id);
+	
 	public int runaTotal(String userId);
 	
 	public int runaTotalAll();

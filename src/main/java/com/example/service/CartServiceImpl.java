@@ -59,7 +59,11 @@ public class CartServiceImpl implements CartService{
 	@Override
 	public void deleteCart(String userId, String name) {
 		cartMapper.deleteCart(userId, name);
-		
+	}
+	
+	@Override
+	public void delete(int id) {
+		cartMapper.delete(id);
 	}
 
 	@Override

@@ -461,6 +461,18 @@ public class MyJsonController {
 		}
 
 	}
+	
+	@PostMapping("delete")
+	public ResponseEntity<String> delete(@RequestHeader("X-CSRF-TOKEN") String csrfToken, @RequestParam("id") int id) {
+		try {
+			cartService.delete(id);
+			System.out.println("id : " + id);
+			return new ResponseEntity<>(csrfToken, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+	}
 
 	@PostMapping("insertCode")
 	public ResponseEntity<String> insertCode(@RequestHeader("X-CSRF-TOKEN") String csrfToken,

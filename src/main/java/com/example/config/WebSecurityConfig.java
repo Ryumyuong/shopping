@@ -28,7 +28,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 						"/luna/main/notificationLunaToken", "/luna/main/updateProduct", "/luna/main/deleteProduct",
 						"/luna/main/deliver", "/luna/main/deleteCart", "/luna/main/insertCode",
 						"/luna/main/updateUser", "/luna/main/deleteUser", "/luna/main/delivering", "/luna/main/deliverCom",
-						"/luna/main/inserCard")
+						"/luna/main/inserCard", "/luna/main/delete")
 				.and().authorizeRequests().mvcMatchers("/runa/main", "/cart/**").hasAnyRole("USER", "ADMIN")
 				.mvcMatchers("/runa/**", "/newLogin", "/addRuna", "/userList").hasRole("ADMIN")
 				.antMatchers("/luna/main/csrf").permitAll().anyRequest().permitAll().and().formLogin().loginPage("/")

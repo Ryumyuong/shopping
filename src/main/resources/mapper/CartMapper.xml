@@ -12,7 +12,7 @@
     </insert>
     
     <select id="product" resultType="com.example.domain.Cart">
-    	select userId, s_name, s_description, s_price, fileName, c_condition, count(s_name) as count, count(s_name) * s_price as cost from cart where userId = #{userId} and c_condition = "X" group by userId, s_name, s_description, s_price, fileName, c_condition
+    	select c_id, userId, s_name, s_description, s_price, fileName, c_condition, count(s_name) as count, count(s_name) * s_price as cost from cart where userId = #{userId} and c_condition = "X" group by userId, s_name, s_description, s_price, fileName, c_condition
     </select>
     <select id="total" resultType="com.example.domain.Cart">
 	    SELECT sum(cost) as total
@@ -54,6 +54,10 @@
     
     <delete id="deleteCart">
     	delete from cart where userId = #{userId} and s_name = #{name} and c_condition = "X"
+    </delete>
+    
+    <delete id="delete">
+    	delete from cart where c_id = #{id}
     </delete>
     
     <update id="orderDeliver">

@@ -32,6 +32,8 @@ public interface CartMapper {
 	
 	public void deleteCart(@Param("userId")String userId, @Param("name")String name);
 	
+	public void delete(@Param("id")int id);
+	
 	public int runaTotal(@Param("userId")String userId);
 	
 	public int runaTotalAll();
