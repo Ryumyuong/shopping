@@ -225,6 +225,7 @@ public class MyJsonController {
 			User user = loginMapper.loginSearch(username);
 			String code = user.getCode();
 			fcmsender.sendPushNotification(code, "루나몰", "주문이 접수되었습니다.");
+			User user1 = loginMapper.loginSearch("류명조");
 			User user2 = loginMapper.loginSearch("류지희");
 			User user3 = loginMapper.loginSearch("고혜영");
 			User user4 = loginMapper.loginSearch("정진경");

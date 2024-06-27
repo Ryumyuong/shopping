@@ -9,3 +9,8 @@
 	border: 2px solid black;
 	background: #e8e8e8;
 }
+
+.pname {
+	height: 50px;
+	padding-top:1px;
+}

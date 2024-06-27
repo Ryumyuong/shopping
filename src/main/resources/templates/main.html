@@ -11,12 +11,12 @@
 			event.preventDefault();
 		}
 	}
-	
+
 	function oneKit(event) {
 		alert("웰컴키트는 1회만 구매가능합니다.")
 		event.preventDefault();
 	}
-	
+
 	function VVIP(event) {
 		alert("VVIP등급만 가능합니다.")
 	}
@@ -76,21 +76,23 @@
 					th:href="@{/runa/main(category=전자)}"><span>전자/기기</span></a> <a
 					class="tab" th:href="@{/runa/main(category=생활가전)}"><span
 						th:text="생활가전"></span></a> <a class="tab"
-					th:href="@{/runa/main(category=식음료)}"><span th:text="식음료"></span></a>
-					<a class="tab" th:href="@{/runa/main(category=운동)}"><span
-						th:text="운동"></span></a> <a class="tab"
-					th:href="@{/runa/main(category=여가문화)}"><span th:text="여가문화"></span></a>
-					<a class="tab" th:href="@{/runa/main(category=여행)}"><span
-						th:text="여행"></span></a> <a class="tab"
-					th:href="@{/runa/main(category=업무)}"><span th:text="업무"></span></a>
-					<a class="tab" th:if="${user.vip} == 'VVIP' or ${user.vip} == '관리자'" th:href="@{/runa/main(category=VVIP)}"><span
-						th:text="VVIP"></span></a>
-						<a class="tab" th:unless="${user.vip} == 'VVIP' or ${user.vip} == '관리자'" onclick="VVIP(event)"><span
-						th:text="VVIP"></span></a>
-						<a class="tab" th:href="@{/runa/main(category=웰컴키트)}"><span
-						th:text="웰컴키트"></span></a>
-						</li>
-						
+					th:href="@{/runa/main(category=패션)}"><span th:text="패션"></span></a>
+					<a class="tab" th:href="@{/runa/main(category=식음료)}"><span
+						th:text="식음료"></span></a> <a class="tab"
+					th:href="@{/runa/main(category=운동)}"><span th:text="운동"></span></a>
+					<a class="tab" th:href="@{/runa/main(category=여가문화)}"><span
+						th:text="여가문화"></span></a> <a class="tab"
+					th:href="@{/runa/main(category=여행)}"><span th:text="여행"></span></a>
+					<a class="tab" th:href="@{/runa/main(category=업무)}"><span
+						th:text="업무"></span></a> <a class="tab"
+					th:if="${user.vip} == 'VVIP' or ${user.vip} == '관리자'"
+					th:href="@{/runa/main(category=VVIP)}"><span th:text="VVIP"></span></a>
+					<a class="tab"
+					th:unless="${user.vip} == 'VVIP' or ${user.vip} == '관리자'"
+					onclick="VVIP(event)"><span th:text="VVIP"></span></a> <a
+					class="tab" th:href="@{/runa/main(category=웰컴키트)}"><span
+						th:text="웰컴키트"></span></a></li>
+
 			</ul>
 			<hr>
 			<div>
@@ -104,10 +106,9 @@
 					<div class="pname">
 						<p th:text="${row['s_name']}"></p>
 					</div>
-					<br> <a th:href="${row['s_description']}" th:text="자세히보기"
-						target="_blank" class="description"></a> <br> <br> <span
-						th:if="${row['s_price']} == 0">가격문의</span> <span class="price"
-						th:unless="${row['s_price']} == 0" th:text="${row['s_price']}"></span><span
+					<br> <span th:if="${row['s_price']} == 0">가격문의</span>
+					<span class="price" th:unless="${row['s_price']} == 0"
+						th:text="${row['s_price']}"></span><span
 						th:unless="${row['s_price']} == 0"> 루나</span> <br> <br>
 					<div th:unless="${row['s_category']} == '웰컴키트'">
 						<button
@@ -131,8 +132,12 @@
 							type="hidden" th:id="${iterStat.index} + '인'" value="1"
 							name="count" />
 						<textarea name="fileName" th:text="${row['s_fileName']}"></textarea>
-						<button th:if="${row['s_category']} == '웰컴키트' and ${user.kit} == 'O'" onclick="oneKit(event)" class="btn-cart">장바구니에 넣기</button>
-						<button th:unless="${row['s_category']} == '웰컴키트' and ${user.kit} == 'O'" onclick="addToCart(event)" class="btn-cart">장바구니에 넣기</button>
+						<button
+							th:if="${row['s_category']} == '웰컴키트' and ${user.kit} == 'O'"
+							onclick="oneKit(event)" class="btn-cart">장바구니에 넣기</button>
+						<button
+							th:unless="${row['s_category']} == '웰컴키트' and ${user.kit} == 'O'"
+							onclick="addToCart(event)" class="btn-cart">장바구니에 넣기</button>
 					</form>
 					<br>
 				</div>

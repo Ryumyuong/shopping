@@ -16,17 +16,18 @@
 						th:href="@{/runa/delete(category=전자)}"><span>전자/기기</span></a> <a
 						class="tab" th:href="@{/runa/delete(category=생활가전)}"><span
 							th:text="생활가전"></span></a> <a class="tab"
-						th:href="@{/runa/delete(category=식음료)}"><span th:text="식음료"></span></a>
-						<a class="tab" th:href="@{/runa/delete(category=운동)}"><span
-							th:text="운동"></span></a> <a class="tab"
-						th:href="@{/runa/delete(category=여가문화)}"><span th:text="여가문화"></span></a>
-						<a class="tab" th:href="@{/runa/delete(category=여행)}"><span
-							th:text="여행"></span></a> <a class="tab"
-						th:href="@{/runa/delete(category=업무)}"><span th:text="업무"></span></a>
-						<a class="tab" th:href="@{/runa/delete(category=VVIP)}"><span
-							th:text="VVIP"></span></a>
-							<a class="tab" th:href="@{/runa/main(category=웰컴키트)}"><span
-						th:text="웰컴키트"></span></a></li>
+						th:href="@{/runa/delete(category=패션)}"><span th:text="패션"></span></a>
+						<a class="tab" th:href="@{/runa/delete(category=식음료)}"><span
+							th:text="식음료"></span></a> <a class="tab"
+						th:href="@{/runa/delete(category=운동)}"><span th:text="운동"></span></a>
+						<a class="tab" th:href="@{/runa/delete(category=여가문화)}"><span
+							th:text="여가문화"></span></a> <a class="tab"
+						th:href="@{/runa/delete(category=여행)}"><span th:text="여행"></span></a>
+						<a class="tab" th:href="@{/runa/delete(category=업무)}"><span
+							th:text="업무"></span></a> <a class="tab"
+						th:href="@{/runa/delete(category=VVIP)}"><span th:text="VVIP"></span></a>
+						<a class="tab" th:href="@{/runa/delete(category=웰컴키트)}"><span
+							th:text="웰컴키트"></span></a></li>
 				</ul>
 				<hr>
 				<div>
@@ -35,7 +36,10 @@
 							<img th:src="'data:image/png;base64,' + ${row.s_fileName}"
 								alt="Product Image" />
 						</p>
-						<p th:text="${row['s_name']}"></p>
+						<div class="pname">
+							<p th:text="${row['s_name']}"></p>
+						</div>
+						<br> 
 						<span th:if="${row['s_price']} == 0">가격문의</span> <span
 							th:unless="${row['s_price']} == 0" th:text="${row['s_price']}"
 							class="price"></span><span th:unless="${row['s_price']} == 0">
