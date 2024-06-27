@@ -85,6 +85,8 @@
 					th:href="@{/runa/main(category=여행)}"><span th:text="여행"></span></a>
 					<a class="tab" th:href="@{/runa/main(category=업무)}"><span
 						th:text="업무"></span></a> <a class="tab"
+					th:href="@{/runa/main(category=루나몰자체제작)}"><span
+						th:text="루나몰자체제작"></span></a><a class="tab"
 					th:if="${user.vip} == 'VVIP' or ${user.vip} == '관리자'"
 					th:href="@{/runa/main(category=VVIP)}"><span th:text="VVIP"></span></a>
 					<a class="tab"
@@ -106,8 +108,8 @@
 					<div class="pname">
 						<p th:text="${row['s_name']}"></p>
 					</div>
-					<br> <span th:if="${row['s_price']} == 0">가격문의</span>
-					<span class="price" th:unless="${row['s_price']} == 0"
+					<br> <span th:if="${row['s_price']} == 0">가격문의</span> <span
+						class="price" th:unless="${row['s_price']} == 0"
 						th:text="${row['s_price']}"></span><span
 						th:unless="${row['s_price']} == 0"> 루나</span> <br> <br>
 					<div th:unless="${row['s_category']} == '웰컴키트'">

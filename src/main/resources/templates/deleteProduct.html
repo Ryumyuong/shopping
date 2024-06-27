@@ -25,6 +25,8 @@
 						th:href="@{/runa/delete(category=여행)}"><span th:text="여행"></span></a>
 						<a class="tab" th:href="@{/runa/delete(category=업무)}"><span
 							th:text="업무"></span></a> <a class="tab"
+						th:href="@{/runa/delete(category=루나몰자체제작)}"><span
+							th:text="루나몰자체제작"></span></a><a class="tab"
 						th:href="@{/runa/delete(category=VVIP)}"><span th:text="VVIP"></span></a>
 						<a class="tab" th:href="@{/runa/delete(category=웰컴키트)}"><span
 							th:text="웰컴키트"></span></a></li>
@@ -39,8 +41,7 @@
 						<div class="pname">
 							<p th:text="${row['s_name']}"></p>
 						</div>
-						<br> 
-						<span th:if="${row['s_price']} == 0">가격문의</span> <span
+						<br> <span th:if="${row['s_price']} == 0">가격문의</span> <span
 							th:unless="${row['s_price']} == 0" th:text="${row['s_price']}"
 							class="price"></span><span th:unless="${row['s_price']} == 0">
 							루나</span> <br> <br>
