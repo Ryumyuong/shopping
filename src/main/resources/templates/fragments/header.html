@@ -10,9 +10,9 @@
 				<div class="navbar">
 					<div class="blank"></div>
 					<ul class="nav-ul">
-						<li class="nav" th:if="${user.vip} == '일반회원' or ${user.vip} == '관리자'"><p class="vip" th:text="${user.vip}"></p></li>
-						<li class="nav" th:if="${user.vip} == 'VIP'"><p class="VIP" th:text="${user.vip}"></p></li>
-						<li class="nav" th:if="${user.vip} == 'VVIP'"><p class="VVIP" th:text="${user.vip}"></p></li>
+						<li class="nav" th:if="${user.vip} == '브론즈' or ${user.vip} == '관리자'"><p class="vip" th:text="${user.vip}"></p></li>
+						<li class="nav" th:if="${user.vip} == '플래티넘'"><p class="VIP" th:text="${user.vip}"></p></li>
+						<li class="nav" th:if="${user.vip} == '다이아'"><p class="VVIP" th:text="${user.vip}"></p></li>
 						<li class="nav"><a
 							th:href="@{/updateUser(userId=${user.userId})}"
 							th:text="${user.userId}"></a><span>님</span></li>
@@ -56,9 +56,9 @@
 				<div class="navbar">
 					<div class="blank"></div>
 					<ul class="nav-ul">
-						<li class="nav" th:if="${user.vip} == '일반회원' or ${user.vip} == '관리자'"><p class="vip" th:text="${user.vip}"></p></li>
-						<li class="nav" th:if="${user.vip} == 'VIP'"><p class="VIP" th:text="${user.vip}"></p></li>
-						<li class="nav" th:if="${user.vip} == 'VVIP'"><p class="VVIP" th:text="${user.vip}"></p></li>
+						<li class="nav" th:if="${user.vip} == '브론즈' or ${user.vip} == '관리자'"><p class="vip" th:text="${user.vip}"></p></li>
+						<li class="nav" th:if="${user.vip} == '플래티넘'"><p class="VIP" th:text="${user.vip}"></p></li>
+						<li class="nav" th:if="${user.vip} == '다이아'"><p class="VVIP" th:text="${user.vip}"></p></li>
 						<li class="nav"><a
 							th:href="@{/updateUser(userId=${user.userId})}"
 							th:text="${user.userId}"></a><span>님</span></li>
@@ -102,9 +102,9 @@
 				<div class="navbar">
 					<div>
 						<ul class="nav-ul">
-							<li class="nav" th:if="${user.vip} == '일반회원' or ${user.vip} == '관리자'"><p class="vip" th:text="${user.vip}"></p></li>
-							<li class="nav" th:if="${user.vip} == 'VIP'"><p class="VIP" th:text="${user.vip}"></p></li>
-							<li class="nav" th:if="${user.vip} == 'VVIP'"><p class="VVIP" th:text="${user.vip}"></p></li>
+							<li class="nav" th:if="${user.vip} == '브론즈' or ${user.vip} == '관리자'"><p class="vip" th:text="${user.vip}"></p></li>
+							<li class="nav" th:if="${user.vip} == '플래티넘'"><p class="VIP" th:text="${user.vip}"></p></li>
+							<li class="nav" th:if="${user.vip} == '다이아'"><p class="VVIP" th:text="${user.vip}"></p></li>
 							<li class="nav"><a
 								th:href="@{/updateUser(userId=${user.userId})}"
 								th:text="${user.userId}"></a><span>님</span></li>
