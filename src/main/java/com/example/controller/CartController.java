@@ -6,10 +6,14 @@ import java.nio.charset.StandardCharsets;
 import java.security.Principal;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -18,6 +22,7 @@ import com.example.domain.Orders;
 import com.example.domain.User;
 import com.example.mapper.LoginMapper;
 import com.example.service.CartService;
+import com.example.service.FCMNotificationSender;
 import com.example.service.LoginService;
 
 import lombok.RequiredArgsConstructor;
@@ -29,6 +34,9 @@ public class CartController {
 	private final CartService cartService;
 	private final LoginMapper loginMapper;
 	private final LoginService loginService;
+	
+	@Autowired
+	FCMNotificationSender fcmsender;
 
 	@GetMapping("main")
 	public String cart(Model model, @RequestParam("userId") String userId) {

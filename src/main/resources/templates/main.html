@@ -84,17 +84,17 @@
 						th:text="여가문화"></span></a> <a class="tab"
 					th:href="@{/runa/main(category=여행)}"><span th:text="여행"></span></a>
 					<a class="tab" th:href="@{/runa/main(category=업무)}"><span
-						th:text="업무"></span></a> <a class="tab"
-					th:href="@{/runa/main(category=루나몰자체제작)}"><span
+						th:text="업무"></span></a><a class="tab"
+					th:href="@{/runa/main(category=명절선물세트)}"><span th:text="명절선물세트"></span></a>
+					<a class="tab" th:href="@{/runa/main(category=루나몰자체제작)}"><span
 						th:text="루나몰자체제작"></span></a><a class="tab"
 					th:if="${user.vip} == '다이아' or ${user.vip} == '관리자'"
-					th:href="@{/runa/main(category=다이아)}"><span th:text="다이아"></span></a>
+					th:href="@{/runa/main(category=VVIP)}"><span th:text="VVIP"></span></a>
 					<a class="tab"
 					th:unless="${user.vip} == '다이아' or ${user.vip} == '관리자'"
 					onclick="VVIP(event)"><span th:text="다이아"></span></a> <a
 					class="tab" th:href="@{/runa/main(category=웰컴키트)}"><span
 						th:text="웰컴키트"></span></a></li>
-
 			</ul>
 			<hr>
 			<div>

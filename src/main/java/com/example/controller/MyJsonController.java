@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.domain.Alarm;
 import com.example.domain.Card;
 import com.example.domain.Cart;
 import com.example.domain.InCard;
@@ -31,6 +32,7 @@ import com.example.domain.Product;
 import com.example.domain.User;
 import com.example.domain.Version;
 import com.example.mapper.LoginMapper;
+import com.example.service.AlarmService;
 import com.example.service.CartService;
 import com.example.service.FCMNotificationSender;
 import com.example.service.LoginService;
@@ -59,6 +61,9 @@ public class MyJsonController {
 	
 	@Autowired
 	TimeService timeService;
+	
+	@Autowired
+	AlarmService alarmService;
 	
 	
 	@GetMapping("api/time")
@@ -220,7 +225,7 @@ public class MyJsonController {
 
 	@PostMapping("notificationToken")
 	public ResponseEntity<String> notiToken(@RequestHeader("X-CSRF-TOKEN") String csrfToken,
-			@RequestParam("username") String username) {
+			@RequestParam("username") String username, @RequestParam("name") String name, @RequestBody Alarm alarm) {
 		try {
 			User user = loginMapper.loginSearch(username);
 			String code = user.getCode();
@@ -231,14 +236,20 @@ public class MyJsonController {
 			String code1 = user1.getCode();
 			String code2 = user2.getCode();
 			String code3 = user3.getCode();
-			fcmsender.sendPushNotification(code1, "루나몰", username + "님이 물품을 주문하였습니다.");
+			System.out.println(username + "님이 " + name +"을 주문하였습니다.");
+			fcmsender.sendPushNotification(code1, "루나몰", username + "님이 " + name +"을 주문하였습니다.");
 			fcmsender.sendPushNotification(code2, "루나몰", username + "님이 물품을 주문하였습니다.");
 			fcmsender.sendPushNotification(code3, "루나몰", username + "님이 물품을 주문하였습니다.");
+			
+			String menu = alarm.getA_menu();
+			String price = alarm.getA_price();	
+			System.out.println(menu);
+			System.out.println(price);
+			alarmService.insertAlarm(username, menu, price);
 			return new ResponseEntity<>(username, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-
 	}
 
 	@PostMapping("notificationLunaToken")
@@ -257,6 +268,7 @@ public class MyJsonController {
 			fcmsender.sendPushNotification(code1, "루나몰", username + "님이 " + luna + " 루나 추가를 신청하였습니다.");
 			fcmsender.sendPushNotification(code2, "루나몰", username + "님이 " + luna + " 루나 추가를 신청하였습니다.");
 			fcmsender.sendPushNotification(code3, "루나몰", username + "님이 " + luna + " 루나 추가를 신청하였습니다.");
+			alarmService.insertAlarm(username, "루나추가신청", luna);
 			return new ResponseEntity<>(username, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -419,17 +431,6 @@ public class MyJsonController {
 		}
 	}
 
-	@PostMapping("deleteProduct")
-	public ResponseEntity<String> deleteProduct(@RequestHeader("X-CSRF-TOKEN") String csrfToken,
-			@RequestParam("productName") String product) {
-		try {
-			productService.deleteProduct(product);
-			return new ResponseEntity<>(product, HttpStatus.OK);
-		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-
-	}
 
 	@PostMapping("deliver")
 	public ResponseEntity<String> deliver(@RequestHeader("X-CSRF-TOKEN") String csrfToken,
@@ -473,6 +474,18 @@ public class MyJsonController {
 		}
 
 	}
+	
+	@PostMapping("deleteUser")
+	public ResponseEntity<String> deleteUser(@RequestHeader("X-CSRF-TOKEN") String csrfToken,
+			@RequestParam("username") String username) {
+		try {
+			loginMapper.deleteUser(username);
+			return new ResponseEntity<>(username, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+	}
 
 	@PostMapping("insertCode")
 	public ResponseEntity<String> insertCode(@RequestHeader("X-CSRF-TOKEN") String csrfToken,
@@ -498,16 +511,6 @@ public class MyJsonController {
 			String encodePwd = passwordEncoder.encode(password);
 			
 			loginService.updateUser(userId, encodePwd, username, phone, address, vip);
-			return new ResponseEntity<>(userId, HttpStatus.OK);
-		} catch(Exception e) {
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
-	
-	@PostMapping("deleteUser")
-	public ResponseEntity<String> deleteUser(@RequestHeader("X-CSRF-TOKEN") String csrfToken, @RequestParam("userId") String userId) {
-		try {
-			loginService.deleteUser(userId);
 			return new ResponseEntity<>(userId, HttpStatus.OK);
 		} catch(Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -554,4 +557,14 @@ public class MyJsonController {
 		
 		return product;
 	}
+	
+	@GetMapping("getAlarm")
+	public Map<String, List<Alarm>> getAlarm() {
+		Map<String, List<Alarm>> alarm = new HashMap<String, List<Alarm>>();
+		System.out.println("알람 " + alarm.size());
+		alarm.put("alarm", alarmService.getAlarm());
+		return alarm;
+	}
+	
+	
 }
